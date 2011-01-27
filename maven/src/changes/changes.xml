@@ -1,0 +1,59 @@
+<!--
+
+    Copyright 2009 Sami Dalouche
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    	http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<document>
+  <properties>
+    <title>PyMager Java Client</title>
+    <author email="sami.dalouche@gmail.com">Sami Dalouche</author>
+  </properties>
+  <body>
+  	<release version="0.13" date="2011-01-25" description="Updates of most dependencies">
+      <action dev="sdalouche" type="update">Upgraded all dependencies (Spring, SLF4J, HC Helpers..)</action>
+      <action dev="sdalouche" type="update">Got rid of commons-* and spring resource abstraction in favor of google guava</action>
+      <action dev="sdalouche" type="update">cleaned up the package hierarchy and maven modules names</action>
+    </release>
+  	<release version="0.12" date="2009-05-17" description="Makes sure ID does not contain special characters">
+      <action dev="sdalouche" type="update">
+      	Added tests and implementation to make sure IDs do not contain special characters
+      </action>
+    </release>
+  	<release version="0.11" date="2009-05-16" description="Added caching tests and fixed miscellaneous bugs">
+      <action dev="sdalouche" type="add">
+      	Added tests to make sure the If-Modified-Since / Last-Modified headers are taken into consideration
+      </action>
+      <action dev="sdalouche" type="fix">
+      	Wrapped unknown client protocol exceptions into our custom exceptions
+      </action>
+      <action dev="sdalouche" type="fix">
+      	Abstracted the notion of HttpClientTemplate, and added a generic error handling mechanism
+      </action>
+      <action dev="sdalouche" type="fix">
+      	Moved the Httpclient helpers into a different project
+      </action>
+    </release>
+    <release version="0.5" date="2009-05-15" description="First release">
+      <action dev="sdalouche" type="fix">
+      	Fixed stupid release mistake in 0.3 and 0.4 (included test resources)
+      </action>
+    </release>
+    <release version="0.3" date="2009-05-15" description="First release">
+      <action dev="sdalouche" type="add">
+      	Created first version of pymager-java-client
+      </action>
+    </release>
+  </body>
+</document>

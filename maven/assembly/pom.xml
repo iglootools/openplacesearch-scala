@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>openplacesearch-scala-parent</artifactId>
+		<groupId>com.sirika.openplacesearch</groupId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sirika.openplacesearch</groupId>
+	<artifactId>openplacesearch-scala-assembly</artifactId>
+	<packaging>pom</packaging>
+	<name>OpenPlaceSearch Scala Assembly</name>
+	<version>0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>com.sirika.openplacesearch</groupId>
+			<artifactId>openplacesearch-scala-api</artifactId>
+			<version>0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>all</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>make-assembly</id>
+								<phase>package</phase>
+								<goals>
+									<goal>attached</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/all.xml</descriptor>
+							</descriptors>
+							<finalName>pymager-java-client-${version}</finalName>
+							<outputDirectory>target/assembly/out</outputDirectory>
+							<workDirectory>target/assembly/work</workDirectory>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

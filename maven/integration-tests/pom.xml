@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>openplacesearch-scala-parent</artifactId>
+		<groupId>com.sirika.openplacesearch</groupId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sirika.openplacesearch</groupId>
+	<artifactId>openplacesearch-integration-tests</artifactId>
+	<name>OpenPlaceSearch Scala Integration Tests</name>
+	<version>0.1-SNAPSHOT</version>
+	<dependencies>
+
+		<!-- Internal Dependencies that we test in integration -->
+		<dependency>
+			<groupId>com.sirika.openplacesearch</groupId>
+			<artifactId>openplacesearch-scala-api</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.sirika.pymager</groupId> <artifactId>pymager-java-client</artifactId> 
+			<version>0.10-SNAPSHOT</version> <classifier>tests</classifier> <scope>test</scope> 
+			</dependency> -->
+
+		<!-- Optional Logging dependencies -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.13</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sirika.hchelpers</groupId>
+			<artifactId>hchelpers-spring</artifactId>
+			<version>${hchelpers.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			<version>${springframework.version}</version> <scope>test</scope> </dependency> 
+			<dependency> <groupId>org.springframework</groupId> <artifactId>spring-test</artifactId> 
+			<version>${springframework.version}</version> <scope>test</scope> </dependency> 
+			<dependency> <groupId>joda-time</groupId> <artifactId>joda-time</artifactId> 
+			<version>1.6.2</version> <scope>test</scope> </dependency> <dependency> <groupId>com.google.guava</groupId> 
+			<artifactId>guava-collections</artifactId> <version>${guava.version}</version> 
+			<scope>test</scope> </dependency> <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>${junit.version}</version> <scope>test</scope> </dependency> -->
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+				<configuration> <skipTests>${skip-integration-tests}</skipTests> </configuration> 
+				</plugin> -->
+		</plugins>
+	</build>
+
+</project>

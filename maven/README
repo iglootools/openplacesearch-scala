@@ -1,0 +1,30 @@
+Import the project in your IDE :
+* Use m2eclipse and m2eclipse-scala to import the project under eclipse
+
+Install the artifacts (without running the integration tests)
+* mvn -Pdev install
+
+Run all tests, including the integration tests (requires pymager to run)
+* mvn test
+
+Skip integration tests
+* mvn -Dskip-integration-tests=true test
+
+Deploy the current snapshot version and site
+* mvn -Pall -Dskip-integration-tests=true clean deploy
+* mvn -Pall site-deploy
+
+Perform a release
+* make sure that  ~/.m2/settings.xml contains your ssh configuration for sirika-repo-releases, sirika-repo-snapshots and sirika-site
+* add entry to src/changes/changes.xml
+* update headers: mvn -Prelease license:format
+* commit
+* delete everything in .m2/repository
+* git clone git@github.com:samokk/opencitysearch-scala.git
+* mvn -Pall,release release:prepare -DautoVersionSubmodules=true
+* mvn release:perform
+
+= Available profiles =
+* all : adds superfluous items to the build (attach sources, javadoc various reports - changes, jxr -, build assembly, ..)
+* release : activate sanity checks (licenses, ..) and disable any potential integrated test
+

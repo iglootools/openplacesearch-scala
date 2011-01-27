@@ -1,0 +1,5 @@
+= Import as an eclipse project =
+
+* setup SbtEclipsify : http://blog.xebia.fr/2010/05/11/configurer-vos-projets-sbt-pour-eclipse-ou-intellij-idea/
+* sbt eclipse
+* import as an existing eclipse project

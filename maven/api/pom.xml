@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>openplacesearch-scala-parent</artifactId>
+		<groupId>com.sirika.openplacesearch</groupId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sirika.openplacesearch</groupId>
+	<artifactId>openplacesearch-scala-api</artifactId>
+	<name>OpenPlaceSearch Scala API</name>
+	<version>0.1-SNAPSHOT</version>
+	<properties>
+	</properties>
+	<dependencies>
+		<!-- Common Stuff that should be in the JDK <dependency> <groupId>com.google.guava</groupId> 
+			<artifactId>guava-collections</artifactId> <version>${guava.version}</version> 
+			</dependency> <dependency> <groupId>com.google.guava</groupId> <artifactId>guava-io</artifactId> 
+			<version>${guava.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>com.sirika.hchelpers</groupId>
+			<artifactId>hchelpers-core</artifactId>
+			<version>${hchelpers.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>${junit.version}</version> <scope>test</scope> </dependency> <dependency> 
+			<groupId>org.mockito</groupId> <artifactId>mockito-all</artifactId> <version>1.8.5</version> 
+			<scope>test</scope> </dependency> -->
+
+	</dependencies>
+	<build>
+		<plugins />
+
+	</build>
+</project>

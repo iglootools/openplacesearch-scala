@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sirika.openplacesearch</groupId>
+	<artifactId>openplacesearch-scala-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>OpenPlaceSearch Scala Parent</name>
+	<description>Scala API for OpenPlaceSearch</description>
+	<version>0.1-SNAPSHOT</version>
+	<url>http://developers.sirika.com/openplacesearch-scala</url>
+	<inceptionYear>2011</inceptionYear>
+	<prerequisites>
+		<maven>3.0.2</maven>
+	</prerequisites>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!--<springframework.version>3.0.5.RELEASE</springframework.version> -->
+		<httpcomponents.version>4.1</httpcomponents.version>
+		<hchelpers.version>0.8</hchelpers.version>
+		<guava.version>r03</guava.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<!--<junit.version>4.8.2</junit.version> -->
+		<!--<compileSource>1.5</compileSource> -->
+		<scala.version>2.8.1</scala.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:git://github.com/samokk/openplacesearch-scala.git</connection>
+		<developerConnection>scm:git:git@github.com:samokk/openplacesearch-scala.git</developerConnection>
+		<url>https://github.com/samokk/openplacesearch-scala</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>sdalouche</id>
+			<name>Sami Dalouche</name>
+			<email>sami.dalouche@gmail.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>api</module>
+		<module>integration-tests</module>
+		<module>assembly</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<skip-integration-tests>true</skip-integration-tests>
+			</properties>
+		</profile>
+		<profile>
+			<id>skip-integration-tests</id>
+			<activation>
+				<property>
+					<name>skip-integration-tests</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<skip-integration-tests>true</skip-integration-tests>
+			</properties>
+		</profile>
+		<profile>
+			<id>integration</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>all</id>
+			<build>
+				<plugins>
+					<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
+						<executions> <execution> <id>attach-sources</id> <goals> <goal>jar</goal> 
+						</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+						<artifactId>maven-javadoc-plugin</artifactId> <executions> <execution> <id>attach-javadocs</id> 
+						<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
+					<!-- http://blog.bindul.name/2010/12/16/reporting-plugin-dependencies-for-maven-3-x-builds/ -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<configuration>
+							<generateSitemap>true</generateSitemap>
+							<reportPlugins>
+								<plugin>
+									<groupId>org.scala-tools</groupId>
+									<artifactId>maven-scala-plugin</artifactId>
+								</plugin>
+								<plugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-changes-plugin</artifactId>
+									<reportSets>
+										<reportSet>
+											<reports>
+												<report>changes-report</report>
+											</reports>
+										</reportSet>
+									</reportSets>
+								</plugin>
+								<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
+									<configuration> <encoding>UTF-8</encoding> <aggregate>true</aggregate> </configuration> 
+									</plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jxr-plugin</artifactId> 
+									<configuration> <aggregate>true</aggregate> </configuration> </plugin> <plugin> 
+									<artifactId>maven-surefire-report-plugin</artifactId> </plugin> -->
+								<plugin>
+									<artifactId>maven-project-info-reports-plugin</artifactId>
+								</plugin>
+
+							</reportPlugins>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<properties>
+				<skip-integration-tests>true</skip-integration-tests>
+			</properties>
+			<build>
+				<plugins>
+					<!-- Only activate at release time because only works when called from 
+						top module, and slows things down -->
+					<plugin>
+						<groupId>com.google.code.maven-license-plugin</groupId>
+						<artifactId>maven-license-plugin</artifactId>
+						<version>1.4.0</version>
+						<configuration>
+							<header>src/etc/header.txt</header>
+							<includes>
+								<include>**/src/**</include>
+							</includes>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>1.0-beta-7</version>
+			</extension>
+		</extensions>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0-beta-3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.scala-tools</groupId>
+					<artifactId>maven-scala-plugin</artifactId>
+					<version>2.15.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<remoteTagging>true</remoteTagging>
+					<releaseProfiles>release</releaseProfiles>
+					<!-- See http://jira.codehaus.org/browse/MRELEASE-271 -->
+					<preparationGoals>clean install</preparationGoals>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+				<configuration> <excludes> <exclude>**/*TestHelper.java</exclude> </excludes> 
+				</configuration> </plugin> -->
+
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<buildcommands>
+						<buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
+					</buildcommands>
+					<additionalProjectnatures>
+						<projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
+					</additionalProjectnatures>
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						<classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+					</classpathContainers>
+
+				</configuration>
+
+			</plugin>
+			<!-- <plugin> <artifactId>maven-idea-plugin</artifactId> <configuration> 
+				<downloadSources>true</downloadSources> <downloadJavadocs>true</downloadJavadocs> 
+				<dependenciesAsLibraries>true</dependenciesAsLibraries> <useFullNames>false</useFullNames> 
+				</configuration> </plugin> -->
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+			</plugin>
+			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <configuration> 
+				<source>${compileSource}</source> <target>${compileSource}</target> </configuration> 
+				</plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+				<executions> <execution> <goals> <goal>test-jar</goal> </goals> </execution> 
+				</executions> </plugin> -->
+
+		</plugins>
+
+	</build>
+	<!-- <repositories> <repository> <id>scala-tools.org</id> <name>Scala-tools 
+		Maven2 Repository</name> <url>http://scala-tools.org/repo-releases</url> 
+		</repository> </repositories> <pluginRepositories> <pluginRepository> <id>scala-tools.org</id> 
+		<name>Scala-tools Maven2 Repository</name> <url>http://scala-tools.org/repo-releases</url> 
+		</pluginRepository> </pluginRepositories> -->
+	<distributionManagement>
+		<repository>
+			<id>sirika-repo-releases</id>
+			<name>Sirika Releases Repository</name>
+			<url>scpexe://developers.sirika.com/srv/http/developers.sirika.com/maven2/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>sirika-repo-snapshots</id>
+			<name>Sirika Snapshots Repository</name>
+			<url>scpexe://developers.sirika.com/srv/http/developers.sirika.com/maven2/snapshots</url>
+		</snapshotRepository>
+		<site>
+			<id>sirika-site</id>
+			<url>scpexe://developers.sirika.com/srv/http/developers.sirika.com/openplacesearch-scala</url>
+		</site>
+	</distributionManagement>
+
+	<pluginRepositories />
+
+</project>
