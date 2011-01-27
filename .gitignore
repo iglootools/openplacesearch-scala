@@ -5,6 +5,9 @@ target
 .settings
 .classpath
 bin
+# IDEA
+*.iml
+.idea
 # sbt
 lib_managed
 src_managed
