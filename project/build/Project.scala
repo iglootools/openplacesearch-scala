@@ -11,6 +11,7 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     val icu4j = "com.ibm.icu" % "icu4j" % "4.6" withSources()
     val slf4jApi = "org.slf4j" % "slf4j-api" % "1.6.1" withSources()
     
+    
     // HTTP and REST
     val HttpComponentsVersion = "4.1"
     val hcHelpers = "com.sirika.hchelpers" % "hchelpers-core" % "0.8" withSources()
@@ -26,4 +27,8 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     val junit = "junit" % "junit" % "4.8.2" % "test" withSources()
     val scalaTest = "org.scalatest" % "scalatest" % "1.2"  % "test" withSources()
     val mockito = "org.mockito" % "mockito-all" % "1.8.5" % "test" withSources()
+    
+    // hacks
+    // needed for guava+scala-IDE : javax.annotation.Nullable 
+    val jsr305 = "com.google.code.findbugs" % "jsr305" % "1.3.9" //withSources()
 }
