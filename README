@@ -3,3 +3,10 @@
 * setup SbtEclipsify : http://blog.xebia.fr/2010/05/11/configurer-vos-projets-sbt-pour-eclipse-ou-intellij-idea/
 * sbt eclipse
 * import as an existing eclipse project
+
+
+Other interesting datasources that could be helpful
+* Yahoo GeoPlanet
+* GADM http://www.gadm.org/
+* ADM2 boundaries : http://www.unsalb.org/
+* ADM1 : http://wwwn.cdc.gov/epiinfo/
