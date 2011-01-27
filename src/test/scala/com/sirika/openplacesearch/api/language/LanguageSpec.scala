@@ -12,11 +12,11 @@ import com.sirika.openplacesearch.api.language._
 class LanguageSpec extends Spec with ShouldMatchers {
     describe("toString ") {
         it("should contain name, alpha3 and alpha2 for French") {
-            french().toString should be === "Language{name=Français, alpha3=fra, alpha2=Some(fr)}"
+            french.toString should be === "Language{name=Français, alpha3=fra, alpha2=Some(fr)}"
         }
         
         it("should contain name, alpha3 for Hawaiian") {
-            hawaiian().toString should be === "Language{name=Hawaiian, alpha3=haw, alpha2=None}"
+            hawaiian.toString should be === "Language{name=Hawaiian, alpha3=haw, alpha2=None}"
         }
     }
     
@@ -27,6 +27,24 @@ class LanguageSpec extends Spec with ShouldMatchers {
         
         it("should require a non-empty name") {
             evaluating { Language(name="", alpha3Code="haw") } should produce [IllegalArgumentException]
+        }
+    }
+    
+    describe("A given Language") {
+        it("should be equal to another language that has the same alpha3Code") {
+            french should be === french
+        }
+        
+        it("should have the same hashcode as another language that has the same alpha3Code") {
+            french.hashCode should be === french.hashCode
+        }
+        
+        it("should not be equal to another language that has a different alpha3Code") {
+            french should not be hawaiian
+        }
+        
+        it("should not have the same hashcode as another language that has a different alpha3Code") {
+            french.hashCode should not be hawaiian.hashCode
         }
     }
 }

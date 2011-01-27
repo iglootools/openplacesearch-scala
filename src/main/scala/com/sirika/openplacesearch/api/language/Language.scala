@@ -20,7 +20,7 @@ object Language {
  * @see <a href="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a>
  * @see <a href="http://en.wikipedia.org/wiki/ISO_639-3">ISO 639-3</a>
  */
-class Language(val name : String, val alpha3Code : String, val alpha2Code : Option[String]) {
+final class Language(val name : String, val alpha3Code : String, val alpha2Code : Option[String]) {
     require(!Strings.isNullOrEmpty(alpha3Code))
     require(!Strings.isNullOrEmpty(name))
     require(alpha2Code != null)
