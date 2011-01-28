@@ -1,16 +1,17 @@
 package com.sirika.openplacesearch.api.language.internal
 
+import java.io.InputStreamReader
 import java.net.URL
 import scala.collection.immutable.{List,Map}
 import com.google.common.base.Charsets
-import com.google.common.io.{Resources,CharStreams,LineProcessor}
+import com.google.common.io.{Resources,CharStreams,LineProcessor, InputSupplier}
 import com.sirika.commons.scala.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
 
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
-    private lazy val languages = importLanguages()
+    private lazy val languages = importLanguagesFromClassPath()
     
     private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*) 
     private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
@@ -19,14 +20,17 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
     def findByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code)
     def findByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
 
-    private def importLanguages() : List[Language ] = {
-        // eng      eng     en      English
-        val LanguageRE = """([^\t]*)\t([^\t]*)\t([^\t]*)\t([^\t]*)""".r
-    
+    private def importLanguagesFromClassPath() : List[Language ] = {
         val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(url("com/sirika/openplacesearch/api/language/iso639languages"))
         val iso639LanguageInputReaderSupplier = CharStreams.newReaderSupplier(iso639LanguageInputStreamSupplier, Charsets.UTF_8)
+        parseLanguages(iso639LanguageInputReaderSupplier)
+        
+    }
     
-        CharStreams.readLines(iso639LanguageInputReaderSupplier, new LineProcessor[List[Language]]() {
+    private def parseLanguages(readerSupplier: InputSupplier[InputStreamReader]) : List[Language] = {
+        // eng      eng     en      English
+        val LanguageRE = """([^\t]*)\t([^\t]*)\t([^\t]*)\t([^\t]*)""".r
+        CharStreams.readLines(readerSupplier, new LineProcessor[List[Language]]() {
             private[this] var languages : List[Language] = Nil
             private[this] var lineNumber = 1
             
@@ -52,6 +56,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
             }
         })
     }
+    
     private def url(classpathUrl: String) : URL = {
         return Thread.currentThread().getContextClassLoader().getResource(classpathUrl)
     }
