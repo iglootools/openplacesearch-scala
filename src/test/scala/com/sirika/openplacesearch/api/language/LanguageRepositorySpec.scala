@@ -2,7 +2,6 @@ package com.sirika.openplacesearch.api.language
 
 import com.sirika.openplacesearch.api.language.internal.InMemoryLanguageRepository
 import org.scalatest.junit.JUnitRunner
-
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
