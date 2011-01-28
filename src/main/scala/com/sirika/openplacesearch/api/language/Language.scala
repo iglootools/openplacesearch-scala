@@ -24,10 +24,10 @@ final class Language(val name : String, val alpha3Code : String, val alpha2Code 
     require(Option(alpha3Code) exists (_.nonEmpty), "alpha3Code is required")
     require(alpha2Code != null, "alpha2Code must be a non-null Option")
     
-    override def hashCode(): Int = Objects.hashCode(alpha3Code)
+    override def hashCode(): Int = Objects.hashCode(name, alpha3Code, alpha2Code)
     
     override def equals(other: Any): Boolean = other match {
-        case Language(_, `alpha3Code`, _) => true
+        case Language(`name`, `alpha3Code`, `alpha2Code`) => true
         case _ => false
     }
     
