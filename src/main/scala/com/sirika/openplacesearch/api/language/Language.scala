@@ -4,8 +4,7 @@ import com.google.common.base.Objects
 import com.google.common.base.Strings
 
 object Language {
-    def apply(name : String, alpha3Code : String, alpha2Code : Option[String]) = new Language(name, alpha3Code, alpha2Code)
-    def apply(name : String, alpha3Code : String, alpha2Code : String = null) = new Language(name, alpha3Code, Option(alpha2Code))
+    def apply(name : String, alpha3Code : String, alpha2Code : Option[String]=None) = new Language(name, alpha3Code, alpha2Code)
     def unapply(l : Language) = Some(l.name, l.alpha3Code, l.alpha2Code )
 }
 
@@ -28,7 +27,7 @@ final class Language(val name : String, val alpha3Code : String, val alpha2Code 
     override def hashCode(): Int = Objects.hashCode(alpha3Code)
     
     override def equals(other: Any): Boolean = other match {
-        case that: Language => this.alpha3Code == that.alpha3Code
+        case Language(_, `alpha3Code`, _) => true
         case _ => false
     }
     
