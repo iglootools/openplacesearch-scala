@@ -27,7 +27,7 @@ class LanguageSpec extends Spec with ShouldMatchers {
 
         describe("toString") {
             it("should return name, alpha3 and alpha2 for French") {
-                french.toString should be === "Language{name=Français, alpha3=fra, alpha2=Some(fr)}"
+                french.toString should be === "Language{name=French, alpha3=fra, alpha2=Some(fr)}"
             }
 
             it("should return name, alpha3 for Hawaiian") {
