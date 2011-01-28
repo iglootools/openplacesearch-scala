@@ -16,7 +16,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
     private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*) 
     private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
     
-    def findAllLanguages() : Seq[Language] = languages
+    def findAll() : Seq[Language] = languages
     def findByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code)
     def findByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
 
