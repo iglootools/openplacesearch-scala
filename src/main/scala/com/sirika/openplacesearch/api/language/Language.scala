@@ -20,9 +20,9 @@ object Language {
  * @see <a href="http://en.wikipedia.org/wiki/ISO_639-3">ISO 639-3</a>
  */
 final class Language(val name : String, val alpha3Code : String, val alpha2Code : Option[String]) {
-    require(!Strings.isNullOrEmpty(alpha3Code))
-    require(!Strings.isNullOrEmpty(name))
-    require(alpha2Code != null)
+    require(Option(name) exists (_.nonEmpty), "name is required")
+    require(Option(alpha3Code) exists (_.nonEmpty), "alpha3Code is required")
+    require(alpha2Code != null, "alpha2Code must be a non-null Option")
     
     override def hashCode(): Int = Objects.hashCode(alpha3Code)
     
