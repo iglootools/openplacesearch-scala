@@ -35,7 +35,7 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
     
     describe("findAllLanguages") {
         it("should retrieve 7600 languages") {
-            languageRepository.findAllLanguages.size should be === 7600
+            languageRepository.findAll.size should be === 7600
         }
     }
 }
