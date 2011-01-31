@@ -8,6 +8,7 @@ bin
 # IDEA
 *.iml
 .idea
+out
 # sbt
 lib_managed
 src_managed
