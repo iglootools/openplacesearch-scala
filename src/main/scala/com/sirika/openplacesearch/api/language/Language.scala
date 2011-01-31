@@ -4,8 +4,8 @@ import com.google.common.base.Objects
 import com.google.common.base.Strings
 
 object Language {
-  def apply(name : String, alpha3Code : String, alpha2Code : Option[String]=None) = new Language(name, alpha3Code, alpha2Code)
-  def unapply(l : Language) = Some(l.name, l.alpha3Code, l.alpha2Code )
+  def apply(name: String, alpha3Code : String, alpha2Code : Option[String]=None) = new Language(name, alpha3Code, alpha2Code)
+  def unapply(l: Language) = Some(l.name, l.alpha3Code, l.alpha2Code )
 }
 
 /**
