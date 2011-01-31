@@ -10,7 +10,7 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     val jodaTime = "joda-time" % "joda-time" % "1.6.2" withSources()
     val icu4j = "com.ibm.icu" % "icu4j" % "4.6" withSources()
     val slf4jApi = "org.slf4j" % "slf4j-api" % "1.6.1" withSources()
-    //val grizzled = "org.clapper" %% "grizzled-slf4j" % "0.3.2" // withSources()
+    val grizzled = "org.clapper" %% "grizzled-slf4j" % "0.4" // withSources()
     
     
     // HTTP and REST
