@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.gisfeature
+package com.sirika.openplacesearch.api.geonames
 
 import com.sirika.openplacesearch.api.administrativedivision.AdministrativeEntity
 import org.joda.time.DateTimeZone
