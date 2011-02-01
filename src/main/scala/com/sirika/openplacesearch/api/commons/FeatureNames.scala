@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.gisfeature
+package com.sirika.openplacesearch.api.commons
 
 import com.google.common.io.InputSupplier
 import com.sirika.openplacesearch.api.language.Language

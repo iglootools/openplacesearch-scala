@@ -2,6 +2,7 @@ package com.sirika.openplacesearch.api.gisfeature
 
 import org.joda.time.DateTimeZone
 import com.sirika.openplacesearch.api
+import api.commons.FeatureGeographyProvider
 import com.vividsolutions.jts.geom.{Coordinate, Point}
 
 object JtsPoint {

@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.gisfeature
+package com.sirika.openplacesearch.api.commons
 
 import org.joda.time.DateTimeZone
 import com.vividsolutions.jts.geom.Point

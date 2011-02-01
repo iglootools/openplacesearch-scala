@@ -1,6 +1,7 @@
-package com.sirika.openplacesearch.api.gisfeature
+package com.sirika.openplacesearch.api.commons
 
 import com.sirika.openplacesearch.api.language.Language
+import com.sirika.openplacesearch.api.commons.{LocalizedName, NamePart}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

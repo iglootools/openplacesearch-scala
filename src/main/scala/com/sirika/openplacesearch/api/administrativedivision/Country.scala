@@ -4,8 +4,7 @@ import com.sirika.openplacesearch.api.continent.Continent
 import com.ibm.icu.util.{Currency, ULocale}
 import com.sirika.openplacesearch.api.language.Language
 import org.joda.time.DateTimeZone
-import com.sirika.openplacesearch.api.commons.{PopulationProvider, TimeZoneProvider}
-import com.sirika.openplacesearch.api.gisfeature.{FeatureNameProvider, LocalizedName, GisFeature}
+import com.sirika.openplacesearch.api.commons.{FeatureNameProvider,LocalizedName, PopulationProvider, TimeZoneProvider}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

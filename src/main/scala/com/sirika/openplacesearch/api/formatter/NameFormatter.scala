@@ -1,6 +1,6 @@
 package com.sirika.openplacesearch.api.formatter
 
-import com.sirika.openplacesearch.api.gisfeature.FeatureNameProvider
+import com.sirika.openplacesearch.api.commons.FeatureNameProvider
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
