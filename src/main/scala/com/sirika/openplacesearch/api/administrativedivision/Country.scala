@@ -42,8 +42,8 @@ final case class Country(
   def parentAdministrativeEntity = None
 
   // FeatureNameProvider
-  def shortName(language: Language): String = featureNameProvider.shortName
-  def preferredName(language: Language): String = featureNameProvider.preferredName()
+  def shortName(language: Language): String = featureNameProvider.shortName(language)
+  def preferredName(language: Language): String = featureNameProvider.preferredName(language)
   def localizedNames: List[LocalizedName] = featureNameProvider.localizedNames
   def userFriendlyCode: Option[String] = Some(isoCountryCode.alpha2Code)
 
