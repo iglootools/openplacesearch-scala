@@ -1,3 +1,10 @@
+= Features =
+OpenPlaceSearch depends on a number of libraries :
+* Joda-Time
+* Guava-IO
+* HC-Helpers
+* IBM icu4j
+
 = Import as an eclipse project =
 
 * setup SbtEclipsify : http://blog.xebia.fr/2010/05/11/configurer-vos-projets-sbt-pour-eclipse-ou-intellij-idea/
