@@ -2,6 +2,7 @@ package com.sirika.openplacesearch.api.gisfeature
 
 import org.joda.time.DateTimeZone
 import com.vividsolutions.jts.geom.Point
+import com.sirika.openplacesearch.api.commons.{LocationProvider, TimeZoneProvider, PopulationProvider}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
