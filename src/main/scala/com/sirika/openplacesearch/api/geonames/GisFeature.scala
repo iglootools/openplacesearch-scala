@@ -18,7 +18,8 @@ case class GisFeature(protected[this] val featureGeography: FeatureGeographyProv
   with GeonamesFeatureProvider
   with FeatureNameProvider
   with FeatureGeographyProvider
-  with ParentAdministrativeEntityProvider{
+  with ParentAdministrativeEntityProvider
+  with StableIdProvider {
 
   // GeonamesFeatureProvider
   def geonamesId: Long = geonamesFeature.geonamesId
@@ -38,4 +39,6 @@ case class GisFeature(protected[this] val featureGeography: FeatureGeographyProv
   def preferredName(language: Language):String = featureNames.preferredName(language)
   def shortName(language: Language): String = featureNames.shortName(language)
 
+  // StableIdProvider
+  def stableId: String = geonamesFeature.stableId
 }
