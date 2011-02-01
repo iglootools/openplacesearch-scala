@@ -4,7 +4,8 @@ import com.sirika.openplacesearch.api.administrativedivision.AdministrativeEntit
 import org.joda.time.DateTimeZone
 import com.vividsolutions.jts.geom.Point
 import com.sirika.openplacesearch.api.language.Language
-import com.sirika.openplacesearch.api.commons._
+import com.sirika.openplacesearch.api.feature._
+import com.sirika.openplacesearch.api.feature.FeatureGeographyProvider
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

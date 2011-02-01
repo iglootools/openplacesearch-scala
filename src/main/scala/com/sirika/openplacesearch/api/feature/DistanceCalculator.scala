@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.commons
+package com.sirika.openplacesearch.api.feature
 
 import javax.measure.quantity.Length
 import javax.measure.unit.SI

@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.commons
+package com.sirika.openplacesearch.api.feature
 
 import org.joda.time.DateTimeZone
 

@@ -1,6 +1,6 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
-import com.sirika.openplacesearch.api.commons.PopulationProvider
+import com.sirika.openplacesearch.api.feature.PopulationProvider
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

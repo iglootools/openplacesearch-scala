@@ -1,6 +1,6 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
-import com.sirika.openplacesearch.api.commons.{FeatureNameProvider, ParentAdministrativeEntityProvider}
+import com.sirika.openplacesearch.api.feature.{FeatureNameProvider, ParentAdministrativeEntityProvider}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

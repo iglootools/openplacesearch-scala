@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.commons
+package com.sirika.openplacesearch.api.feature
 
 trait ElevationProvider {
   def elevationInMeters: Option[Long]

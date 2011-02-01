@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.commons
+package com.sirika.openplacesearch.api.feature
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
