@@ -1,8 +1,7 @@
-package com.sirika.openplacesearch.api.geonames
+package com.sirika.openplacesearch.api.feature
 
 import org.joda.time.DateTimeZone
 import com.sirika.openplacesearch.api
-import api.feature.FeatureGeographyProvider
 import com.vividsolutions.jts.geom.{Coordinate, Point}
 
 object JtsPoint {
