@@ -30,8 +30,8 @@ case class GisFeature(protected[this] val featureGeography: FeatureGeographyProv
   def timeZone: Option[DateTimeZone] = featureGeography.timeZone
 
   // FeatureNameProvider : delegation to featureNames
-  def name:String = featureNames.defaultName
   def userFriendlyCode: Option[String] = None
+  def name:String = featureNames.defaultName
   def localizedNames:List[LocalizedName] = featureNames.localizedNames
   def preferredName(language: Language):String = featureNames.preferredName(language)
   def shortName(language: Language): String = featureNames.shortName(language)
