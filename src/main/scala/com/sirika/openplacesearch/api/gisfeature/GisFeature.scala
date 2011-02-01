@@ -10,8 +10,9 @@ import com.sirika.openplacesearch.api.language.Language
  */
 
 case class GisFeature(protected[this] val featureGeography: FeatureGeographyProvider,
-                            protected[this] val geonamesFeature: GeonamesFeatureProvider,
-                            protected[this] val featureNames: FeatureNames) extends DistanceCalculator
+                      protected[this] val geonamesFeature: GeonamesFeatureProvider,
+                      protected[this] val featureNames: FeatureNames,
+                      val parentAdministrativeEntity: Option[AdministrativeEntity] ) extends DistanceCalculator
   with GeonamesFeatureProvider
   with FeatureNameProvider
   with FeatureGeographyProvider
@@ -35,6 +36,4 @@ case class GisFeature(protected[this] val featureGeography: FeatureGeographyProv
   def preferredName(language: Language):String = featureNames.preferredName(language)
   def shortName(language: Language): String = featureNames.shortName(language)
 
-  // ParentAdministrativeEntityProvider
-  def parentAdministrativeEntity: Option[AdministrativeEntity] = None
 }
