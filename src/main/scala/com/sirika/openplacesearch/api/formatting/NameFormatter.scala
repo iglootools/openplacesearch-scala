@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.formatter
+package com.sirika.openplacesearch.api.formatting
 
 import com.sirika.openplacesearch.api.feature.FeatureNameProvider
 
