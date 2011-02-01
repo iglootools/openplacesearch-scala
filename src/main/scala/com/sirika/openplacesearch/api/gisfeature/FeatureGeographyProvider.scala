@@ -12,17 +12,9 @@ trait FeatureGeographyProvider extends LocationProvider
   with PopulationProvider
   with TimeZoneProvider {
 
-  self: {
-    def featureGeography: FeatureGeographyProvider
-  }  =>
-
-  def location: Point = featureGeography.location
-
-  def population: Option[Long] = featureGeography.population
-
-  def gTopo30ElevationInMeters: Option[Long] = featureGeography.gTopo30ElevationInMeters
-
-  def elevationInMeters: Option[Long] = featureGeography.elevationInMeters
-
-  def timeZone: Option[DateTimeZone] = featureGeography.timeZone
+  def location: Point
+  def population: Option[Long]
+  def gTopo30ElevationInMeters: Option[Long]
+  def elevationInMeters: Option[Long]
+  def timeZone: Option[DateTimeZone]
 }

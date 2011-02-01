@@ -7,11 +7,15 @@ import com.sirika.openplacesearch.api.language.Language
  */
 
 trait FeatureNameProvider {
-  self: {
-    def featureNames: FeatureNames
-  } =>
+  self: ParentAdministrativeEntityProvider =>
 
-  def fullyQualifiedNameParts : List[NamePart]
+  /**
+   * Extracts the different components that form
+   * the fully qualified name of the feature
+   * @see NamePart
+   */
+  def fullyQualifiedNameParts : List[NamePart] = parentAdministrativeEntity.map {_.fullyQualifiedNameParts}
+    .getOrElse(Nil) ::: List(NamePart(name=name, userFriendlyCode=userFriendlyCode))
 
   /**
    * A name that we use when no better name exists.
@@ -19,7 +23,7 @@ trait FeatureNameProvider {
    * Might include non ASCII characters.
    * </p>
    */
-  def name:String = self.featureNames.defaultName
+  def name:String
 
   /**
    * A code such as CA for california, that is supposed to mean something to human beings.
@@ -27,18 +31,16 @@ trait FeatureNameProvider {
    * <p> features that have user friendly codes include US states and countries.
    * </p>
    */
-  def userFriendlyCode: Option[String] = None
+  def userFriendlyCode: Option[String]
 
-  def localizedNames:List[LocalizedName] = self.featureNames.localizedNames
+  def localizedNames:List[LocalizedName]
   /**
    * reverts to #name if no preferredName found
    */
-  def preferredName(language: Language):String = self.featureNames.preferredName(language)
+  def preferredName(language: Language):String
 
   /**
    * reverts to #name if no short name found
    */
-  def shortName(language: Language): String = self.featureNames.shortName(language)
-
-
+  def shortName(language: Language): String
 }

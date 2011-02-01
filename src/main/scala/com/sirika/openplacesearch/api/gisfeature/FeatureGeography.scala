@@ -14,11 +14,11 @@ object JtsPoint {
  */
 
 final case class FeatureGeography(
-  override val location: Point,
-  override val population: Option[Long],
-  override val gTopo30ElevationInMeters: Option[Long],
-  override val elevationInMeters: Option[Long],
-  override val timeZone: Option[DateTimeZone]) extends FeatureGeographyProvider {
+  val location: Point,
+  val population: Option[Long],
+  val gTopo30ElevationInMeters: Option[Long],
+  val elevationInMeters: Option[Long],
+  val timeZone: Option[DateTimeZone]) extends FeatureGeographyProvider {
 
   require(Option(location) exists {_.coveredBy(api.ValidCoordinateBounds)}, "The location must be on earth (within the bounds of WGS84)")
   require(population != null, "population must be a non-null Option")

@@ -4,7 +4,7 @@ package com.sirika.openplacesearch.api.gisfeature
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class GeonamesFeature(override val geonamesId: Long,override val geonamesFeatureCategory: GeonamesFeatureCategory) extends GeonamesFeatureProvider {
+final case class GeonamesFeature(val geonamesId: Long,val geonamesFeatureCategory: GeonamesFeatureCategory) extends GeonamesFeatureProvider {
   //require(geonamesId != null, "geonamesId is required")
   require(geonamesFeatureCategory != null, "geonamesFeatureCategory is required")
 

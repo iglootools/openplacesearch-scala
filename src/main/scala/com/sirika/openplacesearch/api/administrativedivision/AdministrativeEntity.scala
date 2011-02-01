@@ -1,12 +1,12 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
-import com.sirika.openplacesearch.api.gisfeature.FeatureNameProvider
+import com.sirika.openplacesearch.api.gisfeature.{ParentAdministrativeEntityProvider, FeatureNameProvider}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-trait AdministrativeEntity {
+trait AdministrativeEntity extends ParentAdministrativeEntityProvider with FeatureNameProvider {
   /**
    * ADM0 (Country), ADM1 (First Level ADM), ADM2, ...)
    */
