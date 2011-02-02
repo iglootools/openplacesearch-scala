@@ -13,6 +13,21 @@ import com.ibm.icu.util.{ULocale, Currency}
 object Places {
   object France {
     object IleDeFrance {
+
+      object Paris {
+        def paris: Place = placeBasedOn(
+          GisFeature(
+            featureGeography=FeatureGeography(
+              location=JtsPoint(2.333056,48.866667),
+              population=Some(2138551L),
+              gTopo30ElevationInMeters=Some(30L),
+              elevationInMeters=None,
+              timeZone=Some(DateTimeZone.forID("Europe/Paris"))),
+            geonamesFeature=GeonamesFeature(geonamesId=2988507L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPLC")),
+            featureNames=FeatureNames(defaultName="Paris"),
+            parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Paris.ArrondissementDeParis.paris)))
+      }
+
       object Yvelines {
         def gazeran: Place = placeBasedOn(
           GisFeature(
@@ -24,7 +39,7 @@ object Places {
               timeZone=Some(DateTimeZone.forID("Europe/Paris"))),
             geonamesFeature=GeonamesFeature(geonamesId=3016456L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
             featureNames=FeatureNames(defaultName="Gazeran"),
-            parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.gazeran)))
+            parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.ArrondissementDeRambouillet.gazeran)))
 
         def rambouillet: Place = placeBasedOn(
           GisFeature(
@@ -36,7 +51,7 @@ object Places {
               timeZone=Some(DateTimeZone.forID("Europe/Paris"))),
             geonamesFeature=GeonamesFeature(geonamesId=2984513L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
             featureNames=FeatureNames(defaultName="Rambouillet"),
-            parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.rambouillet)))
+            parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.ArrondissementDeRambouillet.rambouillet)))
 
       }
     }
