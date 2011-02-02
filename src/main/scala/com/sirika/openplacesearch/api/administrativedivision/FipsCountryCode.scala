@@ -13,6 +13,5 @@ package com.sirika.openplacesearch.api.administrativedivision
  */
 
 final case class FipsCountryCode(val fipsCode: Option[String] = None, val equivalentFipsCode: Option[String] = None) {
-  require(fipsCode != null, "fipsCode must be a non-null Option")
-  require(equivalentFipsCode != null, "fipsCode must be a non-null Option")
+  require(fipsCode != null || equivalentFipsCode != null, "either fipsCode or equivalentFipsCode must be a non-null Option")
 }

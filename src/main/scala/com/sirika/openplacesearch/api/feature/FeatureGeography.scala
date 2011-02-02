@@ -26,5 +26,4 @@ final case class FeatureGeography(
   require(elevationInMeters != null, "elevationInMeters must be a non-null Option")
   require(timeZone != null, "timeZone must be a non-null Option")
 
-  protected def featureGeography: FeatureGeographyProvider = this
 }

@@ -7,7 +7,7 @@ package com.sirika.openplacesearch.api.administrativedivision
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class IsoCountryCode(val alpha2Code: String, val alpha3Code: String, val numeric: Int) {
+final case class IsoCountryCode(val alpha3Code: String, val alpha2Code: String, val numeric: Int) {
   require(Option(alpha2Code).exists {_.nonEmpty}, "alpha2Code is required")
   require(Option(alpha3Code).exists {_.nonEmpty}, "alpha3Code is required")
 }
