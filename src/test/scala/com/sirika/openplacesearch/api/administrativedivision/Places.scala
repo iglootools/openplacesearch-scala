@@ -58,6 +58,18 @@ object Places {
             geonamesFeature=GeonamesFeature(geonamesId=5368361L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
             featureNames=FeatureNames(defaultName="Los Angeles"),
             parentAdministrativeEntity=Some(AdministrativeDivisions.UnitedStates.California.losAngelesCounty)))
+
+        def marinaDelRey: Place = placeBasedOn(
+          GisFeature(
+            featureGeography=FeatureGeography(
+              location=JtsPoint(-118.45174407958984, 33.980289459228516),
+              population=Some(8680L),
+              gTopo30ElevationInMeters=Some(7L),
+              elevationInMeters=Some(5L),
+              timeZone=Some(DateTimeZone.forID("America/Los_Angeles"))),
+            geonamesFeature=GeonamesFeature(geonamesId=5370542L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
+            featureNames=FeatureNames(defaultName="Marina Del Rey"),
+            parentAdministrativeEntity=Some(AdministrativeDivisions.UnitedStates.California.losAngelesCounty)))
       }
     }
   }
