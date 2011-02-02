@@ -39,9 +39,7 @@ object Places {
             parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.rambouillet)))
 
       }
-
     }
-
   }
 
   object UnitedStates {
