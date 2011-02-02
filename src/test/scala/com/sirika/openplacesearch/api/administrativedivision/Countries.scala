@@ -14,7 +14,6 @@ object Countries {
   def unitedStates: Country = Country(
     isoCountryCode=IsoCountryCode(alpha3Code="USA",alpha2Code="US", numeric=840),
     continent=Continents.northAmerica,
-    name="United States",
     featureNameProvider= SimpleFeatureNameProvider(defaultName = "United States", parentAdministrativeEntity=None),
     currency=Some(Currency.getInstance("USD")),
     fipsCountryCode=FipsCountryCode(fipsCode=Some("US")),
@@ -31,7 +30,6 @@ object Countries {
   def usOutlyingIslands: Country = Country(
     isoCountryCode=IsoCountryCode(alpha3Code="UMI",alpha2Code="UM", numeric=581),
     continent=Continents.oceania,
-    name="United States Minor Outlying Islands",
     featureNameProvider= SimpleFeatureNameProvider(defaultName = "United States Minor Outlying Islands", parentAdministrativeEntity=None),
     currency=Some(Currency.getInstance("USD")),
     fipsCountryCode=FipsCountryCode(fipsCode=None),
@@ -48,7 +46,6 @@ object Countries {
   def france: Country = Country(
     isoCountryCode=IsoCountryCode(alpha3Code="FRA",alpha2Code="FR", numeric=250),
     continent=Continents.europe,
-    name="France",
     featureNameProvider= SimpleFeatureNameProvider(defaultName = "France", parentAdministrativeEntity=None),
     currency=Some(Currency.getInstance("EUR")),
     fipsCountryCode=FipsCountryCode(fipsCode=Some("FR")),
@@ -65,7 +62,6 @@ object Countries {
   def antarctica: Country = Country(
     isoCountryCode=IsoCountryCode(alpha3Code="ATA",alpha2Code="AQ", numeric=10),
     continent=Continents.antarctica,
-    name="Antarctica",
     featureNameProvider= SimpleFeatureNameProvider(defaultName = "Antarctica", parentAdministrativeEntity=None),
     currency=None,
     fipsCountryCode=FipsCountryCode(fipsCode=Some("AY")),
