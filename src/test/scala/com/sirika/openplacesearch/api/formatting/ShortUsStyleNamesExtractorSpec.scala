@@ -11,7 +11,7 @@ class ShortUsStyleNamesExtractorSpec extends Spec with ShouldMatchers {
   describe("FullyQualifiedNamesExtractor") {
     val extractor: NamesExtractor = new ShortUsStyleNamesExtractor()
 
-    it("should extract all name parts") {
+    it("should extract ADM1 code and place") {
       extractor.extractRelevantNames(NameProviders.losAngeles.fullyQualifiedNameParts) should be === List("CA", "Los Angeles")
     }
 

@@ -11,7 +11,7 @@ class LongUsStyleNamesExtractorSpec extends Spec with ShouldMatchers {
   describe("FullyQualifiedNamesExtractor") {
     val extractor: NamesExtractor = new LongUsStyleNamesExtractor()
 
-    it("should extract all name parts") {
+    it("should extract ADM1 name and place") {
       extractor.extractRelevantNames(NameProviders.losAngeles.fullyQualifiedNameParts) should be === List("California", "Los Angeles")
     }
 
