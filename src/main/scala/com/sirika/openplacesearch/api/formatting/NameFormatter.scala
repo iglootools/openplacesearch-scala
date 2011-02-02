@@ -7,5 +7,5 @@ import com.sirika.openplacesearch.api.feature.FeatureNameProvider
  */
 
 trait NameFormatter {
-  def formatName(nameProvider: FeatureNameProvider)
+  def formatName(nameProvider: FeatureNameProvider): String
 }

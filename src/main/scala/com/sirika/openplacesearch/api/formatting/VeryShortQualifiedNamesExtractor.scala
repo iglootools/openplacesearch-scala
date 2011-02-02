@@ -11,7 +11,7 @@ protected final class VeryShortQualifiedNamesExtractor extends NamesExtractor {
     require(nameParts.size >= 2, "There should be at least 2 NameParts : a Country and a name")
 
     val feature = nameParts(nameParts.size -1)
-    val country = nameParts(1)
+    val country = nameParts(0)
     List(country, feature) map {_.name}
   }
 }
