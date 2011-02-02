@@ -13,7 +13,7 @@ final class Continent(val geonamesCode: String, val name : String) {
   override def hashCode() : Int = Objects.hashCode(geonamesCode)
 
   override def equals(other: Any) : Boolean = other match {
-    case Continent(`geonamesCode`, _) => true
+    case Continent(`geonamesCode`, `name`) => true
     case _ => false
   }
 
