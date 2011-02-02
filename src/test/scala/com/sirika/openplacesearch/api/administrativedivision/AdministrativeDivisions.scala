@@ -13,7 +13,7 @@ import com.ibm.icu.util.{ULocale, Currency}
 
 object AdministrativeDivisions {
   object France {
-    def ileDeFranceAdm1: AdministrativeDivision =
+    def ileDeFrance: AdministrativeDivision =
       AdministrativeDivision(
         code="A8",
         featureNameProvider=SimpleFeatureNameProvider(defaultName="Île-de-France", parentAdministrativeEntity=Some(Countries.france)),
@@ -21,32 +21,32 @@ object AdministrativeDivisions {
       )
 
     object IleDeFrance {
-      def yvelinesAdm2: AdministrativeDivision =
+      def yvelines: AdministrativeDivision =
         AdministrativeDivision(
           code="78",
-          featureNameProvider=SimpleFeatureNameProvider(defaultName="Département des Yvelines", parentAdministrativeEntity=Some(ileDeFranceAdm1)),
-          parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(ileDeFranceAdm1))
+          featureNameProvider=SimpleFeatureNameProvider(defaultName="Département des Yvelines", parentAdministrativeEntity=Some(ileDeFrance)),
+          parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(ileDeFrance))
         )
 
       object Yvelines {
-        def arrondissementDeRambouilletAdm3: AdministrativeDivision =
+        def arrondissementDeRambouillet: AdministrativeDivision =
           AdministrativeDivision(
             code="782",
-            featureNameProvider=SimpleFeatureNameProvider(defaultName="Arrondissement de Rambouillet", parentAdministrativeEntity=Some(yvelinesAdm2)),
-            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(yvelinesAdm2))
+            featureNameProvider=SimpleFeatureNameProvider(defaultName="Arrondissement de Rambouillet", parentAdministrativeEntity=Some(yvelines)),
+            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(yvelines))
           )
-        def gazeranAdm4: AdministrativeDivision =
+        def gazeran: AdministrativeDivision =
           AdministrativeDivision(
             code="78269",
-            featureNameProvider=SimpleFeatureNameProvider(defaultName="Gazeran", parentAdministrativeEntity=Some(arrondissementDeRambouilletAdm3)),
-            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(arrondissementDeRambouilletAdm3))
+            featureNameProvider=SimpleFeatureNameProvider(defaultName="Gazeran", parentAdministrativeEntity=Some(arrondissementDeRambouillet)),
+            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(arrondissementDeRambouillet))
           )
 
-        def rambouilletAdm4: AdministrativeDivision =
+        def rambouillet: AdministrativeDivision =
           AdministrativeDivision(
             code="78517",
-            featureNameProvider=SimpleFeatureNameProvider(defaultName="Rambouillet", parentAdministrativeEntity=Some(arrondissementDeRambouilletAdm3)),
-            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(arrondissementDeRambouilletAdm3))
+            featureNameProvider=SimpleFeatureNameProvider(defaultName="Rambouillet", parentAdministrativeEntity=Some(arrondissementDeRambouillet)),
+            parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(arrondissementDeRambouillet))
           )
 
       }
@@ -54,7 +54,23 @@ object AdministrativeDivisions {
 
   }
 
+  object UnitedStates {
+    def california: AdministrativeDivision =
+      AdministrativeDivision(
+        code="CA",
+        featureNameProvider=SimpleFeatureNameProvider(defaultName="California", parentAdministrativeEntity=Some(Countries.unitedStates)),
+        parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(Countries.unitedStates))
+      )
 
+    object California {
+      def losAngelesCounty: AdministrativeDivision =
+        AdministrativeDivision(
+          code="037",
+          featureNameProvider=SimpleFeatureNameProvider(defaultName="Los Angeles County", parentAdministrativeEntity=Some(california)),
+          parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(parentAdministrativeEntity = Some(california))
+        )
 
+    }
+  }
 
 }
