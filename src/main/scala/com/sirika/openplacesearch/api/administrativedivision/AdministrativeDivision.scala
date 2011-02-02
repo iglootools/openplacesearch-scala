@@ -17,7 +17,7 @@ final case class AdministrativeDivision(
   def shortName(language: Language): String = featureNameProvider.shortName(language)
   def preferredName(language: Language): String = featureNameProvider.preferredName(language)
   def localizedNames: List[LocalizedName] = featureNameProvider.localizedNames
-  def userFriendlyCode: Option[String] = featureNameProvider.userFriendlyCode
+  def userFriendlyCode: Option[String] = Some(code)
 
   // ParentAdministrativeEntityProvider
   def parentAdministrativeEntity: Option[AdministrativeEntity] = parentAdministrativeEntityProvider.parentAdministrativeEntity
