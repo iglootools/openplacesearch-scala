@@ -22,7 +22,26 @@ object Places {
           timeZone=Some(DateTimeZone.forID("Europe/Paris"))),
         geonamesFeature=GeonamesFeature(geonamesId=3016456L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
         featureNames=FeatureNames(defaultName="Gazeran"),
-        parentAdministrativeEntity=Some(AdministrativeDivisions.France.gazeranAdm4))
+        parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.gazeranAdm4))
+
+      Place(
+        parentAdministrativeEntityProvider=gisFeature,
+        featureGeographyProvider=gisFeature,
+        featureNameProvider=gisFeature,
+        stableIdProvider=gisFeature)
+    }
+
+    def rambouillet: Place = {
+      val gisFeature = GisFeature(
+        featureGeography=FeatureGeography(
+          location=JtsPoint(1.8333332538604736,48.650001525878906),
+          population=Some(0L),
+          gTopo30ElevationInMeters=Some(161L),
+          elevationInMeters=None,
+          timeZone=Some(DateTimeZone.forID("Europe/Paris"))),
+        geonamesFeature=GeonamesFeature(geonamesId=2984513L, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass="P", featureCode="PPL")),
+        featureNames=FeatureNames(defaultName="Rambouillet"),
+        parentAdministrativeEntity=Some(AdministrativeDivisions.France.IleDeFrance.Yvelines.rambouilletAdm4))
 
       Place(
         parentAdministrativeEntityProvider=gisFeature,
