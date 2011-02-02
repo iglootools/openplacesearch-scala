@@ -21,7 +21,7 @@ object NameProviders {
       NamePart(name="United States", userFriendlyCode=Some("US")),
       NamePart(name="California", userFriendlyCode=Some("CA")))
 
-  def onePartsOnly: FeatureNameProvider =
+  def onePartOnly: FeatureNameProvider =
     new StaticNameProvider(
       NamePart(name="United States", userFriendlyCode=Some("US")))
 }
