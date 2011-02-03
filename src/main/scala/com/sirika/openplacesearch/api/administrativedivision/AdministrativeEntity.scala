@@ -27,7 +27,7 @@ trait AdministrativeEntity extends ParentAdministrativeEntityProvider with Featu
   def country: Country = {
     val administrativeEntityAtLevelZero = parentAdministrativeEntityHavingLevel(0)
     administrativeEntityAtLevelZero match {
-      case c: Country =>  c.asInstanceOf[Country]
+      case c: Country =>  c
       case _ => throw new RuntimeException("By design, ADM0 should be a country")
     }
   }
