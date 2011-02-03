@@ -4,6 +4,8 @@ import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.feature.{FeatureNameProvider, LocalizedName, ParentAdministrativeEntityProvider}
 
 /**
+ * An Administrative Division
+ * <p>The code is unique only among a given country </p>
  * @param code represents the <a href="http://en.wikipedia.org/wiki/List_of_FIPS_region_codes">FIPS code</a> for US states.
  * @author Sami Dalouche (sami.dalouche@gmail
  */
