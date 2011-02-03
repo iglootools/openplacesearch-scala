@@ -30,7 +30,7 @@ final case class Place(
   def location: Point = featureGeographyProvider.location
 
   // ParentAdministrativeEntity
-  def parentAdministrativeEntity: Option[AdministrativeEntity] = null
+  def parentAdministrativeEntity: Option[AdministrativeEntity] = parentAdministrativeEntityProvider.parentAdministrativeEntity
 
   // StableIdProvider
   def stableId: String = stableIdProvider.stableId
