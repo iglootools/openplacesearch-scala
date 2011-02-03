@@ -12,6 +12,11 @@ final case class AdministrativeDivision(
   val featureNameProvider: FeatureNameProvider,
   val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider) extends AdministrativeEntity {
 
+  country match {
+    case c: Country => // ok
+    case _ => throw new IllegalArgumentException("parentAdministrativeEntityProvider should have a country in its hierarchy")
+  }
+
   // FeatureNameProvider
   def name: String = featureNameProvider.name
   def shortName(language: Language): String = featureNameProvider.shortName(language)
