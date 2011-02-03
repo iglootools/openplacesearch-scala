@@ -4,9 +4,8 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import com.sirika.openplacesearch.api.language.Language
-import com.sirika.openplacesearch.api.feature.{LocalizedName, FeatureNames}
-import com.google.common.base.Objects
+import com.sirika.openplacesearch.api.administrativedivision.DummyAdministrativeEntities._
+
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeEntitySpec extends Spec with ShouldMatchers {
@@ -52,22 +51,6 @@ class AdministrativeEntitySpec extends Spec with ShouldMatchers {
     adm2.country should be === Countries.unitedStates
   }
 
-  private def adm0 = new DummyAdministrativeEntity(name="adm0", parentAdministrativeEntity=None)
-  private def adm1 = new DummyAdministrativeEntity(name="adm1", parentAdministrativeEntity=Some(adm0))
-  private def adm2 = new DummyAdministrativeEntity(name="adm2", parentAdministrativeEntity=Some(adm1))
+
 }
 
-private class DummyAdministrativeEntity(val name: String, val parentAdministrativeEntity: Option[AdministrativeEntity]) extends AdministrativeEntity{
-  private val featureNames = FeatureNames(name)
-  def shortName(language: Language): String = featureNames.shortName(language)
-  def preferredName(language: Language): String = featureNames.preferredName(language)
-  def localizedNames: List[LocalizedName] = featureNames.localizedNames
-  def userFriendlyCode: Option[String] = None
-
-  override def equals(that: Any): Boolean = that match {
-    case a: DummyAdministrativeEntity => name.equals(a.name)
-    case _ => false
-  }
-
-  override def hashCode: Int = Objects.hashCode(name)
-}
