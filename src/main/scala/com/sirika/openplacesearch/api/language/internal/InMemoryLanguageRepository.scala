@@ -8,6 +8,7 @@ import com.google.common.io.{Resources,CharStreams,LineProcessor, InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
+import com.sirika.openplacesearch.api.commons.Urls
 
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
@@ -21,7 +22,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   def findByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
 
   private def importLanguagesFromClassPath() : List[Language ] = {
-    val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(url("com/sirika/openplacesearch/api/language/iso639languages"))
+    val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/language/iso639languages"))
     val iso639LanguageInputReaderSupplier = CharStreams.newReaderSupplier(iso639LanguageInputStreamSupplier, Charsets.UTF_8)
     parseLanguages(iso639LanguageInputReaderSupplier)
 
@@ -55,9 +56,5 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
         true
       }
     })
-  }
-
-  private def url(classpathUrl: String) : URL = {
-    return Thread.currentThread().getContextClassLoader().getResource(classpathUrl)
   }
 }
