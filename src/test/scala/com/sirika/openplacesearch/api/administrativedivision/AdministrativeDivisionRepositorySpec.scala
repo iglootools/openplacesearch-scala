@@ -28,5 +28,25 @@ class AdministrativeDivisionRepositorySpec extends Spec with ShouldMatchers {
       evaluating { administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "ZZ") } should produce[NoSuchElementException]
     }
   }
+
+  describe("getSecondOrderAdministrativeDivision") {
+    it("should return Yvelines") {
+      val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
+      administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "78") should be ===
+        AdministrativeDivisions.France.IleDeFrance.yvelines
+    }
+
+    it("should produce exception when code is unknown") {
+      evaluating { val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
+      administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "ZZ")  } should produce[NoSuchElementException]
+    }
+  }
+
+  describe("findAllSecondOrderAdministrativeDivisions") {
+    it("of France.IleDeFrance should return 8 departements") {
+      val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
+      administrativeDivisionRepository.findAllSecondOrderAdministrativeDivisions(france, ileDeFrance).size should be === 8
+    }
+  }
 }
 
