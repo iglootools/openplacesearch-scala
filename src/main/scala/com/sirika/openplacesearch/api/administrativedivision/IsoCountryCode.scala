@@ -8,6 +8,6 @@ package com.sirika.openplacesearch.api.administrativedivision
  */
 
 final case class IsoCountryCode(val alpha3Code: String, val alpha2Code: String, val numeric: Int) {
-  require(Option(alpha2Code).exists {_.nonEmpty}, "alpha2Code is required")
-  require(Option(alpha3Code).exists {_.nonEmpty}, "alpha3Code is required")
+  require(Option(alpha2Code).exists {c => c.nonEmpty && c.size == 2}, "alpha2Code is required, with an expected size of 2: %s".format(alpha2Code))
+  require(Option(alpha3Code).exists {c => c.nonEmpty && c.size == 3}, "alpha3Code is required, with an expected size of 3: %s".format(alpha3Code))
 }

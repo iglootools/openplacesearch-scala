@@ -17,6 +17,6 @@ class InMemoryContinentRepository extends ContinentRepository {
 
   def findAll(): List[Continent] = { continents }
 
-  def findByGeonamesCode(code: String): Option[Continent] = { continentsLookupTable.get(code) }
+  def getByGeonamesCode(code: String): Continent = continentsLookupTable.get(code).get
 
 }

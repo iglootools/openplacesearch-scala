@@ -5,7 +5,7 @@ import com.sirika.openplacesearch.api.language.internal.InMemoryLanguageReposito
 object MainApp {
   def main(args : Array[String]) : Unit = {
     val languageRepository : LanguageRepository = new InMemoryLanguageRepository()
-    val language = languageRepository.findByAlpha3Code("fra");
+    val language = languageRepository.getByAlpha3Code("fra");
     println(language)
   }
 }

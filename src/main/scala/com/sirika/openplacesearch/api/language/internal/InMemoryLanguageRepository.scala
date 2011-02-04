@@ -8,7 +8,7 @@ import com.google.common.io.{Resources,CharStreams,LineProcessor, InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
-import com.sirika.openplacesearch.api.commons.Urls
+import com.sirika.commons.scala.Urls
 
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
@@ -18,8 +18,8 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
 
   def findAll() : Seq[Language] = languages
-  def findByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code)
-  def findByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
+  def getByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code)
+  def getByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
 
   private def importLanguagesFromClassPath() : List[Language ] = {
     val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/language/iso639languages"))
@@ -29,8 +29,9 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   }
 
   private def parseLanguages(readerSupplier: InputSupplier[InputStreamReader]) : List[Language] = {
-    // eng      eng     en      English
-    val LanguageRE = """([^\t]*)\t([^\t]*)\t([^\t]*)\t([^\t]*)""".r
+    // 4 fields separated by tabs
+    // alpha3, alphaFucked, alpha2, name
+    val LanguageRE =(("""([^\t]*)\t""" * 3) + """([^\t]*)""").r
     CharStreams.readLines(readerSupplier, new LineProcessor[List[Language]]() {
       private[this] var languages : List[Language] = Nil
       private[this] var lineNumber = 1

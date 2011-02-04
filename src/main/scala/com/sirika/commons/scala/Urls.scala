@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.commons
+package com.sirika.commons.scala
 
 import java.net.URL
 

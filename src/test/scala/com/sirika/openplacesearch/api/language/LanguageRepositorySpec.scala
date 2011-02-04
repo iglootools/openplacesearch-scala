@@ -12,23 +12,23 @@ import com.sirika.openplacesearch.api.language._
 class LanguageRepositorySpec extends Spec with ShouldMatchers {
   val languageRepository : LanguageRepository = new InMemoryLanguageRepository()
 
-  describe("findByAlpha2Code") {
+  describe("getByAlpha2Code") {
     it("should find the french language") {
-      languageRepository.findByAlpha2Code("fr") should be === Some(french)
+      languageRepository.getByAlpha2Code("fr") should be === Some(french)
     }
 
     it("should not find an inexisting language") {
-      languageRepository.findByAlpha2Code("zz") should be === None
+      languageRepository.getByAlpha2Code("zz") should be === None
     }
   }
 
-  describe("findByAlpha3Code") {
+  describe("getByAlpha3Code") {
     it("should find the french language") {
-      languageRepository.findByAlpha3Code("fra") should be === Some(french)
+      languageRepository.getByAlpha3Code("fra") should be === Some(french)
     }
 
     it("should not find an inexisting language") {
-      languageRepository.findByAlpha3Code("zzz") should be === None
+      languageRepository.getByAlpha3Code("zzz") should be === None
     }
   }
 

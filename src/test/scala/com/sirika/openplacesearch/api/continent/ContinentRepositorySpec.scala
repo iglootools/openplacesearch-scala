@@ -10,13 +10,13 @@ import com.sirika.openplacesearch.api.continent.Continents._
 @RunWith(classOf[JUnitRunner])
 class ContinentRepositorySpec extends Spec with ShouldMatchers {
   val continentRepository : ContinentRepository = new InMemoryContinentRepository()
-  describe("findByGeonamesCode") {
+  describe("getByGeonamesCode") {
     it("should find Europe") {
-      continentRepository.findByGeonamesCode("EU") should be === Some(europe)
+      continentRepository.getByGeonamesCode("EU") should be === europe
     }
 
     it("should not find inexisting continent") {
-      continentRepository.findByGeonamesCode("ZZ") should be === None
+      evaluating { continentRepository.getByGeonamesCode("ZZ") } should produce[NoSuchElementException]
     }
   }
 
