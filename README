@@ -10,7 +10,7 @@
 = Features =
 OpenPlaceSearch depends on a number of libraries :
 * Joda-Time
-* Guava-IO
+* Guava-IO (until Scala-IO is merged to the official scala: https://github.com/scala-incubator/scala-io)
 * HC-Helpers
 * IBM icu4j
 
