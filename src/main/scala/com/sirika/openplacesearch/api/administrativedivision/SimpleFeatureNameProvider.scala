@@ -12,6 +12,9 @@ final case class SimpleFeatureNameProvider(
   val parentAdministrativeEntity:Option[AdministrativeEntity])
   extends FeatureNameProvider with ParentAdministrativeEntityProvider {
 
+  require(Option(defaultName) exists {_.nonEmpty}, "the name is required")
+  require(parentAdministrativeEntity != null, "parentAdministrativeEntity must be a non-null Option")
+
   def featureNames = FeatureNames(defaultName = defaultName)
 
   // FeatureNameProvider

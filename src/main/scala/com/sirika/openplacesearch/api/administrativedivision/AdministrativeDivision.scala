@@ -19,6 +19,8 @@ final case class AdministrativeDivision(
     case _ => throw new IllegalArgumentException("parentAdministrativeEntityProvider should have a country in its hierarchy")
   }
 
+  require(Option(code) exists {_.nonEmpty}, "the code is required")
+
   // FeatureNameProvider
   def name: String = featureNameProvider.name
   def shortName(language: Language): String = featureNameProvider.shortName(language)
