@@ -2,7 +2,7 @@
 * iso639Languages: http://download.geonames.org/export/dump/iso-languagecodes.txt
 * countries: http://download.geonames.org/export/dump/countryInfo.txt
 * ADM1:
-** http://download.geonames.org/export/dump/admin1Codes.txt
+** http://download.geonames.org/export/dump/admin1Codes.txt (not used anymore)
 ** http://download.geonames.org/export/dump/admin1CodesASCII.txt
 * ADM2:
 ** http://download.geonames.org/export/dump/admin2Codes.txt
