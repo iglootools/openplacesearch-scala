@@ -13,7 +13,8 @@ import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentReposi
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class InMemoryCountryRepository extends CountryRepository with Logging {
+class
+InMemoryCountryRepository extends CountryRepository with Logging {
   def findAll(): List[Country] = null
   def getByFipsCode(code: String): Country = null
   def getByIsoAlpha3Code(code: String): Country = null
@@ -50,27 +51,35 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
               capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
               phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
               =>
-                Country(
-                  isoCountryCode=IsoCountryCode(alpha3Code=isoAlpha3CountryCode,alpha2Code=isoAlpha2CountryCode, numeric=isoNumericCountryCode.toInt),
+                val c=Country(
+                  isoCountryCode=
+                    IsoCountryCode(
+                      alpha3Code=isoAlpha3CountryCode,
+                      alpha2Code=isoAlpha2CountryCode,
+                      numeric=isoNumericCountryCode.toInt),
                   continent=continentRepository.getByGeonamesCode(continentCode),
                   featureNameProvider= SimpleFeatureNameProvider(defaultName = countryName, parentAdministrativeEntity=None),
                   currency=someIfNonEmpty(currencyCode, {c => Currency.getInstance(c)}),
-                  fipsCountryCode=FipsCountryCode(fipsCode=someIfNonEmpty(fipsCountryCode), equivalentFipsCode=someIfNonEmpty(equivalentFipsCode)),
+                  fipsCountryCode=
+                    FipsCountryCode(
+                      fipsCode=someIfNonEmpty(fipsCountryCode),
+                      equivalentFipsCode=someIfNonEmpty(equivalentFipsCode)),
                   countryAdministrativeInformation=
                     CountryAdministrativeInformation(
-                      preferredLocales=List(new ULocale("en_US"), new ULocale("es_US"), new ULocale("haw"), new ULocale("fr")),
+                      preferredLocales=toLocales(preferredLocales),
                       topLevelDomain=someIfNonEmpty(topLevelDomain),
                       phonePrefix=someIfNonEmpty(phonePrefix),
                       postalCodeRegex=someIfNonEmpty(postalCodeRegex),
                       postalCodeMask=someIfNonEmpty(postalCodeMask)),
-                  countryGeographicInformation=CountryGeographicInformation(population = Some(303824000L), areaInSquareKilometers = Some(9629091)))
+                  countryGeographicInformation=
+                    CountryGeographicInformation(
+                      population = someIfNonEmpty(population, p=> p.toLong),
+                      areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble)))
 
-                debug("found line: " + lineNumber + "with content: " + l)
+                debug("Created Country: " + c)
+                countries ::= c
               case _ => throw new IllegalArgumentException("Error processing line[%d]: %s".format(lineNumber, line))
             }
-
-
-
         }
 
         lineNumber+=1
@@ -86,8 +95,22 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
 
     line.toList ++ List.fill(numberOfMissingFields)("")
   }
-  private def someIfNonEmpty[T](value: String, f: (String)=> T = {s:String => s}):Option[T] = value.trim match {
+
+  /**
+   * trims the value, and returns an Option :
+   * <ul>
+   *  <li>None if the string is empty (after trimming)</li>
+   *  <li>Some() on what the result callback returns (by default, the string itself)</li>
+   * </ul>
+   */
+  private def someIfNonEmpty[T](value: String, result: (String)=> T = {s:String => s}):Option[T] = value.trim match {
     case s if s.isEmpty => None
-    case s:String => Some(f(s))
+    case s:String => Some(result(s))
+  }
+
+  private def toLocales(preferredLocalesAsString: String): List[ULocale] = {
+    preferredLocalesAsString.split(",").map { localeAsString =>
+      new ULocale(localeAsString.replaceAll("-", "_"))
+    }.toList
   }
 }
