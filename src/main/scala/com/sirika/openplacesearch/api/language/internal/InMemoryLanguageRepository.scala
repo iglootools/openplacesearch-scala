@@ -11,7 +11,7 @@ import com.sirika.openplacesearch.api.language.LanguageRepository
 import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls}
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
-  private lazy val languages = importLanguagesFromClassPath()
+  private lazy val languages = parseLanguages(Urls.toInputReaderSupplier("com/sirika/openplacesearch/api/language/iso639languages"))
 
   private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*)
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
@@ -19,12 +19,6 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   def findAll() : Seq[Language] = languages
   def getByAlpha2Code(code: String): Language = alpha2LookupTable.get(code).get
   def getByAlpha3Code(code: String): Language = alpha3LookupTable.get(code).get
-
-  private def importLanguagesFromClassPath() : List[Language ] = {
-    val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/language/iso639languages"))
-    val iso639LanguageInputReaderSupplier = CharStreams.newReaderSupplier(iso639LanguageInputStreamSupplier, Charsets.UTF_8)
-    parseLanguages(iso639LanguageInputReaderSupplier)
-  }
 
   private def parseLanguages(readerSupplier: InputSupplier[InputStreamReader]) : List[Language] = {
     // 4 fields separated by tabs
