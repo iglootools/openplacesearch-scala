@@ -35,13 +35,13 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
   private def parseCountries(readerSupplier: InputSupplier[InputStreamReader]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
-    new InputStreamReaderTransformer(readerSupplier).map { line =>
+    new InputStreamReaderTransformer(readerSupplier).map { (line, lineNumber) =>
       sanitizeLineSplit(line.split('\t')) match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
         phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
         =>
-          Country(
+          Some(Country(
             isoCountryCode=
               IsoCountryCode(
                 alpha3Code=isoAlpha3CountryCode,
@@ -64,7 +64,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
             countryGeographicInformation=
               CountryGeographicInformation(
                 population = someIfNonEmpty(population, p=> p.toLong),
-                areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble)))
+                areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble))))
         case _ => throw new IllegalArgumentException("Error processing line: %s".format(line))
       }
     }

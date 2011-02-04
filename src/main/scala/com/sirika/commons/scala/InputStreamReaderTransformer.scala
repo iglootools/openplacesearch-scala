@@ -17,7 +17,7 @@ class InputStreamReaderTransformer [T] (val readerSupplier: InputSupplier[InputS
    * Long: the lineNumber
    * </p>
    */
-  def map(f: (String) => T): List[T] = {
+  def map(f: (String, Long) => Option[T]): List[T] = {
     CharStreams.readLines(readerSupplier, new LineProcessor[List[T]]() {
       private[this] var result : List[T] = Nil
       private[this] var lineNumber = 1
@@ -31,9 +31,13 @@ class InputStreamReaderTransformer [T] (val readerSupplier: InputSupplier[InputS
           case s:String if s.isEmpty => debug("Ignoring line[%d]: empty".format(lineNumber))
           case l:String =>
             try {
-              val temp = f(l)
-              debug("Successful result for line[%d]: ".format(lineNumber) + temp)
-              result ::= temp
+              val temp = f(l, lineNumber)
+              if(temp.isDefined) {
+                debug("Successful result for line[%d]: ".format(lineNumber) + temp)
+                result ::= temp.get
+              } else {
+                debug("No result for line[%d]: ".format(lineNumber))
+              }
             } catch {
               case e:Exception => throw new IllegalArgumentException("Error processing line[%d]: %s".format(lineNumber, line), e)
             }

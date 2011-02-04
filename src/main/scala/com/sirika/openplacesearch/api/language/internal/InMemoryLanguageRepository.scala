@@ -8,8 +8,7 @@ import com.google.common.io.{Resources,CharStreams,LineProcessor, InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
-import com.sirika.commons.scala.Urls
-
+import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls}
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private lazy val languages = importLanguagesFromClassPath()
@@ -25,37 +24,26 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
     val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/language/iso639languages"))
     val iso639LanguageInputReaderSupplier = CharStreams.newReaderSupplier(iso639LanguageInputStreamSupplier, Charsets.UTF_8)
     parseLanguages(iso639LanguageInputReaderSupplier)
-
   }
 
   private def parseLanguages(readerSupplier: InputSupplier[InputStreamReader]) : List[Language] = {
     // 4 fields separated by tabs
     // alpha3, alphaFucked, alpha2, name
     val LanguageRE =(("""([^\t]*)\t""" * 3) + """([^\t]*)""").r
-    CharStreams.readLines(readerSupplier, new LineProcessor[List[Language]]() {
-      private[this] var languages : List[Language] = Nil
-      private[this] var lineNumber = 1
 
-      def getResult() : List[Language] = languages
-      def processLine(line : String) : Boolean = {
-        // ignore first line
-        if(lineNumber > 1) {
-          line match {
-            case "" => debug("Ignoring empty line " + lineNumber)
-            case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>
-              val alpha2CodeOption = if(Option(alpha2Code) exists (_.nonEmpty)) Some(alpha2Code) else None
-              val l = Language(name, alpha3Code, alpha2CodeOption)
-              languages ::= l
-              debug("Language has been imported: " + l)
-            case _ => throw new IllegalArgumentException("Line " + lineNumber + " cannot be processed: " + line)
-          }
-        } else {
-          debug("Ignoring first line")
+    new InputStreamReaderTransformer(readerSupplier).map { (line, lineNumber) =>
+      if(lineNumber > 1) {
+        line match {
+          case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>
+            val alpha2CodeOption = if(Option(alpha2Code) exists (_.nonEmpty)) Some(alpha2Code) else None
+            Some(Language(name, alpha3Code, alpha2CodeOption))
+          case _ =>throw new IllegalArgumentException("Error processing line: %s".format(line))
         }
-
-        lineNumber+=1
-        true
+      } else {
+        debug("Ignoring first line")
+        None
       }
-    })
+
+    }
   }
 }
