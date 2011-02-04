@@ -13,7 +13,7 @@ trait AdministrativeDivisionRepository {
    * @throws NoSuchElementException if no adm matches the given code
    */
   def getFirstOrderAdministrativeDivision(country: Country, code: String): AdministrativeDivision
-  def getAllFirstOrderAdministrativeDivision(country: Country): List[AdministrativeDivision]
+  def getAllFirstOrderAdministrativeDivisions(country: Country): List[AdministrativeDivision]
 
   /**
    * Finds the second order administrative division
@@ -23,5 +23,5 @@ trait AdministrativeDivisionRepository {
    * @throws NoSuchElementException if no adm matches the given code
    */
   def getSecondOrderAdministrativeDivision(country: Country, firstOrderAdministrativeDivision: AdministrativeDivision, code: String): AdministrativeDivision
-  def getAllSecondOrderAdministrativeDivision(country: Country): List[AdministrativeDivision]
+  def getAllSecondOrderAdministrativeDivisions(country: Country, firstOrderAdministrativeDivision: AdministrativeDivision): List[AdministrativeDivision]
 }
