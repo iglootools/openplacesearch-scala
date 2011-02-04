@@ -14,21 +14,21 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
 
   describe("getByAlpha2Code") {
     it("should find the french language") {
-      languageRepository.getByAlpha2Code("fr") should be === Some(french)
+      languageRepository.getByAlpha2Code("fr") should be === french
     }
 
     it("should not find an inexisting language") {
-      languageRepository.getByAlpha2Code("zz") should be === None
+      evaluating { languageRepository.getByAlpha2Code("zz") } should produce[NoSuchElementException]
     }
   }
 
   describe("getByAlpha3Code") {
     it("should find the french language") {
-      languageRepository.getByAlpha3Code("fra") should be === Some(french)
+      languageRepository.getByAlpha3Code("fra") should be === french
     }
 
     it("should not find an inexisting language") {
-      languageRepository.getByAlpha3Code("zzz") should be === None
+       evaluating { languageRepository.getByAlpha3Code("zzz")  } should produce[NoSuchElementException]
     }
   }
 

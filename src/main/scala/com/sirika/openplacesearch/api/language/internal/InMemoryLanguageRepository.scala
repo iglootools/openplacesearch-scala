@@ -18,8 +18,8 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
 
   def findAll() : Seq[Language] = languages
-  def getByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code)
-  def getByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code)
+  def getByAlpha2Code(code: String): Language = alpha2LookupTable.get(code).get
+  def getByAlpha3Code(code: String): Language = alpha3LookupTable.get(code).get
 
   private def importLanguagesFromClassPath() : List[Language ] = {
     val iso639LanguageInputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/language/iso639languages"))
