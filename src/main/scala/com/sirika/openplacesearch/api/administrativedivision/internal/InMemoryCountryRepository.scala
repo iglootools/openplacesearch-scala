@@ -14,12 +14,15 @@ import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentReposi
  */
 
 class InMemoryCountryRepository extends CountryRepository with Logging {
-  def findAll(): List[Country] = null
-  def getByFipsCode(code: String): Country = null
-  def getByIsoAlpha3Code(code: String): Country = null
-  def getByIsoAlpha2Code(code: String): Country = null
+  private lazy val countries = importCountriesFromClassPath()
+  private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)
+  private val alpha2LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha2Code, c)} : _*)
+  private val alpha3LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha3Code, c)} : _*)
 
-  importCountriesFromClassPath
+  def findAll: List[Country] = countries
+  def getByFipsCode(code: String): Country = fipsLookupTable.get(code).get
+  def getByIsoAlpha3Code(code: String): Country = alpha3LookupTable.get(code).get
+  def getByIsoAlpha2Code(code: String): Country = alpha2LookupTable.get(code).get
 
   private def importCountriesFromClassPath() : List[Country ] = {
     val inputStreamSupplier = Resources.newInputStreamSupplier(Urls.classpath("com/sirika/openplacesearch/api/administrativedivision/countries"))

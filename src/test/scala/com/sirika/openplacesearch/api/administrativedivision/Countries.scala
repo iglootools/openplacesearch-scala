@@ -54,7 +54,7 @@ object Countries {
         preferredLocales=List(new ULocale("fr_FR"), new ULocale("frp"), new ULocale("br"), new ULocale("co"), new ULocale("ca"), new ULocale("eu"), new ULocale("oc")),
         topLevelDomain=Some(".fr"),
         phonePrefix=Some("33"),
-        postalCodeRegex=Some("""^^(\d{5})$"""),
+        postalCodeRegex=Some("""^(\d{5})$"""),
         postalCodeMask=Some("#####")),
     countryGeographicInformation=CountryGeographicInformation(population = Some(64768389L), areaInSquareKilometers = Some(547030))
   )
