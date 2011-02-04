@@ -14,6 +14,8 @@ import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentReposi
  */
 
 class InMemoryCountryRepository extends CountryRepository with Logging {
+  private[this] val continentRepository = new InMemoryContinentRepository()
+
   private lazy val countries = importCountriesFromClassPath()
   private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)
   private val alpha2LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha2Code, c)} : _*)
@@ -33,7 +35,6 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
   private def parseCountries(readerSupplier: InputSupplier[InputStreamReader]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
     CharStreams.readLines(readerSupplier, new LineProcessor[List[Country]]() {
-      private[this] val continentRepository = new InMemoryContinentRepository()
       private[this] var countries : List[Country] = Nil
       private[this] var countryGeonamesId: Map[Country,Long]= Map()
       private[this] var lineNumber = 1
