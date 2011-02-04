@@ -13,8 +13,7 @@ import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentReposi
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class
-InMemoryCountryRepository extends CountryRepository with Logging {
+class InMemoryCountryRepository extends CountryRepository with Logging {
   def findAll(): List[Country] = null
   def getByFipsCode(code: String): Country = null
   def getByIsoAlpha3Code(code: String): Country = null
