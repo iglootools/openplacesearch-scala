@@ -9,7 +9,7 @@ import com.sirika.openplacesearch.api.administrativedivision.Country
 
 object CountryLineProcessor {
 
-  def processCountryLine(line: String) (f: (List[String]) => Either[ParsingWarning,Country]) = {
+  def processCountryLine[T](line: String) (f: (List[String]) => Either[ParsingWarning,T]) = {
      val split = sanitizeLineSplit(line.split('\t'))
      split match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
