@@ -20,6 +20,10 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
     it("should produce an exception for inexisting language") {
       evaluating { languageRepository.getByAlpha2Code("zz") } should produce[NoSuchElementException]
     }
+
+    it("should be case insensitive") {
+      languageRepository.getByAlpha2Code("FR") should be === french
+    }
   }
 
   describe("getByAlpha3Code") {
@@ -27,8 +31,12 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
       languageRepository.getByAlpha3Code("fra") should be === french
     }
 
+    it("should be case insensitive") {
+      languageRepository.getByAlpha3Code("FRA") should be === french
+    }
+
     it("shouldproduce an exception for inexisting language") {
-       evaluating { languageRepository.getByAlpha3Code("zzz")  } should produce[NoSuchElementException]
+      evaluating { languageRepository.getByAlpha3Code("zzz")  } should produce[NoSuchElementException]
     }
   }
 
