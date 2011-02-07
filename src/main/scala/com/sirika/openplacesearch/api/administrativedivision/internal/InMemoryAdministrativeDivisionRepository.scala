@@ -105,10 +105,6 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     }
   }
 
-  //private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)
-  //private val alpha2LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha2Code, c)} : _*)
-  //private val alpha3LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha3Code, c)} : _*)
-
   def findAllSecondOrderAdministrativeDivisions(country: Country, firstOrderAdministrativeDivision: AdministrativeDivision) = {
     SecondOrderAdministrativeDivisions.allSecondOrderAdministrativeDivisionPerCountryAndAdm1.get((country, firstOrderAdministrativeDivision)).get
   }
