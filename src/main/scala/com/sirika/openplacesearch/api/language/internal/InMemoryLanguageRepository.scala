@@ -27,7 +27,8 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
       if(lineNumber > 1) {
         line match {
           case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>
-            Right(Language(name, alpha3Code, Option(alpha2Code)))
+            val alpha2 = if(Option(alpha2Code).exists {_.nonEmpty}) Some(alpha2Code) else None
+            Right(Language(name, alpha3Code, alpha2))
           case _ =>throw new IllegalArgumentException("The language is required to have a name and an alpha3code")
         }
       } else {
