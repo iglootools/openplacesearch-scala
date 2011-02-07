@@ -14,7 +14,7 @@ import com.sirika.openplacesearch.api.ReferenceData
 class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRepository with Logging {
   private[this] val countryRepository = new InMemoryCountryRepository()
   private[this] object FirstOrderAdministrativeDivisions {
-    val allFirstOrderAdministrativeDivisions = parseAdm1(Urls.toInputReaderSupplier(ReferenceData.FirstOrderAdministrativeDivisions))
+    val allFirstOrderAdministrativeDivisions = parseAdm1(ReferenceData.FirstOrderAdministrativeDivisions)
     val allFirstOrderAdministrativeDivisionsPerCountry: Map[Country,List[AdministrativeDivision]] = allFirstOrderAdministrativeDivisions.groupBy (_.country)
     val adm1LookupTable: Map[(Country,String),AdministrativeDivision] = Map(allFirstOrderAdministrativeDivisions.map{a : AdministrativeDivision => ((a.country,a.code), a)} : _*)
 
@@ -40,7 +40,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
   }
 
   private[this] object SecondOrderAdministrativeDivisions {
-    val allSecondOrderAdministrativeDivisions = parseAdm2(Urls.toInputReaderSupplier(ReferenceData.SecondOrderAdministrativeDivisions))
+    val allSecondOrderAdministrativeDivisions = parseAdm2(ReferenceData.SecondOrderAdministrativeDivisions)
     val allSecondOrderAdministrativeDivisionPerCountryAndAdm1: Map[(Country,AdministrativeDivision),List[AdministrativeDivision]] =
       allSecondOrderAdministrativeDivisions.groupBy {a=>(a.country,a.parentAdministrativeEntity.get.asInstanceOf[AdministrativeDivision])}
     val adm2LookupTable: Map[(Country,AdministrativeDivision, String),AdministrativeDivision] =
