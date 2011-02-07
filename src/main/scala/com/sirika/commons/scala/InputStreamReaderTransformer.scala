@@ -16,8 +16,9 @@ class InputStreamReaderTransformer [T] (val readerSupplier: InputSupplier[InputS
    * String; the line
    * Long: the lineNumber
    * </p>
+   * @param f is supposed to throw Exception if a not-recoverable error happens, and a ParsingWarning/actual result otherwise
    */
-  def map(f: (String, Long) => Option[T]): List[T] = {
+  def map(f: (String, Long) => Either[ParsingWarning,T]): List[T] = {
     CharStreams.readLines(readerSupplier, new LineProcessor[List[T]]() {
       private[this] var result : List[T] = Nil
       private[this] var lineNumber = 1
@@ -27,19 +28,18 @@ class InputStreamReaderTransformer [T] (val readerSupplier: InputSupplier[InputS
         debug("Processing line[%d]: %s".format(lineNumber, line))
 
         line match {
-          case s:String if s.startsWith("#") => debug("Ignoring line [%d]: comment".format(lineNumber))
-          case s:String if s.isEmpty => debug("Ignoring line[%d]: empty".format(lineNumber))
+          case s:String if s.startsWith("#") => debug("[%d] Ignoring line: comment".format(lineNumber))
+          case s:String if s.isEmpty => debug("[%d] Ignoring line: empty".format(lineNumber))
           case l:String =>
             try {
               val temp = f(l, lineNumber)
-              if(temp.isDefined) {
-                debug("Successful result for line[%d]: ".format(lineNumber) + temp)
-                result ::= temp.get
-              } else {
-                debug("No result for line[%d]: ".format(lineNumber))
+              temp match {
+                case Left(e) => warn("[%d] Parsing warning: %s".format(lineNumber,e.message))
+                case Right(r) =>  debug("[%d] Successful result: ".format(lineNumber) + temp)
+                  result ::= r
               }
             } catch {
-              case e:Exception => throw new IllegalArgumentException("Error processing line[%d]: %s".format(lineNumber, line), e)
+              case e:Exception => throw new IllegalArgumentException("[%d] Unexpected error processing: %s".format(lineNumber, line), e)
             }
         }
 

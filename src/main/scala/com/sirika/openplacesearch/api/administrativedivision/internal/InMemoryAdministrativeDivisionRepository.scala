@@ -1,11 +1,10 @@
 package com.sirika.openplacesearch.api.administrativedivision.internal
 
-import com.google.common.io.{Resources, LineProcessor, CharStreams, InputSupplier}
+import com.google.common.io.{InputSupplier}
 import java.io.InputStreamReader
-import com.google.common.base.Charsets
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
-import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls}
+import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls, ParsingWarning}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -26,14 +25,14 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
             val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
             val parentAdministrativeEntity = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
 
-            Some(AdministrativeDivision(
+            Right(AdministrativeDivision(
               code=adminCode,
               featureNameProvider=
                 SimpleFeatureNameProvider(
                   defaultName = if(name.nonEmpty) name else asciiName,
                   parentAdministrativeEntity=Some(parentAdministrativeEntity)),
               parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
-          case _ => throw new IllegalArgumentException("Error processing line: %s".format(line))
+          case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
         }
       }
     }
@@ -58,10 +57,10 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
 
 
             adm1 match {
-              case None => warn("ADM1 with code %s from country %s does not exist. Cannot import ADM2(%s,%s)".format(adm1Code, countryAlpha2Code, adm2Code, name))
-              None
+              case None =>
+                Left(ParsingWarning("ADM1 with code %s from country %s does not exist. Cannot import ADM2 properly(%s,%s)".format(adm1Code, countryAlpha2Code, adm2Code, name)))
               case _ =>
-                Some(AdministrativeDivision(
+                Right(AdministrativeDivision(
                   code=adm2Code,
                   featureNameProvider=
                     SimpleFeatureNameProvider(
@@ -71,7 +70,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
             }
 
 
-          case _ => throw new IllegalArgumentException("Error processing line: %s".format(line))
+          case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
         }
       }
     }

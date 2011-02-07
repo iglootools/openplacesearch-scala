@@ -1,13 +1,12 @@
 package com.sirika.openplacesearch.api.administrativedivision.internal
 
 import com.sirika.openplacesearch.api.administrativedivision.{Country, IsoCountryCode, FipsCountryCode, CountryAdministrativeInformation,CountryGeographicInformation, CountryRepository, SimpleFeatureNameProvider}
-import com.google.common.io.{Resources, LineProcessor, CharStreams, InputSupplier}
+import com.google.common.io.{InputSupplier}
 import java.io.InputStreamReader
-import com.google.common.base.Charsets
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
 import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
-import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls}
+import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls, ParsingWarning}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -35,7 +34,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
         phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
         =>
-          Some(Country(
+          Right(Country(
             isoCountryCode=
               IsoCountryCode(
                 alpha3Code=isoAlpha3CountryCode,
@@ -59,7 +58,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
               CountryGeographicInformation(
                 population = someIfNonEmpty(population, p=> p.toLong),
                 areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble))))
-        case _ => throw new IllegalArgumentException("Error processing line: %s".format(line))
+        case _ => throw new IllegalArgumentException("Syntax error in input. It should have 19 tab-separated fields.")
       }
     }
   }

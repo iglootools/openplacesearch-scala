@@ -1,14 +1,12 @@
 package com.sirika.openplacesearch.api.language.internal
 
 import java.io.InputStreamReader
-import java.net.URL
 import scala.collection.immutable.{List,Map}
-import com.google.common.base.Charsets
-import com.google.common.io.{Resources,CharStreams,LineProcessor, InputSupplier}
+import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
-import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls}
+import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls, ParsingWarning}
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private lazy val languages = parseLanguages(Urls.toInputReaderSupplier("com/sirika/openplacesearch/api/language/iso639languages"))
@@ -29,13 +27,11 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
       if(lineNumber > 1) {
         line match {
           case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>
-            val alpha2CodeOption = if(Option(alpha2Code) exists (_.nonEmpty)) Some(alpha2Code) else None
-            Some(Language(name, alpha3Code, alpha2CodeOption))
-          case _ =>throw new IllegalArgumentException("Error processing line: %s".format(line))
+            Right(Language(name, alpha3Code, Option(alpha2Code)))
+          case _ =>throw new IllegalArgumentException("The language is required to have a name and an alpha3code")
         }
       } else {
-        debug("Ignoring first line")
-        None
+        Left(ParsingWarning("Ignoring first line : we assume it to be a comment"))
       }
 
     }
