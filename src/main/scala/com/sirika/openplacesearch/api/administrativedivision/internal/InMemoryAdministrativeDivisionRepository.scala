@@ -60,7 +60,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
             def adm1ToUse: Option[AdministrativeDivision] = {
               adm1 match {
                 case None =>
-                  warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will rely on a hacked ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
+                  warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will have a parent ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
                   adm1hacks.get((country, adm1Code)) match {
                     case None =>
                       val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
