@@ -47,7 +47,9 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
         ((a.country,a.parentAdministrativeEntity.get.asInstanceOf[AdministrativeDivision], a.code), a)} : _*)
 
     private def parseAdm2(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
-      new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
+      var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
+
+      val result = new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
         line.split('\t') match {
           case Array(compositeCode, name, asciiName, geonamesId)
           =>
@@ -55,24 +57,51 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
             val country = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
             val adm1 = getFirstOrderAdministrativeDivisionOption(country, adm1Code)
 
+            def adm1ToUse: Option[AdministrativeDivision] = {
+              adm1 match {
+                case None =>
+                  warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will rely on a hacked ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
+                  adm1hacks.get((country, adm1Code)) match {
+                    case None =>
+                      val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
+                        SimpleFeatureNameProvider(
+                          defaultName = adm1Code + "[HACK]",
+                          parentAdministrativeEntity=Some(country)),
+                        parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(country)))
 
-            adm1 match {
-              case None =>
-                Left(ParsingWarning("ADM1 with code %s from country %s does not exist. Cannot import ADM2 properly(%s,%s)".format(adm1Code, countryAlpha2Code, adm2Code, name)))
-              case _ =>
-                Right(AdministrativeDivision(
-                  code=adm2Code,
-                  featureNameProvider=
-                    SimpleFeatureNameProvider(
-                      defaultName = if(name.nonEmpty) name else asciiName,
-                      parentAdministrativeEntity=adm1),
-                  parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1)))
+                      val t = ((a.country,a.code), a)
+                      adm1hacks = adm1hacks + t
+                      adm1hacks.get((country, adm1Code))
+                    case s => s
+                  }
+                case s => s
+              }
+
             }
 
-
+            Right(
+              AdministrativeDivision(
+                code=adm2Code,
+                featureNameProvider=
+                  SimpleFeatureNameProvider(
+                    defaultName = if(name.nonEmpty) name else asciiName,
+                    parentAdministrativeEntity=adm1ToUse),
+                parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
           case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
         }
       }
+
+      sumUpErrors(adm1hacks)
+      result
+    }
+  }
+
+  def sumUpErrors(adm1hacks: Map[(Country, String), AdministrativeDivision]) {
+    val errorsByCountry = adm1hacks.values.groupBy(_.country)
+    errorsByCountry.keys.foreach { c =>
+      val missingAdm1s = errorsByCountry.get(c).get.map(_.code).mkString(",")
+      warn("(Summary) Country[%s] misses the following ADM1: %s".format(c.isoCountryCode.alpha3Code, missingAdm1s))
+
     }
   }
 
