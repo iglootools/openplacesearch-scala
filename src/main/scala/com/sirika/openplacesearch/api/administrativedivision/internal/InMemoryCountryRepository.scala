@@ -31,7 +31,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
 
     new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
 
-      CountryLineProcessor.processCountryLine(line) { l =>
+      FieldExtractors.extractFieldsFromCountryLine(line) { l =>
         l match {
           case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
           capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,

@@ -1,7 +1,7 @@
 package com.sirika.openplacesearch.api.language
 import com.sirika.commons.scala.{LineByLineInputStreamReader, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
-import com.sirika.openplacesearch.api.administrativedivision.internal.CountryLineProcessor
+import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
 
 object UpdateReferenceData {
   def main(args : Array[String]) : Unit = {
@@ -26,7 +26,7 @@ object UpdateReferenceData {
 
   def extractCountryGisFeatures = {
     new LineByLineInputStreamReader(ReferenceData.Countries).map { (line, lineNumber) =>
-      CountryLineProcessor.processCountryLine(line) { l =>
+      FieldExtractors.extractFieldsFromCountryLine(line) { l =>
         l match {
           case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
           capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
