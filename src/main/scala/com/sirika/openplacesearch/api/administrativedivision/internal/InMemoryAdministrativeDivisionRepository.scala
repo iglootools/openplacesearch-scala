@@ -19,20 +19,22 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
 
     private def parseAdm1(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
       new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
-        line.split('\t') match {
-          case Array(compositeCode, name, asciiName, geonamesId)
-          =>
-            val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
-            val parentAdministrativeEntity = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
 
-            Right(AdministrativeDivision(
-              code=adminCode,
-              featureNameProvider=
-                SimpleFeatureNameProvider(
-                  defaultName = if(name.nonEmpty) name else asciiName,
-                  parentAdministrativeEntity=Some(parentAdministrativeEntity)),
-              parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
-          case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
+        FieldExtractors.extractFieldsFromAdministrativeDivisionLine(line) { l =>
+          l match {
+            case Array(compositeCode, name, asciiName, geonamesId)
+            =>
+              val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
+              val parentAdministrativeEntity = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
+
+              Right(AdministrativeDivision(
+                code=adminCode,
+                featureNameProvider=
+                  SimpleFeatureNameProvider(
+                    defaultName = if(name.nonEmpty) name else asciiName,
+                    parentAdministrativeEntity=Some(parentAdministrativeEntity)),
+                parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
+          }
         }
       }
     }
@@ -50,44 +52,45 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
       val result = new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
-        line.split('\t') match {
-          case Array(compositeCode, name, asciiName, geonamesId)
-          =>
-            val Array(countryAlpha2Code,adm1Code,adm2Code) = compositeCode.split('.')
-            val country = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
-            val adm1 = getFirstOrderAdministrativeDivisionOption(country, adm1Code)
+        FieldExtractors.extractFieldsFromAdministrativeDivisionLine(line) { l =>
+          l match {
+            case Array(compositeCode, name, asciiName, geonamesId)
+            =>
+              val Array(countryAlpha2Code,adm1Code,adm2Code) = compositeCode.split('.')
+              val country = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
+              val adm1 = getFirstOrderAdministrativeDivisionOption(country, adm1Code)
 
-            def adm1ToUse: Option[AdministrativeDivision] = {
-              adm1 match {
-                case None =>
-                  warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will have a parent ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
-                  adm1hacks.get((country, adm1Code)) match {
-                    case None =>
-                      val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
-                        SimpleFeatureNameProvider(
-                          defaultName = adm1Code + "[HACK]",
-                          parentAdministrativeEntity=Some(country)),
-                        parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(country)))
+              def adm1ToUse: Option[AdministrativeDivision] = {
+                adm1 match {
+                  case None =>
+                    warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will have a parent ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
+                    adm1hacks.get((country, adm1Code)) match {
+                      case None =>
+                        val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
+                          SimpleFeatureNameProvider(
+                            defaultName = adm1Code + "[HACK]",
+                            parentAdministrativeEntity=Some(country)),
+                          parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(country)))
 
-                      val t = ((a.country,a.code), a)
-                      adm1hacks = adm1hacks + t
-                      adm1hacks.get((country, adm1Code))
-                    case s => s
-                  }
-                case s => s
+                        val t = ((a.country,a.code), a)
+                        adm1hacks = adm1hacks + t
+                        adm1hacks.get((country, adm1Code))
+                      case s => s
+                    }
+                  case s => s
+                }
+
               }
 
-            }
-
-            Right(
-              AdministrativeDivision(
-                code=adm2Code,
-                featureNameProvider=
-                  SimpleFeatureNameProvider(
-                    defaultName = if(name.nonEmpty) name else asciiName,
-                    parentAdministrativeEntity=adm1ToUse),
-                parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
-          case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
+              Right(
+                AdministrativeDivision(
+                  code=adm2Code,
+                  featureNameProvider=
+                    SimpleFeatureNameProvider(
+                      defaultName = if(name.nonEmpty) name else asciiName,
+                      parentAdministrativeEntity=adm1ToUse),
+                  parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
+          }
         }
       }
 

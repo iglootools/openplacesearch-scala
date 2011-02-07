@@ -9,15 +9,24 @@ import com.sirika.openplacesearch.api.administrativedivision.Country
 
 object FieldExtractors {
 
+  def extractFieldsFromAdministrativeDivisionLine[T](line: String) (f: (Array[String]) => Either[ParsingWarning,T]) = {
+    val split = line.split('\t')
+    split match {
+      case Array(compositeCode, name, asciiName, geonamesId)
+      => f(split)
+      case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: compositeCode, name, asciiName, geonamesId")
+    }
+  }
+
   def extractFieldsFromCountryLine[T](line: String) (f: (List[String]) => Either[ParsingWarning,T]) = {
-     val split = sanitizeLineSplit(line.split('\t'))
-     split match {
-        case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
-        capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
-        phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
-        => f(split)
-        case _ => throw new IllegalArgumentException("Syntax error in input. It should have 19 tab-separated fields.")
-      }
+    val split = sanitizeLineSplit(line.split('\t'))
+    split match {
+      case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
+      capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
+      phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
+      => f(split)
+      case _ => throw new IllegalArgumentException("Syntax error in input. It should have 19 tab-separated fields.")
+    }
   }
 
   private def sanitizeLineSplit(line: Array[String]):List[String] = {
