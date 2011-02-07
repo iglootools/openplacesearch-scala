@@ -1,7 +1,7 @@
 package com.sirika.openplacesearch.api.language
 import com.sirika.openplacesearch.api.language.internal.InMemoryLanguageRepository
 
-object UpdateReferenceFiles {
+object UpdateReferenceData {
   def main(args : Array[String]) : Unit = {
     downloadReferenceFiles
     val featureIds = extractGisFeatureIds
