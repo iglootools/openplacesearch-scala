@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api
+package com.sirika.openplacesearch.api.referencedata
 
 import com.sirika.commons.scala.Urls
 

@@ -7,7 +7,7 @@ import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
 import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
 import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
-import com.sirika.openplacesearch.api.ReferenceData
+import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

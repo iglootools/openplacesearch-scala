@@ -5,12 +5,11 @@ import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
 import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
-import com.sirika.openplacesearch.api.ReferenceData
+import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-
 class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRepository with Logging {
   private[this] val countryRepository = new InMemoryCountryRepository()
   private[this] object FirstOrderAdministrativeDivisions {

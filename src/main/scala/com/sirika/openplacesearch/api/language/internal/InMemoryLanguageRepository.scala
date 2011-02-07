@@ -7,7 +7,7 @@ import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
 import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
-import com.sirika.openplacesearch.api.ReferenceData
+import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private lazy val languages = parseLanguages(ReferenceData.Languages)
