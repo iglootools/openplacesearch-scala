@@ -7,9 +7,10 @@ import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
 import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
+import com.sirika.openplacesearch.api.ReferenceData
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
-  private lazy val languages = parseLanguages(Urls.toInputReaderSupplier("com/sirika/openplacesearch/api/language/iso639languages"))
+  private lazy val languages = parseLanguages(Urls.toInputReaderSupplier(ReferenceData.Languages))
 
   private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*)
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)

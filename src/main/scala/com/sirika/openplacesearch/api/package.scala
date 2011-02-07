@@ -9,3 +9,5 @@ package object api {
   protected[api] val GeometryFactory: GeometryFactory = new GeometryFactory(Precision, WGS84_SRID)
   protected[api] val ValidCoordinateBounds: Geometry = api.GeometryFactory.toGeometry(WGS84_ENVELOPE);
 }
+
+

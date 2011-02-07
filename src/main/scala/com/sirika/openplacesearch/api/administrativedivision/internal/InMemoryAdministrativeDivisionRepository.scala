@@ -5,6 +5,7 @@ import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
 import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
+import com.sirika.openplacesearch.api.ReferenceData
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -13,7 +14,7 @@ import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarni
 class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRepository with Logging {
   private[this] val countryRepository = new InMemoryCountryRepository()
   private[this] object FirstOrderAdministrativeDivisions {
-    val allFirstOrderAdministrativeDivisions = parseAdm1(Urls.toInputReaderSupplier("com/sirika/openplacesearch/api/administrativedivision/admin1CodesASCII"))
+    val allFirstOrderAdministrativeDivisions = parseAdm1(Urls.toInputReaderSupplier(ReferenceData.FirstOrderAdministrativeDivisions))
     val allFirstOrderAdministrativeDivisionsPerCountry: Map[Country,List[AdministrativeDivision]] = allFirstOrderAdministrativeDivisions.groupBy (_.country)
     val adm1LookupTable: Map[(Country,String),AdministrativeDivision] = Map(allFirstOrderAdministrativeDivisions.map{a : AdministrativeDivision => ((a.country,a.code), a)} : _*)
 
@@ -39,7 +40,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
   }
 
   private[this] object SecondOrderAdministrativeDivisions {
-    val allSecondOrderAdministrativeDivisions = parseAdm2(Urls.toInputReaderSupplier("com/sirika/openplacesearch/api/administrativedivision/admin2Codes"))
+    val allSecondOrderAdministrativeDivisions = parseAdm2(Urls.toInputReaderSupplier(ReferenceData.SecondOrderAdministrativeDivisions))
     val allSecondOrderAdministrativeDivisionPerCountryAndAdm1: Map[(Country,AdministrativeDivision),List[AdministrativeDivision]] =
       allSecondOrderAdministrativeDivisions.groupBy {a=>(a.country,a.parentAdministrativeEntity.get.asInstanceOf[AdministrativeDivision])}
     val adm2LookupTable: Map[(Country,AdministrativeDivision, String),AdministrativeDivision] =
