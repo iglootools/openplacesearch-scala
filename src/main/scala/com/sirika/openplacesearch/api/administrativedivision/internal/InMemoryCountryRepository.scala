@@ -6,7 +6,7 @@ import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
 import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
-import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls, ParsingWarning}
+import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -28,7 +28,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
   private def parseCountries(readerSupplier: InputSupplier[InputStreamReader]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
-    new InputStreamReaderTransformer(readerSupplier).map { (line, lineNumber) =>
+    new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
       sanitizeLineSplit(line.split('\t')) match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,

@@ -4,7 +4,7 @@ import com.google.common.io.{InputSupplier}
 import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
-import com.sirika.commons.scala.{InputStreamReaderTransformer, Urls, ParsingWarning}
+import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -18,7 +18,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     val adm1LookupTable: Map[(Country,String),AdministrativeDivision] = Map(allFirstOrderAdministrativeDivisions.map{a : AdministrativeDivision => ((a.country,a.code), a)} : _*)
 
     private def parseAdm1(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
-      new InputStreamReaderTransformer(readerSupplier).map { (line, lineNumber) =>
+      new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
         line.split('\t') match {
           case Array(compositeCode, name, asciiName, geonamesId)
           =>
@@ -47,7 +47,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
         ((a.country,a.parentAdministrativeEntity.get.asInstanceOf[AdministrativeDivision], a.code), a)} : _*)
 
     private def parseAdm2(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
-      new InputStreamReaderTransformer(readerSupplier).map { (line, lineNumber) =>
+      new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
         line.split('\t') match {
           case Array(compositeCode, name, asciiName, geonamesId)
           =>

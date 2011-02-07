@@ -8,7 +8,7 @@ import grizzled.slf4j.Logging
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class InputStreamReaderTransformer [T] (val readerSupplier: InputSupplier[InputStreamReader]) extends Logging {
+class LineByLineInputStreamReader [T] (val readerSupplier: InputSupplier[InputStreamReader]) extends Logging {
   /**
    * Ignores comment lines and empty lines
    *
