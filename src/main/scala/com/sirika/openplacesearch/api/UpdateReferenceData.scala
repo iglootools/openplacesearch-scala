@@ -1,6 +1,5 @@
 package com.sirika.openplacesearch.api.language
-import com.sirika.openplacesearch.api.language.internal.InMemoryLanguageRepository
-import com.sirika.commons.scala.LineByLineInputStreamReader
+import com.sirika.commons.scala.{LineByLineInputStreamReader, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 object UpdateReferenceData {
@@ -25,14 +24,19 @@ object UpdateReferenceData {
   }
 
   def extractCountryGisFeatures = {
-//    new LineByLineInputStreamReader(ReferenceData.Countries).map { (line, lineNumber) =>
-//      sanitizeLineSplit(line.split('\t')) match {
-//        case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
-//        capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
-//        phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
-//        =>
-//      }
-//    }
+    new LineByLineInputStreamReader(ReferenceData.Countries).map { (line, lineNumber) =>
+      line.split('\t') match {
+        case Array(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
+        capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
+        phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,_)
+        =>
+          if(Option(geonamesId).exists {s => s.nonEmpty && s.toInt > 0})
+            Right(geonamesId)
+          else
+            Left(ParsingWarning("GeonamesID is required to be a positive number, but is currently: %s".format(geonamesId)))
+        case _ => throw new IllegalArgumentException("Syntax error in input. It should have 19 tab-separated fields.")
+      }
+    }
   }
 
   def reportProgress(x : Any) = println(x)

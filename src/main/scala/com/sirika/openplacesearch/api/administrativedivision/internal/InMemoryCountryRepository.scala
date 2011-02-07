@@ -30,47 +30,43 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
     new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
-      sanitizeLineSplit(line.split('\t')) match {
-        case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
-        capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
-        phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
-        =>
-          Right(Country(
-            isoCountryCode=
-              IsoCountryCode(
-                alpha3Code=isoAlpha3CountryCode,
-                alpha2Code=isoAlpha2CountryCode,
-                numeric=isoNumericCountryCode.toInt),
-            continent=continentRepository.getByGeonamesCode(continentCode),
-            featureNameProvider= SimpleFeatureNameProvider(defaultName = countryName, parentAdministrativeEntity=None),
-            currency=someIfNonEmpty(currencyCode, {c => Currency.getInstance(c)}),
-            fipsCountryCode=
-              FipsCountryCode(
-                fipsCode=someIfNonEmpty(fipsCountryCode),
-                equivalentFipsCode=someIfNonEmpty(equivalentFipsCode)),
-            countryAdministrativeInformation=
-              CountryAdministrativeInformation(
-                preferredLocales=toLocales(preferredLocales),
-                topLevelDomain=someIfNonEmpty(topLevelDomain),
-                phonePrefix=someIfNonEmpty(phonePrefix),
-                postalCodeRegex=someIfNonEmpty(postalCodeRegex),
-                postalCodeMask=someIfNonEmpty(postalCodeMask)),
-            countryGeographicInformation=
-              CountryGeographicInformation(
-                population = someIfNonEmpty(population, p=> p.toLong),
-                areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble))))
-        case _ => throw new IllegalArgumentException("Syntax error in input. It should have 19 tab-separated fields.")
+
+      CountryLineProcessor.processCountryLine(line) { l =>
+        l match {
+          case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
+          capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
+          phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
+          =>
+            Right(Country(
+              isoCountryCode=
+                IsoCountryCode(
+                  alpha3Code=isoAlpha3CountryCode,
+                  alpha2Code=isoAlpha2CountryCode,
+                  numeric=isoNumericCountryCode.toInt),
+              continent=continentRepository.getByGeonamesCode(continentCode),
+              featureNameProvider= SimpleFeatureNameProvider(defaultName = countryName, parentAdministrativeEntity=None),
+              currency=someIfNonEmpty(currencyCode, {c => Currency.getInstance(c)}),
+              fipsCountryCode=
+                FipsCountryCode(
+                  fipsCode=someIfNonEmpty(fipsCountryCode),
+                  equivalentFipsCode=someIfNonEmpty(equivalentFipsCode)),
+              countryAdministrativeInformation=
+                CountryAdministrativeInformation(
+                  preferredLocales=toLocales(preferredLocales),
+                  topLevelDomain=someIfNonEmpty(topLevelDomain),
+                  phonePrefix=someIfNonEmpty(phonePrefix),
+                  postalCodeRegex=someIfNonEmpty(postalCodeRegex),
+                  postalCodeMask=someIfNonEmpty(postalCodeMask)),
+              countryGeographicInformation=
+                CountryGeographicInformation(
+                  population = someIfNonEmpty(population, p=> p.toLong),
+                  areaInSquareKilometers = someIfNonEmpty(areaInSquareMeters, a => a.toDouble))))
+        }
       }
     }
   }
 
-  private def sanitizeLineSplit(line: Array[String]):List[String] = {
-    val ExpectedNumberOfFields = 19
-    def actualNumberOfFields = line.size
-    def numberOfMissingFields = ExpectedNumberOfFields-actualNumberOfFields
 
-    line.toList ++ List.fill(numberOfMissingFields)("")
-  }
 
   /**
    * trims the value, and returns an Option :
