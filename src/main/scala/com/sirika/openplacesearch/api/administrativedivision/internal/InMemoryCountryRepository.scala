@@ -29,7 +29,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
   private def parseCountries(readerSupplier: InputSupplier[InputStreamReader]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
-    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
       fields match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,

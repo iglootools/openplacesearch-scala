@@ -19,7 +19,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
 
     private def parseAdm1(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
 
-      new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
+      new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
           fields match {
             case Array(compositeCode, name, asciiName, geonamesId)
             =>
@@ -49,7 +49,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     private def parseAdm2(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
-      val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
+      val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
           fields match {
             case Array(compositeCode, name, asciiName, geonamesId)
             =>

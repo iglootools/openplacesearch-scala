@@ -25,6 +25,14 @@ object FieldExtractors {
     }
   }
 
+  def extractFieldsFromAlternateNames(line: String, lineNumber: Long): Array[String] = {
+    val split = line.split('\t')
+    split match {
+      case Array(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) => split
+      case _ => throw new IllegalArgumentException("Syntax error in the input file. We are expecting the following fields: alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName")
+    }
+  }
+
   private def sanitizeLineSplit(line: Array[String]):List[String] = {
     val ExpectedNumberOfFields = 19
     def actualNumberOfFields = line.size

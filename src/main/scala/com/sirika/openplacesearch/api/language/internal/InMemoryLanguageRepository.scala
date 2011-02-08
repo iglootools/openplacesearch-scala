@@ -24,7 +24,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
     // alpha3, alphaFucked, alpha2, name
     val LanguageRE =(("""([^\t]*)\t""" * 3) + """([^\t]*)""").r
 
-    new LineByLineInputStreamParser(readerSupplier).map { (line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier).map { (line, originalLine, lineNumber) =>
       if(lineNumber > 1) {
         line match {
           case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>

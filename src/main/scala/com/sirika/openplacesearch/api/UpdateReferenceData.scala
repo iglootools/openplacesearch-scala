@@ -32,24 +32,35 @@ object UpdateReferenceData {
   }
 
   def extractCountryGisFeatureIds = {
-    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, lineNumber) =>
-        fields match {
-          case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
-          capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
-          phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
-          =>  geonamesIdToResult(geonamesId)
+    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
+      fields match {
+        case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
+        capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
+        phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
+        =>  geonamesIdToResult(geonamesId)
       }
     }
   }
 
   def extractAdministrativeDivisionGisFeatureIds(input: InputSupplier[InputStreamReader]) = {
-    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
-        fields match {
-          case Array(compositeCode, name, asciiName, geonamesId)
-          => geonamesIdToResult(geonamesId)
-        }
+    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
+      fields match {
+        case Array(compositeCode, name, asciiName, geonamesId)
+        => geonamesIdToResult(geonamesId)
+      }
     }
   }
+
+  def extractAlternateNames(input: InputSupplier[InputStreamReader], geonamesIds: Set[Int]) = {
+    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
+      fields match {
+        case Array(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)
+        case _ => Left(ParsingWarning("nothing to say"))
+      }
+    }
+
+  }
+
 
   def reportProgress(x : Any) = println(x)
 
