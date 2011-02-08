@@ -16,14 +16,14 @@ final case class FeatureNames(val defaultName: String, val localizedNamesSupplie
   /**
    * reverts to #name if no preferredName found
    */
-  def preferredName(language: Language) :String = localizedNames.find {n: LocalizedName => n.preferred && n.language == Some(language)}
+  def preferredName(language: Language) :String = localizedNames.find {n: LocalizedName => n.preferred && n.language == language}
     .map{ _.name}
     .getOrElse(defaultName)
 
   /**
    * reverts to #name if no short name found
    */
-  def shortName(language: Language) : String = localizedNames.find {n: LocalizedName => n.shortName && n.language == Some(language)}
+  def shortName(language: Language) : String = localizedNames.find {n: LocalizedName => n.shortName && n.language == language}
     .map {_.name}
     .getOrElse(defaultName)
 

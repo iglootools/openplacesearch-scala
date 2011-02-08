@@ -16,10 +16,10 @@ class FeatureNamesSpec extends Spec with ShouldMatchers {
         localizedNamesSupplier=
           new InMemoryLocalizedNamesSupplier(
             localizedNames=List(
-              LocalizedName(name="some name in english", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="some preferred name in french", language = Some(Languages.french), preferred = true, shortName=false),
-              LocalizedName(name="some name in french", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="preferred", language = Some(Languages.english), preferred = true, shortName=false))))
+              LocalizedName(name="some name in english", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="some preferred name in french", language = Languages.french, preferred = true, shortName=false),
+              LocalizedName(name="some name in french", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="preferred", language = Languages.english, preferred = true, shortName=false))))
       featureNames.preferredName(Languages.english) should be === "preferred"
     }
 
@@ -29,9 +29,9 @@ class FeatureNamesSpec extends Spec with ShouldMatchers {
         localizedNamesSupplier=
           new InMemoryLocalizedNamesSupplier(
             localizedNames=List(
-              LocalizedName(name="some name in english", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="some preferred name in french", language = Some(Languages.french), preferred = true, shortName=false),
-              LocalizedName(name="some name in french", language = Some(Languages.english), preferred = false, shortName=false))))
+              LocalizedName(name="some name in english", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="some preferred name in french", language = Languages.french, preferred = true, shortName=false),
+              LocalizedName(name="some name in french", language = Languages.english, preferred = false, shortName=false))))
       featureNames.preferredName(Languages.english) should be === "default"
     }
 
@@ -41,10 +41,10 @@ class FeatureNamesSpec extends Spec with ShouldMatchers {
         localizedNamesSupplier=
           new InMemoryLocalizedNamesSupplier(
             localizedNames=List(
-              LocalizedName(name="some name in english", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="some short name in french", language = Some(Languages.french), preferred = false, shortName=true),
-              LocalizedName(name="some name in french", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="short", language = Some(Languages.english), preferred = false, shortName=true))))
+              LocalizedName(name="some name in english", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="some short name in french", language = Languages.french, preferred = false, shortName=true),
+              LocalizedName(name="some name in french", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="short", language = Languages.english, preferred = false, shortName=true))))
       featureNames.shortName(Languages.english) should be === "short"
     }
 
@@ -54,9 +54,9 @@ class FeatureNamesSpec extends Spec with ShouldMatchers {
         localizedNamesSupplier=
           new InMemoryLocalizedNamesSupplier(
             localizedNames=List(
-              LocalizedName(name="some name in english", language = Some(Languages.english), preferred = false, shortName=false),
-              LocalizedName(name="some short name in french", language = Some(Languages.french), preferred = false, shortName=true),
-              LocalizedName(name="some name in french", language = Some(Languages.english), preferred = false, shortName=false))))
+              LocalizedName(name="some name in english", language = Languages.english, preferred = false, shortName=false),
+              LocalizedName(name="some short name in french", language = Languages.french, preferred = false, shortName=true),
+              LocalizedName(name="some name in french", language = Languages.english, preferred = false, shortName=false))))
       featureNames.shortName(Languages.english) should be === "default"
     }
 
