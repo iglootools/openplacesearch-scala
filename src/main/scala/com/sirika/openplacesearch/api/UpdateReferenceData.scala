@@ -27,7 +27,7 @@ object UpdateReferenceData {
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.FirstOrderAdministrativeDivisions) ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.SecondOrderAdministrativeDivisions)
 
-    println(featureIds)
+    println(featureIds.toSet)
     null
   }
 
