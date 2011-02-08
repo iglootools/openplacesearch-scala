@@ -6,7 +6,7 @@ import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
-import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
+import com.sirika.commons.scala.{LineByLineInputStreamParser, Urls, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
@@ -24,7 +24,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
     // alpha3, alphaFucked, alpha2, name
     val LanguageRE =(("""([^\t]*)\t""" * 3) + """([^\t]*)""").r
 
-    new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier).map { (line, lineNumber) =>
       if(lineNumber > 1) {
         line match {
           case LanguageRE(alpha3Code, alphaFucked, alpha2Code, name) =>

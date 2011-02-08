@@ -8,7 +8,9 @@ import grizzled.slf4j.Logging
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class LineByLineInputStreamReader [T] (val readerSupplier: InputSupplier[InputStreamReader]) extends Logging {
+class LineByLineInputStreamParser [T, Input] (val readerSupplier: InputSupplier[InputStreamReader],
+                                              val fieldExtractor: (String, Long) => Input = (line:String, lineNumber:Long) => line) extends Logging {
+
   /**
    * Ignores comment lines and empty lines
    *
@@ -18,6 +20,37 @@ class LineByLineInputStreamReader [T] (val readerSupplier: InputSupplier[InputSt
    * </p>
    * @param f is supposed to throw Exception if a not-recoverable error happens, and a ParsingWarning/actual result otherwise
    */
+  def map(f: (Input,Long) => Either[ParsingWarning,T]): List[T] = {
+    CharStreams.readLines(readerSupplier, new LineProcessor[List[T]]() {
+      private[this] var result : List[T] = Nil
+      private[this] var lineNumber = 1
+
+      def getResult = result
+      def processLine(line : String) : Boolean = {
+        debug("Processing line[%d]: %s".format(lineNumber, line))
+
+        line match {
+          case s:String if s.startsWith("#") => debug("[%d] Ignoring line: comment".format(lineNumber))
+          case s:String if s.isEmpty => debug("[%d] Ignoring line: empty".format(lineNumber))
+          case l:String =>
+            try {
+              val temp = f(fieldExtractor(l, lineNumber), lineNumber)
+              temp match {
+                case Left(e) => warn("[%d] Parsing warning: %s".format(lineNumber,e.message))
+                case Right(r) =>  debug("[%d] Successful result: ".format(lineNumber) + temp)
+                result ::= r
+              }
+            } catch {
+              case e:Exception => throw new IllegalArgumentException("[%d] Unexpected error processing: %s".format(lineNumber, line), e)
+            }
+        }
+
+        lineNumber+=1
+        true
+      }
+    })
+  }
+   /*
   def map(f: (String, Long) => Either[ParsingWarning,T]): List[T] = {
     CharStreams.readLines(readerSupplier, new LineProcessor[List[T]]() {
       private[this] var result : List[T] = Nil
@@ -36,7 +69,7 @@ class LineByLineInputStreamReader [T] (val readerSupplier: InputSupplier[InputSt
               temp match {
                 case Left(e) => warn("[%d] Parsing warning: %s".format(lineNumber,e.message))
                 case Right(r) =>  debug("[%d] Successful result: ".format(lineNumber) + temp)
-                  result ::= r
+                result ::= r
               }
             } catch {
               case e:Exception => throw new IllegalArgumentException("[%d] Unexpected error processing: %s".format(lineNumber, line), e)
@@ -47,5 +80,5 @@ class LineByLineInputStreamReader [T] (val readerSupplier: InputSupplier[InputSt
         true
       }
     })
-  }
+  }    */
 }

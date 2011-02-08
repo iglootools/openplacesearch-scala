@@ -1,5 +1,5 @@
 package com.sirika.openplacesearch.api.language
-import com.sirika.commons.scala.{LineByLineInputStreamReader, ParsingWarning}
+import com.sirika.commons.scala.{LineByLineInputStreamParser, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
 import java.io.InputStreamReader
@@ -32,26 +32,22 @@ object UpdateReferenceData {
   }
 
   def extractCountryGisFeatureIds = {
-    new LineByLineInputStreamReader(ReferenceData.Countries).map { (line, lineNumber) =>
-      FieldExtractors.extractFieldsFromCountryLine(line) { l =>
-        l match {
+    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, lineNumber) =>
+        fields match {
           case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
           capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
           phonePrefix,postalCodeMask,postalCodeRegex,preferredLocales,geonamesId,neighbours, equivalentFipsCode)
           =>  geonamesIdToResult(geonamesId)
-        }
       }
     }
   }
 
   def extractAdministrativeDivisionGisFeatureIds(input: InputSupplier[InputStreamReader]) = {
-    new LineByLineInputStreamReader(input).map { (line, lineNumber) =>
-      FieldExtractors.extractFieldsFromAdministrativeDivisionLine(line) { l =>
-        l match {
+    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
+        fields match {
           case Array(compositeCode, name, asciiName, geonamesId)
           => geonamesIdToResult(geonamesId)
         }
-      }
     }
   }
 

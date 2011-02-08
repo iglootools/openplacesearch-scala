@@ -4,7 +4,7 @@ import com.google.common.io.{InputSupplier}
 import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
-import com.sirika.commons.scala.{LineByLineInputStreamReader, Urls, ParsingWarning}
+import com.sirika.commons.scala.{LineByLineInputStreamParser, Urls, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 /**
@@ -18,10 +18,9 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     val adm1LookupTable: Map[(Country,String),AdministrativeDivision] = Map(allFirstOrderAdministrativeDivisions.map{a : AdministrativeDivision => ((a.country,a.code), a)} : _*)
 
     private def parseAdm1(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
-      new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
 
-        FieldExtractors.extractFieldsFromAdministrativeDivisionLine(line) { l =>
-          l match {
+      new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
+          fields match {
             case Array(compositeCode, name, asciiName, geonamesId)
             =>
               val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
@@ -35,7 +34,6 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
                     parentAdministrativeEntity=Some(parentAdministrativeEntity)),
                 parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
           }
-        }
       }
     }
   }
@@ -51,9 +49,8 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     private def parseAdm2(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
-      val result = new LineByLineInputStreamReader(readerSupplier).map { (line, lineNumber) =>
-        FieldExtractors.extractFieldsFromAdministrativeDivisionLine(line) { l =>
-          l match {
+      val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, lineNumber) =>
+          fields match {
             case Array(compositeCode, name, asciiName, geonamesId)
             =>
               val Array(countryAlpha2Code,adm1Code,adm2Code) = compositeCode.split('.')
@@ -91,7 +88,6 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
                       parentAdministrativeEntity=adm1ToUse),
                   parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
           }
-        }
       }
 
       sumUpErrors(adm1hacks)
