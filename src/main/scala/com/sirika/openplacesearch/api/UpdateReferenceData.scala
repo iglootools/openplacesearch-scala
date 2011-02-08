@@ -1,9 +1,10 @@
 package com.sirika.openplacesearch.api.language
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
-import java.io.InputStreamReader
-import com.google.common.io.InputSupplier
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
+import com.google.common.io.{Files, InputSupplier}
+import com.google.common.base.Charsets
+import java.io.{File, InputStreamReader}
 
 object UpdateReferenceData {
   def main(args : Array[String]) : Unit = {
@@ -26,8 +27,8 @@ object UpdateReferenceData {
     val featureIds = extractCountryGisFeatureIds ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.FirstOrderAdministrativeDivisions) ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.SecondOrderAdministrativeDivisions)
-
-    println(featureIds.toSet)
+    println("number of featureIDS: " + featureIds.size)
+    println("number of Alternate Names: " + extractAlternateNames(Files.newReaderSupplier(new File("/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"), Charsets.UTF_8), featureIds.toSet).size)
     null
   }
 
@@ -52,10 +53,10 @@ object UpdateReferenceData {
   }
 
   def extractAlternateNames(input: InputSupplier[InputStreamReader], geonamesIds: Set[Int]) = {
-    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
-        case Array(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)
-        case _ => Left(Skip(SkipCause.NoResult, "nothing to say"))
+        case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)
+        case _ => Left(Skip(SkipCause.NoResult, "AlternateName is not related to the geoname feature IDs we are looking for"))
       }
     }
 
