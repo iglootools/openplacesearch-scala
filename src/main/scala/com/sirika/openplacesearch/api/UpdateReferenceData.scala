@@ -11,29 +11,29 @@ import grizzled.slf4j.Logging
 object UpdateReferenceData extends Logging{
   def main(args : Array[String]) : Unit = {
     val inputPath = "/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"
-
+    info("Update Reference Data")
     downloadReferenceFiles
     reportProgress("Extracting FeatureIDs that are related to countries and ADMx...")
     val featureIds = extractGisFeatureIds
-    reportProgress("[DONE] number of featureIDS: %d".format(featureIds.size))
+    reportProgress("    [DONE] number of featureIDS: %d".format(featureIds.size))
 
     reportProgress("Extracting alternate names for these FeatureIDs...")
     val alternateNames = extractAlternateNames(Files.newReaderSupplier(new File(inputPath), Charsets.UTF_8), featureIds.toSet)
-    reportProgress("[DONE] number of Alternate Names: %d".format(alternateNames.size))
+    reportProgress("    [DONE] number of Alternate Names: %d".format(alternateNames.size))
 
-    reportProgress("Dumping alternate names to file: %s".format(inputPath))
+    reportProgress("Dumping alternate names to file")
     dumpAlternateNamesToFile(alternateNames)
-    reportProgress("[DONE] alternate names are dumped.")
+    reportProgress("    [DONE] alternate names are dumped to file: %s".format(inputPath))
   }
 
   def downloadReferenceFiles = {
     reportProgress("Downloading reference files...")
-    reportProgress("[skip] SKipping iso639Languages download: not implemented yet.")
-    reportProgress("[skip] SKipping countries download: not implemented yet.")
-    reportProgress("[skip] SKipping admin1Codes download: not implemented yet.")
-    reportProgress("[skip] SKipping admin2Codes download: not implemented yet.")
-    reportProgress("[skip] SKipping features download: not implemented yet.")
-    reportProgress("[skip] SKipping alternateNames download: not implemented yet.")
+    reportProgress("    [skip] Skipping iso639Languages download: not implemented yet.")
+    reportProgress("    [skip] Skipping countries download: not implemented yet.")
+    reportProgress("    [skip] Skipping admin1Codes download: not implemented yet.")
+    reportProgress("    [skip] Skipping admin2Codes download: not implemented yet.")
+    reportProgress("    [skip] Skipping features download: not implemented yet.")
+    reportProgress("    [skip] Skipping alternateNames download: not implemented yet.")
   }
 
   def extractGisFeatureIds: Set[Int] = {
