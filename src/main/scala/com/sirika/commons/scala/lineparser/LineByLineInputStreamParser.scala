@@ -1,14 +1,14 @@
 package com.sirika.commons.scala.lineparser
 
-import java.io.InputStreamReader
 import com.google.common.io.{CharStreams, LineProcessor, InputSupplier}
 import grizzled.slf4j.Logging
+import java.io.{Reader, InputStreamReader}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class LineByLineInputStreamParser [T, ExtractedFields] (val readerSupplier: InputSupplier[InputStreamReader],
+class LineByLineInputStreamParser [T, ExtractedFields,R <: Reader] (val readerSupplier: InputSupplier[R],
                                                         val fieldExtractor: (String, Long) => ExtractedFields = (line:String, lineNumber:Long) => line) extends Logging {
 
   /**

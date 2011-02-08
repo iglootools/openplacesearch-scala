@@ -4,7 +4,7 @@ import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtra
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 import com.google.common.io.{Files, InputSupplier}
 import com.google.common.base.Charsets
-import java.io.{File, InputStreamReader}
+import java.io.{Reader, File, InputStreamReader}
 
 object UpdateReferenceData {
   def main(args : Array[String]) : Unit = {
@@ -23,12 +23,14 @@ object UpdateReferenceData {
   }
 
   def extractGisFeatureIds: List[Int] = {
-
+    val inputPath = "/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"
+    val outputPath = "/home/sdalouche/workspace/samokk/geonames-data/target/extracted-alternateNames.txt"
     val featureIds = extractCountryGisFeatureIds ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.FirstOrderAdministrativeDivisions) ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.SecondOrderAdministrativeDivisions)
-    println("number of featureIDS: " + featureIds.size)
-    println("number of Alternate Names: " + extractAlternateNames(Files.newReaderSupplier(new File("/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"), Charsets.UTF_8), featureIds.toSet).size)
+    println("number of featureIDS: %d".format(featureIds.size))
+    println("number of Alternate Names: %d".format(extractAlternateNames(Files.newReaderSupplier(new File(inputPath), Charsets.UTF_8), featureIds.toSet).size))
+    Files.newWriterSupplier(new File(outputPath), Charsets.UTF_8)
     null
   }
 
@@ -43,7 +45,7 @@ object UpdateReferenceData {
     }
   }
 
-  def extractAdministrativeDivisionGisFeatureIds(input: InputSupplier[InputStreamReader]) = {
+  def extractAdministrativeDivisionGisFeatureIds[R <: Reader](input: InputSupplier[R]) = {
     new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
       fields match {
         case Array(compositeCode, name, asciiName, geonamesId)
@@ -52,7 +54,7 @@ object UpdateReferenceData {
     }
   }
 
-  def extractAlternateNames(input: InputSupplier[InputStreamReader], geonamesIds: Set[Int]) = {
+  def extractAlternateNames[R <: Reader](input: InputSupplier[R], geonamesIds: Set[Int]) = {
     new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
         case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)

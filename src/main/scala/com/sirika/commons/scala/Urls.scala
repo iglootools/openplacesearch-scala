@@ -3,7 +3,8 @@ package com.sirika.commons.scala
 import java.net.URL
 import com.google.common.base.Charsets
 import com.google.common.io.{CharStreams, Resources, InputSupplier}
-import java.io.InputStreamReader
+import java.io.{Reader, InputStreamReader}
+
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */

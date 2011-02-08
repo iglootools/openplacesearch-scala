@@ -1,11 +1,11 @@
 package com.sirika.openplacesearch.api.administrativedivision.internal
 
 import com.google.common.io.{InputSupplier}
-import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
 import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
+import java.io.{Reader, InputStreamReader}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -17,7 +17,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
     val allFirstOrderAdministrativeDivisionsPerCountry: Map[Country,List[AdministrativeDivision]] = allFirstOrderAdministrativeDivisions.groupBy (_.country)
     val adm1LookupTable: Map[(Country,String),AdministrativeDivision] = Map(allFirstOrderAdministrativeDivisions.map{a : AdministrativeDivision => ((a.country,a.code), a)} : _*)
 
-    private def parseAdm1(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
+    private def parseAdm1[R <: Reader](readerSupplier: InputSupplier[R]) : List[AdministrativeDivision] = {
 
       new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
           fields match {
@@ -46,7 +46,7 @@ class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRep
       Map(allSecondOrderAdministrativeDivisions.map{a : AdministrativeDivision =>
         ((a.country,a.parentAdministrativeEntity.get.asInstanceOf[AdministrativeDivision], a.code), a)} : _*)
 
-    private def parseAdm2(readerSupplier: InputSupplier[InputStreamReader]) : List[AdministrativeDivision] = {
+    private def parseAdm2[R <: Reader](readerSupplier: InputSupplier[R]) : List[AdministrativeDivision] = {
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
       val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>

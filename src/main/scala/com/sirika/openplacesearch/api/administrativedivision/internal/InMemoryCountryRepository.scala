@@ -2,12 +2,12 @@ package com.sirika.openplacesearch.api.administrativedivision.internal
 
 import com.sirika.openplacesearch.api.administrativedivision.{Country, IsoCountryCode, FipsCountryCode, CountryAdministrativeInformation,CountryGeographicInformation, CountryRepository, SimpleFeatureNameProvider}
 import com.google.common.io.{InputSupplier}
-import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
 import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
 import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
+import java.io.{Reader, InputStreamReader}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -26,7 +26,7 @@ class InMemoryCountryRepository extends CountryRepository with Logging {
   def getByIsoAlpha3Code(code: String): Country = alpha3LookupTable.get(code).get
   def getByIsoAlpha2Code(code: String): Country = alpha2LookupTable.get(code).get
 
-  private def parseCountries(readerSupplier: InputSupplier[InputStreamReader]) : List[Country] = {
+  private def parseCountries[R <: Reader](readerSupplier: InputSupplier[R]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
     new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
