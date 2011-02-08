@@ -4,12 +4,26 @@ import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtra
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 import com.google.common.io.{Files, InputSupplier}
 import com.google.common.base.Charsets
-import java.io.{Reader, File, InputStreamReader}
+import com.sirika.commons.scala.io.{OutputSuppliers}
+import java.io.{PrintWriter, Reader, File}
+import grizzled.slf4j.Logging
 
-object UpdateReferenceData {
+object UpdateReferenceData extends Logging{
   def main(args : Array[String]) : Unit = {
+    val inputPath = "/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"
+
     downloadReferenceFiles
+    reportProgress("Extracting FeatureIDs that are related to countries and ADMx...")
     val featureIds = extractGisFeatureIds
+    reportProgress("[DONE] number of featureIDS: %d".format(featureIds.size))
+
+    reportProgress("Extracting alternate names for these FeatureIDs...")
+    val alternateNames = extractAlternateNames(Files.newReaderSupplier(new File(inputPath), Charsets.UTF_8), featureIds.toSet)
+    reportProgress("[DONE] number of Alternate Names: %d".format(alternateNames.size))
+
+    reportProgress("Dumping alternate names to file: %s".format(inputPath))
+    dumpAlternateNamesToFile(alternateNames)
+    reportProgress("[DONE] alternate names are dumped.")
   }
 
   def downloadReferenceFiles = {
@@ -22,16 +36,21 @@ object UpdateReferenceData {
     reportProgress("[skip] SKipping alternateNames download: not implemented yet.")
   }
 
-  def extractGisFeatureIds: List[Int] = {
-    val inputPath = "/home/sdalouche/workspace/samokk/geonames-data/alternateNames.txt"
-    val outputPath = "/home/sdalouche/workspace/samokk/geonames-data/target/extracted-alternateNames.txt"
+  def extractGisFeatureIds: Set[Int] = {
     val featureIds = extractCountryGisFeatureIds ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.FirstOrderAdministrativeDivisions) ++
       extractAdministrativeDivisionGisFeatureIds(ReferenceData.SecondOrderAdministrativeDivisions)
-    println("number of featureIDS: %d".format(featureIds.size))
-    println("number of Alternate Names: %d".format(extractAlternateNames(Files.newReaderSupplier(new File(inputPath), Charsets.UTF_8), featureIds.toSet).size))
-    Files.newWriterSupplier(new File(outputPath), Charsets.UTF_8)
-    null
+    featureIds.toSet
+  }
+
+  def dumpAlternateNamesToFile(alternateNames: List[String]): Unit = {
+    val outputPath = "/home/sdalouche/workspace/samokk/geonames-data/target/extracted-alternateNames.txt"
+    OutputSuppliers.doWithWriter(Files.newWriterSupplier(new File(outputPath), Charsets.UTF_8)) { w =>
+      val out = new PrintWriter(w)
+      alternateNames.foreach { s =>
+       out.println(s)
+      }
+    }
   }
 
   def extractCountryGisFeatureIds = {
@@ -55,9 +74,15 @@ object UpdateReferenceData {
   }
 
   def extractAlternateNames[R <: Reader](input: InputSupplier[R], geonamesIds: Set[Int]) = {
+    /**
+     * We do not care about names that do not have any language, as we cannot really do anything with them
+     */
+    def isIsoLanguageCode(s: String) = s.size == 2 || s.size == 3
+
     new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
-        case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)
+        case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName)
+          if geonamesIds.contains(geonamesid.toInt) && isIsoLanguageCode(isolanguage) => Right(line)
         case _ => Left(Skip(SkipCause.NoResult, "AlternateName is not related to the geoname feature IDs we are looking for"))
       }
     }
@@ -65,7 +90,7 @@ object UpdateReferenceData {
   }
 
 
-  def reportProgress(x : Any) = println(x)
+  def reportProgress(x : => String) = println(x)
 
   def geonamesIdToResult(id: String): Either[Skip, Int] = {
     if(correctGeonamesId(id))
