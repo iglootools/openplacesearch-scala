@@ -4,7 +4,7 @@ import com.google.common.io.{InputSupplier}
 import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
-import com.sirika.commons.scala.{LineByLineInputStreamParser, Urls, ParsingWarning}
+import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 /**

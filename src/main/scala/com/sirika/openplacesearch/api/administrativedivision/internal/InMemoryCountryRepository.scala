@@ -6,7 +6,7 @@ import java.io.InputStreamReader
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
 import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
-import com.sirika.commons.scala.{LineByLineInputStreamParser, Urls, ParsingWarning}
+import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 
 /**

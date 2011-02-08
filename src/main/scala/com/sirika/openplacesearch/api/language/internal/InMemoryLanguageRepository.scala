@@ -6,8 +6,8 @@ import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.language.LanguageRepository
-import com.sirika.commons.scala.{LineByLineInputStreamParser, Urls, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
+import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private lazy val languages = parseLanguages(ReferenceData.Languages)
@@ -33,7 +33,7 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
           case _ =>throw new IllegalArgumentException("The language is required to have a name and an alpha3code")
         }
       } else {
-        Left(ParsingWarning("Ignoring first line : we assume it to be a comment"))
+        Left(Skip(SkipCause.NoResult, "Ignoring first line : we assume it to be a comment"))
       }
 
     }

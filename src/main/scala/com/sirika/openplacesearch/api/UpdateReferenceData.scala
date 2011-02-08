@@ -1,9 +1,9 @@
 package com.sirika.openplacesearch.api.language
-import com.sirika.commons.scala.{LineByLineInputStreamParser, ParsingWarning}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
 import java.io.InputStreamReader
 import com.google.common.io.InputSupplier
+import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 
 object UpdateReferenceData {
   def main(args : Array[String]) : Unit = {
@@ -55,7 +55,7 @@ object UpdateReferenceData {
     new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
         case Array(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) if geonamesIds.contains(geonamesid.toInt) => Right(line)
-        case _ => Left(ParsingWarning("nothing to say"))
+        case _ => Left(Skip(SkipCause.NoResult, "nothing to say"))
       }
     }
 
@@ -64,11 +64,11 @@ object UpdateReferenceData {
 
   def reportProgress(x : Any) = println(x)
 
-  def geonamesIdToResult(id: String): Either[ParsingWarning, Int] = {
+  def geonamesIdToResult(id: String): Either[Skip, Int] = {
     if(correctGeonamesId(id))
       Right(id.toInt)
     else
-      Left(ParsingWarning("GeonamesID is required to be a positive number, but is currently: %s".format(id)))
+      Left(Skip(SkipCause.Warning, "GeonamesID is required to be a positive number, but is currently: %s".format(id)))
   }
   def correctGeonamesId(id: String): Boolean = {
     Option(id).exists {s => s.nonEmpty && s.toInt > 0}
