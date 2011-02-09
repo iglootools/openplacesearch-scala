@@ -1,3 +1,6 @@
+General README
+==============
+
 = Data Sources =
 * iso639Languages: http://download.geonames.org/export/dump/iso-languagecodes.txt
 * countries: http://download.geonames.org/export/dump/countryInfo.txt
@@ -8,6 +11,19 @@
 ** http://download.geonames.org/export/dump/admin2Codes.txt
 
 = Features =
+* Access ISO-639 Languages
+* Access Countries, with their currency, and more
+* Access First and Second order administrative divisions
+* Full-text search of places (cities)
+* GIS "near" search of places (cities)
+
+= Limitations =
+* We do not import ADM3 and ADM4
+
+
+Developer README
+================
+= Dependencies =
 OpenPlaceSearch depends on a number of libraries :
 * Joda-Time
 * Guava-IO (until Scala-IO is merged to the official scala: https://github.com/scala-incubator/scala-io)
