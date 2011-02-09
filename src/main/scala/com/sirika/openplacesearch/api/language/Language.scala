@@ -1,7 +1,6 @@
 package com.sirika.openplacesearch.api.language
 
 import com.google.common.base.Objects
-import com.google.common.base.Strings
 
 object Language {
   def apply(name: String, alpha3Code : String, alpha2Code : Option[String]=None) = new Language(name, alpha3Code, alpha2Code)
