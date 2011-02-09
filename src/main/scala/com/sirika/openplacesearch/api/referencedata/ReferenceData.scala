@@ -1,6 +1,6 @@
 package com.sirika.openplacesearch.api.referencedata
 
-import com.sirika.commons.scala.Urls
+import com.sirika.commons.scala.io.Urls
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

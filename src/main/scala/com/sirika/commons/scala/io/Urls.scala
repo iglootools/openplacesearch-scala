@@ -1,4 +1,4 @@
-package com.sirika.commons.scala
+package com.sirika.commons.scala.io
 
 import java.net.URL
 import com.google.common.base.Charsets
