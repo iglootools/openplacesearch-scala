@@ -1,0 +1,29 @@
+#!/bin/bash
+# Fetch new data, process it, and dispatch the files where the java/scala code can find them 
+
+set -e
+
+PROJECT_DIRECTORY=$(dirname $0)/..
+PROJECT_DATA=$PROJECT_DIRECTORY/src/main/resources/com/sirika/openplacesearch/api/referencedata
+
+DOWNLOAD_DIRECTORY=$(dirname $0)/downloads
+TARGET_DIRECTORY=$(dirname $0)/target
+
+# download and unzip the files
+$(dirname $0)/download
+
+# process the data
+mkdir -p $TARGET_DIRECTORY
+cd $PROJECT_DIRECTORY
+sbt run
+
+# copy the files to the classpath
+cp -fv $DOWNLOAD_DIRECTORY/admin1CodesASCII.txt $PROJECT_DATA/admin1CodesASCII
+cp -fv $DOWNLOAD_DIRECTORY/admin2Codes.txt $PROJECT_DATA/admin2Codes
+cp -fv $DOWNLOAD_DIRECTORY/countryInfo.txt $PROJECT_DATA/countries
+# disabled, as there seems to be a bug
+#cp -fv $DOWNLOAD_DIRECTORY/iso-languagecodes.txt $PROJECT_DATA/iso639languages
+echo iso-languagecodes.txt is currently disabled. please re-enable when the source file is corrected 
+cp -fv $TARGET_DIRECTORY/extracted-alternateNames.txt $PROJECT_DATA/extractedAlternateNames
+
+echo DONE

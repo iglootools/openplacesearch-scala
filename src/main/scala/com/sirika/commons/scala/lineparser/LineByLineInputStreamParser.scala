@@ -53,35 +53,4 @@ class LineByLineInputStreamParser [T, ExtractedFields,R <: Reader] (val readerSu
       }
     })
   }
-  /*
-def map(f: (String, Long) => Either[Skip,T]): List[T] = {
-CharStreams.readLines(readerSupplier, new LineProcessor[List[T]]() {
-  private[this] var result : List[T] = Nil
-  private[this] var lineNumber = 1
-
-  def getResult = result
-  def processLine(line : String) : Boolean = {
-    debug("Processing line[%d]: %s".format(lineNumber, line))
-
-    line match {
-      case s:String if s.startsWith("#") => debug("[%d] Ignoring line: comment".format(lineNumber))
-      case s:String if s.isEmpty => debug("[%d] Ignoring line: empty".format(lineNumber))
-      case l:String =>
-        try {
-          val temp = f(l, lineNumber)
-          temp match {
-            case Left(e) => warn("[%d] Parsing warning: %s".format(lineNumber,e.message))
-            case Right(r) =>  debug("[%d] Successful result: ".format(lineNumber) + temp)
-            result ::= r
-          }
-        } catch {
-          case e:Exception => throw new IllegalArgumentException("[%d] Unexpected error processing: %s".format(lineNumber, line), e)
-        }
-    }
-
-    lineNumber+=1
-    true
-  }
-})
-}    */
 }

@@ -1,17 +1,17 @@
 package com.sirika.commons.scala.io
 
-import java.io.{Writer, Closeable}
 import com.google.common.io.{Closeables, OutputSupplier}
+import java.io.{PrintWriter, Writer, Closeable}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
 object OutputSuppliers {
-  def doWithWriter[T,W <: Appendable with Closeable](outputSupplier: OutputSupplier[W])(f: W => T): T = {
-    var out: Option[W] = None
+  def doWithWriter[T,W <: Writer](outputSupplier: OutputSupplier[W])(f: PrintWriter => T): T = {
+    var out: Option[PrintWriter] = None
     try {
-      out = Some(outputSupplier.getOutput)
+      out = Some(new PrintWriter(outputSupplier.getOutput))
       f(out.get)
     } finally {
       out.foreach(Closeables.closeQuietly _)

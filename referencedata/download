@@ -1,0 +1,32 @@
+#!/bin/bash
+# Downloads all required files, and unzip them, so that everything is ready to consumption
+
+set -e
+
+GEONAMES_SERVER="http://download.geonames.org/export/dump"
+GEONAMES_FILES="readme.txt allCountries.zip alternateNames.zip admin1CodesASCII.txt admin2Codes.txt countryInfo.txt iso-languagecodes.txt"
+DOWNLOAD_DIRECTORY=$(dirname $0)/downloads
+
+DELETE_PREVIOUS_FILES="false"
+
+echo Cleaning up download directory...
+[ $DELETE_PREVIOUS_FILES == "true" ] && rm -rf $DOWNLOAD_DIRECTORY
+mkdir -p $DOWNLOAD_DIRECTORY
+echo
+
+echo Downloading required files...
+for i in $GEONAMES_FILES ; do
+    filepath=$DOWNLOAD_DIRECTORY/$i
+    [ -f $filepath ] ||  wget -O $filepath $GEONAMES_SERVER/$i
+done
+echo
+
+echo Unzipping downloaded files...
+for i in $GEONAMES_FILES ; do
+    if [ ${i#*.} == "zip" ] ; then
+        echo Unzipping $i
+	unzip -fo -d $DOWNLOAD_DIRECTORY $DOWNLOAD_DIRECTORY/$i
+    fi
+done
+echo
+echo Successfully downloaded and extracted files in $DOWNLOAD_DIRECTORY

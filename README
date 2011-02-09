@@ -14,6 +14,15 @@ OpenPlaceSearch depends on a number of libraries :
 * HC-Helpers
 * IBM icu4j
 
+
+= How to update the reference data =
+* git status # make sure the tree is clean (in case things don't go smooth)
+* $ referencedata/update
+* sbt test
+* git status # sanity check
+* git commit -m "updated the reference data"
+
+
 = Import as an eclipse project =
 
 * setup SbtEclipsify : http://blog.xebia.fr/2010/05/11/configurer-vos-projets-sbt-pour-eclipse-ou-intellij-idea/
