@@ -33,7 +33,7 @@ class InMemoryAlternateNamesLookup @Inject() (private[this] val languageReposito
 
           language match {
             case Some(l) => Right((geonamesid.toLong, LocalizedName(name=alternateName, language=l, preferred=preferred, shortName=shortName)))
-            case None => Left(Skip(cause=SkipCause.Warning, message="Language with code [%s] does not exist".format(isolanguage)))
+            case None => Left(Skip(cause=SkipCause.Warning, message="Language with code [%s] does not exist. Alternate Name[%s] cannot be imported".format(isolanguage, alternateNameId)))
           }
       }
   }.groupBy(x => x._1).mapValues(v => v.map(_._2))
