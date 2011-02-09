@@ -5,11 +5,12 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
+import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeDivisionRepositorySpec extends Spec with ShouldMatchers {
-  val administrativeDivisionRepository: AdministrativeDivisionRepository= new InMemoryAdministrativeDivisionRepository
-  val countryRepository: CountryRepository = new InMemoryCountryRepository
+  val administrativeDivisionRepository = api.ApplicationContext.getInstance(classOf[AdministrativeDivisionRepository])
+  val countryRepository = api.ApplicationContext.getInstance(classOf[CountryRepository])
 
   val france = countryRepository.getByIsoAlpha3Code("FRA")
 

@@ -11,7 +11,9 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     val icu4j = "com.ibm.icu" % "icu4j" % "4.6" withSources()
     val slf4jApi = "org.slf4j" % "slf4j-api" % "1.6.1" withSources()
     val grizzled = "org.clapper" %% "grizzled-slf4j" % "0.4" // withSources()
-    
+
+    // IoC
+    val guice = "com.google.code.guice" % "guice" % "1.0" withSources()
     
     // HTTP and REST
     val HttpComponentsVersion = "4.1"
@@ -34,4 +36,7 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     // hacks
     // needed for guava+scala-IDE : javax.annotation.Nullable 
     val jsr305 = "com.google.code.findbugs" % "jsr305" % "1.3.9" //withSources()
+
+    // needed for guice
+    val aopalliance = "aopalliance" % "aopalliance" % "1.0" withSources()
 }

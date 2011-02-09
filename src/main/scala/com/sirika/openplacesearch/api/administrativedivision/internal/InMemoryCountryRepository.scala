@@ -4,17 +4,18 @@ import com.sirika.openplacesearch.api.administrativedivision.{Country, IsoCountr
 import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
-import com.sirika.openplacesearch.api.continent.internal.InMemoryContinentRepository
 import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
-import java.io.{Reader, InputStreamReader}
+import java.io.{Reader}
+import com.sirika.openplacesearch.api.continent.ContinentRepository
+import com.google.inject.Inject
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-
-class InMemoryCountryRepository extends CountryRepository with Logging {
-  private[this] val continentRepository = new InMemoryContinentRepository()
+@com.google.inject.Singleton()
+class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository)
+  extends CountryRepository with Logging {
 
   private lazy val countries = parseCountries(ReferenceData.Countries)
   private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)

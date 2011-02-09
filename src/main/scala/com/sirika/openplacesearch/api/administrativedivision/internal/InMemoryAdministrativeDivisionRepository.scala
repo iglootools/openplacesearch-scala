@@ -3,15 +3,18 @@ package com.sirika.openplacesearch.api.administrativedivision.internal
 import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.sirika.openplacesearch.api.administrativedivision._
-import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser, Skip}
+import com.sirika.commons.scala.lineparser.{LineByLineInputStreamParser}
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
-import java.io.{Reader, InputStreamReader}
+import java.io.{Reader}
+import com.google.inject.Inject
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-class InMemoryAdministrativeDivisionRepository extends AdministrativeDivisionRepository with Logging {
-  private[this] val countryRepository = new InMemoryCountryRepository()
+@com.google.inject.Singleton()
+class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository)
+  extends AdministrativeDivisionRepository with Logging {
+
   private[this] object FirstOrderAdministrativeDivisions {
     val allFirstOrderAdministrativeDivisions = parseAdm1(ReferenceData.FirstOrderAdministrativeDivisions)
     val allFirstOrderAdministrativeDivisionsPerCountry: Map[Country,List[AdministrativeDivision]] = allFirstOrderAdministrativeDivisions.groupBy (_.country)

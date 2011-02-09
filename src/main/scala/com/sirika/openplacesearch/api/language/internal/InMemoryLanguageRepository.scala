@@ -9,6 +9,7 @@ import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 import java.io.{Reader, InputStreamReader}
 
+@com.google.inject.Singleton()
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private lazy val languages = parseLanguages(ReferenceData.Languages)
 

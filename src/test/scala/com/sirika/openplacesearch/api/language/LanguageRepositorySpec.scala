@@ -7,10 +7,11 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import com.sirika.openplacesearch.api.language.Languages._
 import com.sirika.openplacesearch.api.language._
+import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class LanguageRepositorySpec extends Spec with ShouldMatchers {
-  val languageRepository : LanguageRepository = new InMemoryLanguageRepository()
+  val languageRepository = api.ApplicationContext.getInstance(classOf[LanguageRepository])
 
   describe("getByAlpha2Code") {
     it("should find the french language") {

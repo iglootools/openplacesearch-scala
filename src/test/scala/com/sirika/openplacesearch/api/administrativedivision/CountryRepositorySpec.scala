@@ -5,10 +5,11 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
+import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class CountryRepositorySpec extends Spec with ShouldMatchers {
-  val countryRepository: CountryRepository = new InMemoryCountryRepository()
+  val countryRepository = api.ApplicationContext.getInstance(classOf[CountryRepository])
 
   describe("findAll") {
 
