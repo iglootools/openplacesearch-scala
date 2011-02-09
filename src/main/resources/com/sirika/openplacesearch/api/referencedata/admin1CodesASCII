@@ -722,7 +722,7 @@ DJ.01	Ali Sabieh	Region d' Ali Sabieh	225282
 DJ.08	Arta	Region d' Arta	449265
 DK.17	Capital Region	Capital Region	6418538
 DK.18	Central Jutland	Central Jutland	6418539
-DK.19	North Jutland	North Jutland	6418540
+DK.19	Region North Jutland	Region North Jutland	6418540
 DK.20	Zealand	Zealand	6418541
 DK.21	South Denmark	South Denmark	6418542
 DM.11	Saint Peter	Saint Peter	3575618
@@ -911,16 +911,17 @@ ES.58	Galicia	Galicia	3336902
 ES.59	Basque Country	Basque Country	3336903
 ES.ML	Melilla	Melilla	6362988
 ET.44	Ādīs Ābeba	Adis Abeba Astedader	444178
-ET.45	The State of Afar	The State of Afar	444179
-ET.46	The State of Amhara	The State of Amhara	444180
+ET.45	Afar Regional State	Afar Regional State	444179
+ET.46	Amhara Regional State	Amhara Regional State	444180
 ET.47	Beneshangual Gumz Regional State	Beneshangual Gumz Regional State	444181
 ET.48	Dirē Dawa	Dire Dawa Astedader	444182
-ET.49	Gambela Regional State	Gambela Regional State	444183
-ET.50	Harari Regional State	Harari Regional State	444184
+ET.49	The State of Gambela Peoples	The State of Gambela Peoples	444183
+ET.50	The State of Harari People	The State of Harari People	444184
 ET.51	The State of Oromia	The State of Oromia	444185
 ET.52	The State of Somalia	The State of Somalia	444186
-ET.53	The State of Tigray	The State of Tigray	444187
-ET.54	Southern Nations and Nationalities Peoples Regional State	Southern Nations and Nationalities Peoples Regional State	444188
+ET.53	Tigray Regional State	Tigray Regional State	444187
+ET.54	Nationalities and Peoples, The State of Southern Nations	Nationalities and Peoples, The State of Southern Nations	444188
+ET.39	Gamo Gofa	Southern Nations, Nationalities and Peoples Region (SNNPR)	7648846
 FI.08	Oulu	Oulu	643485
 FI.06	Lapponia	Lapponia	648958
 FI.13	Province of Southern Finland	Province of Southern Finland	828987
@@ -1350,6 +1351,7 @@ IR.04	Sīstān va Balūchestān	Ostan-e Sistan va Baluchestan	1159456
 IR.41	Khorāsān-e Jonūbī	Ostan-e Khorasan-e Jonubi	6201374
 IR.42	Razavi Khorasan	Razavi Khorasan	6201375
 IR.43	Khorāsān-e Shomālī	Ostan-e Khorasan-e Shomali	6201376
+IR.44	IR.44	Ostan-e Alborz	7648907
 IS.41	Northwest	Northwest	3337403
 IS.40	Northeast	Northeast	3337404
 IS.38	East	East	3337405
@@ -1782,7 +1784,7 @@ LY.65	Al Kufrah	Sha`biyat al Kafrah	88932
 LY.63	Al Jabal al Akhḑar	Sha'biyat al Jabal al Akhdar	443289
 LY.77	Ţarābulus	Sha`biyat Tarabulus	2210245
 LY.76	Surt	Sha`biyat Surt	2210553
-LY.75	Sabhā	Sha`biyat Sibha	2212774
+LY.75	Sabhā	Sha`biyat Sabha	2212774
 LY.74	Nālūt	Sha`biyat Nalut	2214432
 LY.73	Murzuq	Sha`biyat Murzuq	2214602
 LY.72	Mişrātah	Sha`biyat Misratah	2214845
@@ -2025,16 +2027,16 @@ MN.09	Dzavhan	Dzavhan Aymag	1516012
 MN.03	Bayan-Ölgiy	Bayan-Olgiy Aymag	1516278
 MN.02	Bayanhongor	Bayanhongor Aymag	1516290
 MN.20	Ulaanbaatar	Ulaanbaatar Hot	2028461
-MN.18	Central	Central	2028849
+MN.18	Central Aimak	Central Aimak	2028849
 MN.17	Sühbaatar	Suhbaatar Aymag	2029155
 MN.16	Selenge	Selenge Aymag	2029432
 MN.15	Övörhangay	OEvoerhangay	2029546
-MN.14	South Govĭ	South Govi	2029669
+MN.14	South Gobi Aimak	South Gobi Aimak	2029669
 MN.13	Hövsgöl	Hovsgol Aymag	2030469
 MN.11	Hentiy	Hentiy Aymag	2030783
 MN.08	Middle Govĭ	Middle Govi	2031740
 MN.07	East Gobi Aymag	East Gobi Aymag	2031798
-MN.06	Eastern Aymag	Eastern Aymag	2031799
+MN.06	East Aimak	East Aimak	2031799
 MN.21	Bulgan	Bulgan Aymag	2032199
 MN.01	Arhangay	Arhangay Aymag	2032855
 MN.23	Darhan Uul	Darhan-Uul Aymag	2055111
@@ -2047,19 +2049,19 @@ MP.100	Municipality of Rota	Municipality of Rota	4041530
 MP.110	Municipality of Saipan	Municipality of Saipan	4041552
 MP.120	Municipality of Tinian	Municipality of Tinian	4041650
 MQ.MQ	Martinique	Martinique	6690603
-MR.06	Trarza	Region du Trarza	2375742
-MR.11	Tiris Zemmour	Region du Tiris Zemmour	2375989
-MR.09	Tagant	Region du Tagant	2376551
+MR.06	Trarza	Wilaya du Trarza	2375742
+MR.11	Tiris Zemmour	Wilaya du Tiris Zemmour	2375989
+MR.09	Tagant	Wilaya du Tagant	2376551
 MR.NKC	Nouakchott	District de Nouakchott	2377449
-MR.12	Inchiri	Region de l'Inchiri	2378903
-MR.02	Hodh El Gharbi	Region du Hodh El Gharbi	2379024
-MR.01	Hodh ech Chargui	Region du Hodh Ech Chargui	2379025
-MR.10	Guidimaka	Region du Guidimaka	2379216
-MR.04	Gorgol	Region du Gorgol	2379384
-MR.08	Dakhlet Nouadhibou	Region de Dakhlet Nouadhibou	2380426
-MR.05	Brakna	Region du Brakna	2380635
-MR.03	Assaba	Region de l'Assaba	2381344
-MR.07	Adrar	Region de l'Adrar	2381972
+MR.12	Inchiri	Wilaya de l'Inchiri	2378903
+MR.02	Hodh El Gharbi	Wilaya du Hodh el Gharbi	2379024
+MR.01	Hodh ech Chargui	Wilaya du Hodh ech Chargui	2379025
+MR.10	Guidimaka	Wilaya du Guidimaka	2379216
+MR.04	Gorgol	Wilaya du Gorgol	2379384
+MR.08	Dakhlet Nouadhibou	Wilaya de Dakhlet Nouadhibou	2380426
+MR.05	Brakna	Wilaya du Brakna	2380635
+MR.03	Assaba	Wilaya de l'Assaba	2381344
+MR.07	Adrar	Wilaya de l'Adrar	2381972
 MS.03	Saint Peter	Parish of Saint Peter	3578039
 MS.02	Saint Georges	Parish of Saint Georges	3578044
 MS.01	Saint Anthony	Parish of Saint Anthony	3578045
@@ -2222,7 +2224,7 @@ NG.28	Imo	Imo State	2337542
 NG.22	Cross River	Cross River State	2345891
 NG.27	Borno	Borno State	2346794
 NG.26	Benue	Benue State	2347266
-NG.46	Bauchi State	Bauchi State	2347468
+NG.46	Bauchi	Bauchi	2347468
 NG.25	Anambra State	Anambra State	2349961
 NG.21	Akwa Ibom	Akwa Ibom State	2350813
 NG.11	Abuja Federal Capital Territory	Abuja Federal Capital Territory	2352776
@@ -2779,13 +2781,13 @@ SD.43	Northern	Northern	378389
 SD.29	Khartoum	Khartoum	379253
 SD.35	Upper Nile	Upper Nile	381229
 SD.36	Red Sea State	Red Sea State	408646
-SD.37	Lakes State	Lakes State	408647
+SD.37	Lakes	Lakes	408647
 SD.38	Al Jazirah	Al Jazirah	408648
-SD.39	Al Qadarif	Al Qadarif	408649
+SD.39	Gedaref State	Gedaref State	408649
 SD.40	Unity State	Unity State	408650
-SD.41	White Nile State	White Nile State	408653
+SD.41	White Nile	White Nile	408653
 SD.42	Blue Nile State	Blue Nile State	408654
-SD.44	Central Equatoria	Central Equatoria	408655
+SD.44	Central Equatoria State	Central Equatoria State	408655
 SD.45	Western Equatoria State	Western Equatoria State	408656
 SD.46	Western Bahr al Ghazal	Western Bahr al Ghazal	408657
 SD.47	Western Darfur State	Western Darfur State	408658
@@ -2799,7 +2801,7 @@ SD.55	Northern Darfur State	Northern Darfur State	408666
 SD.56	Northern Kordofan State	Northern Kordofan State	408667
 SD.57	Eastern Equatoria State	Eastern Equatoria State	408668
 SD.58	Sinnar State	Sinnar State	408669
-SD.59	Warrap State	Warrap State	408670
+SD.59	Warrap	Warrap	408670
 SE.14	Norrbotten	Norrbotten	604010
 SE.25	Västmanland	Vaestmanland	2664179
 SE.24	Västernorrland	Vaesternorrland	2664292
