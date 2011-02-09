@@ -27,6 +27,21 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
     }
   }
 
+  describe("maybeGetByAlpha2Code") {
+    it("should find the french language") {
+      languageRepository.maybeGetByAlpha2Code("fr") should be === Some(french)
+    }
+
+    it("should return None for inexisting language") {
+      languageRepository.maybeGetByAlpha2Code("zz") should be === None
+    }
+
+    it("should be case insensitive") {
+      languageRepository.maybeGetByAlpha2Code("FR") should be === Some(french)
+    }
+  }
+
+
   describe("getByAlpha3Code") {
     it("should find the french language") {
       languageRepository.getByAlpha3Code("fra") should be === french
@@ -38,6 +53,20 @@ class LanguageRepositorySpec extends Spec with ShouldMatchers {
 
     it("shouldproduce an exception for inexisting language") {
       evaluating { languageRepository.getByAlpha3Code("zzz")  } should produce[NoSuchElementException]
+    }
+  }
+
+  describe("maybeGetByAlpha3Code") {
+    it("should find the french language") {
+      languageRepository.maybeGetByAlpha3Code("fra") should be === Some(french)
+    }
+
+    it("should be case insensitive") {
+      languageRepository.maybeGetByAlpha3Code("FRA") should be === Some(french)
+    }
+
+    it("shouldproduce an exception for inexisting language") {
+      languageRepository.maybeGetByAlpha3Code("zzz")  should be === None
     }
   }
 

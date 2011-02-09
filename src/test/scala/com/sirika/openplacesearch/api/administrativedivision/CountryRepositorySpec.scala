@@ -6,6 +6,7 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import com.sirika.openplacesearch.api
+import api.language.{Languages}
 
 @RunWith(classOf[JUnitRunner])
 class CountryRepositorySpec extends Spec with ShouldMatchers {
@@ -45,6 +46,13 @@ class CountryRepositorySpec extends Spec with ShouldMatchers {
 
     describe("should produce exception for unknown code") {
       evaluating { countryRepository.getByFipsCode("ZZZ")} should produce [NoSuchElementException]
+    }
+  }
+
+  describe("imported countries") {
+    describe("should have localized names") {
+      countryRepository.getByIsoAlpha2Code("US").preferredName(Languages.french) should be === "États-Unis"
+      countryRepository.getByIsoAlpha2Code("US").localizedNames.size should be >= 10
     }
   }
 }

@@ -5,6 +5,7 @@ import com.ibm.icu.util.{Currency, ULocale}
 import com.sirika.openplacesearch.api.language.Language
 import org.joda.time.DateTimeZone
 import com.sirika.openplacesearch.api.feature.{FeatureNameProvider,LocalizedName, PopulationProvider, TimeZoneProvider}
+import com.google.common.base.Objects
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -49,4 +50,11 @@ final case class Country(
   // CountryGeographicInformationProvider
   def population: Option[Long] = countryGeographicInformation.population
   def areaInSquareKilometers: Option[Double] = countryGeographicInformation.areaInSquareKilometers
+
+  override def hashCode(): Int = Objects.hashCode(isoCountryCode)
+
+  override def equals(other: Any): Boolean = other match {
+    case Country(`isoCountryCode`, _, _, _, _, _, _) => true
+    case _ => false
+  }
 }

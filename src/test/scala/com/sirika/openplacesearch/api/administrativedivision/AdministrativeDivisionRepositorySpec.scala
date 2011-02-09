@@ -12,8 +12,6 @@ class AdministrativeDivisionRepositorySpec extends Spec with ShouldMatchers {
   val administrativeDivisionRepository = api.ApplicationContext.getInstance(classOf[AdministrativeDivisionRepository])
   val countryRepository = api.ApplicationContext.getInstance(classOf[CountryRepository])
 
-  val france = countryRepository.getByIsoAlpha3Code("FRA")
-
   describe("findAllFirstOrderAdministrativeDivisions") {
     it("of France should return 22 regions") {
       administrativeDivisionRepository.findAllFirstOrderAdministrativeDivisions(france).size should be === 22
@@ -32,22 +30,35 @@ class AdministrativeDivisionRepositorySpec extends Spec with ShouldMatchers {
 
   describe("getSecondOrderAdministrativeDivision") {
     it("should return Yvelines") {
-      val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
-      administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "78") should be ===
+      yvelines should be ===
         AdministrativeDivisions.France.IleDeFrance.yvelines
     }
 
     it("should produce exception when code is unknown") {
-      evaluating { val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
-      administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "ZZ")  } should produce[NoSuchElementException]
+      evaluating { administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "ZZ")  } should produce[NoSuchElementException]
     }
   }
 
   describe("findAllSecondOrderAdministrativeDivisions") {
     it("of France.IleDeFrance should return 8 departements") {
-      val ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
       administrativeDivisionRepository.findAllSecondOrderAdministrativeDivisions(france, ileDeFrance).size should be === 8
     }
   }
+
+  describe("first order administrative divisions") {
+    it("should have localized names") {
+      ileDeFrance.localizedNames.size should be >= 5
+    }
+  }
+
+    describe("second order administrative divisions") {
+    it("should have localized names") {
+      yvelines.localizedNames.size should be >= 5
+    }
+  }
+
+  def yvelines = administrativeDivisionRepository.getSecondOrderAdministrativeDivision(france, ileDeFrance, "78")
+  def france = countryRepository.getByIsoAlpha3Code("FRA")
+  def ileDeFrance = administrativeDivisionRepository.getFirstOrderAdministrativeDivision(france, "A8")
 }
 

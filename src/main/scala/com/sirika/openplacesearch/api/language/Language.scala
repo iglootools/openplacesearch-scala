@@ -24,10 +24,10 @@ final class Language(val name : String, val alpha3Code : String, val alpha2Code 
   require(alpha2Code != null, "alpha2Code must be a non-null Option")
   alpha2Code foreach { c : String => require(c.length == 2, "alpha2Code is be 2-character long")}
 
-  override def hashCode(): Int = Objects.hashCode(name, alpha3Code, alpha2Code)
+  override def hashCode(): Int = Objects.hashCode(alpha3Code)
 
   override def equals(other: Any): Boolean = other match {
-    case Language(`name`, `alpha3Code`, `alpha2Code`) => true
+    case Language(_, `alpha3Code`, _) => true
     case _ => false
   }
 

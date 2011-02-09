@@ -12,7 +12,8 @@ import com.google.inject.Inject
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 @com.google.inject.Singleton()
-class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository)
+class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository,
+                                                          private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends AdministrativeDivisionRepository with Logging {
 
   private[this] object FirstOrderAdministrativeDivisions {
@@ -23,20 +24,21 @@ class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val coun
     private def parseAdm1[R <: Reader](readerSupplier: InputSupplier[R]) : List[AdministrativeDivision] = {
 
       new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
-          fields match {
-            case Array(compositeCode, name, asciiName, geonamesId)
-            =>
-              val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
-              val parentAdministrativeEntity = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
+        fields match {
+          case Array(compositeCode, name, asciiName, geonamesId)
+          =>
+            val Array(countryAlpha2Code,adminCode) = compositeCode.split('.')
+            val parentAdministrativeEntity = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
 
-              Right(AdministrativeDivision(
-                code=adminCode,
-                featureNameProvider=
-                  SimpleFeatureNameProvider(
-                    defaultName = if(name.nonEmpty) name else asciiName,
-                    parentAdministrativeEntity=Some(parentAdministrativeEntity)),
-                parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
-          }
+            Right(AdministrativeDivision(
+              code=adminCode,
+              featureNameProvider=
+                SimpleFeatureNameProvider(
+                  defaultName = if(name.nonEmpty) name else asciiName,
+                  parentAdministrativeEntity=Some(parentAdministrativeEntity),
+                  names=alternateNamesLookup.getAlternateNamesFor(geonamesId.toLong)),
+              parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(parentAdministrativeEntity))))
+        }
       }
     }
   }
@@ -53,44 +55,45 @@ class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val coun
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
       val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
-          fields match {
-            case Array(compositeCode, name, asciiName, geonamesId)
-            =>
-              val Array(countryAlpha2Code,adm1Code,adm2Code) = compositeCode.split('.')
-              val country = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
-              val adm1 = getFirstOrderAdministrativeDivisionOption(country, adm1Code)
+        fields match {
+          case Array(compositeCode, name, asciiName, geonamesId)
+          =>
+            val Array(countryAlpha2Code,adm1Code,adm2Code) = compositeCode.split('.')
+            val country = countryRepository.getByIsoAlpha2Code(countryAlpha2Code)
+            val adm1 = getFirstOrderAdministrativeDivisionOption(country, adm1Code)
 
-              def adm1ToUse: Option[AdministrativeDivision] = {
-                adm1 match {
-                  case None =>
-                    warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will have a parent ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
-                    adm1hacks.get((country, adm1Code)) match {
-                      case None =>
-                        val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
-                          SimpleFeatureNameProvider(
-                            defaultName = adm1Code + "[HACK]",
-                            parentAdministrativeEntity=Some(country)),
-                          parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(country)))
+            def adm1ToUse: Option[AdministrativeDivision] = {
+              adm1 match {
+                case None =>
+                  warn("ADM1 with code %s from country %s does not exist. ADM2(%s,%s) will have a parent ADM1 with name: %s".format(adm1Code, countryAlpha2Code, adm2Code, name, adm1Code + "[HACK]"))
+                  adm1hacks.get((country, adm1Code)) match {
+                    case None =>
+                      val a = AdministrativeDivision(code=adm1Code,featureNameProvider=
+                        SimpleFeatureNameProvider(
+                          defaultName = adm1Code + "[HACK]",
+                          parentAdministrativeEntity=Some(country)),
+                        parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(Some(country)))
 
-                        val t = ((a.country,a.code), a)
-                        adm1hacks = adm1hacks + t
-                        adm1hacks.get((country, adm1Code))
-                      case s => s
-                    }
-                  case s => s
-                }
-
+                      val t = ((a.country,a.code), a)
+                      adm1hacks = adm1hacks + t
+                      adm1hacks.get((country, adm1Code))
+                    case s => s
+                  }
+                case s => s
               }
 
-              Right(
-                AdministrativeDivision(
-                  code=adm2Code,
-                  featureNameProvider=
-                    SimpleFeatureNameProvider(
-                      defaultName = if(name.nonEmpty) name else asciiName,
-                      parentAdministrativeEntity=adm1ToUse),
-                  parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
-          }
+            }
+
+            Right(
+              AdministrativeDivision(
+                code=adm2Code,
+                featureNameProvider=
+                  SimpleFeatureNameProvider(
+                    defaultName = if(name.nonEmpty) name else asciiName,
+                    parentAdministrativeEntity=adm1ToUse,
+                    names=alternateNamesLookup.getAlternateNamesFor(geonamesId.toLong)),
+                parentAdministrativeEntityProvider=SimpleParentAdministrativeEntityProvider(adm1ToUse)))
+        }
       }
 
       sumUpErrors(adm1hacks)

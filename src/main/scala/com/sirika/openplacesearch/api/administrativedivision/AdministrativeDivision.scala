@@ -2,6 +2,7 @@ package com.sirika.openplacesearch.api.administrativedivision
 
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.feature.{FeatureNameProvider, LocalizedName, ParentAdministrativeEntityProvider}
+import com.google.common.base.{Objects}
 
 /**
  * An Administrative Division
@@ -9,11 +10,9 @@ import com.sirika.openplacesearch.api.feature.{FeatureNameProvider, LocalizedNam
  * @param code represents the <a href="http://en.wikipedia.org/wiki/List_of_FIPS_region_codes">FIPS code</a> for US states.
  * @author Sami Dalouche (sami.dalouche@gmail
  */
-final case class AdministrativeDivision(
-  val code: String,
-  val featureNameProvider: FeatureNameProvider,
-  val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider) extends AdministrativeEntity {
-
+final case class AdministrativeDivision(val code: String,
+                                        val featureNameProvider: FeatureNameProvider,
+                                        val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider) extends AdministrativeEntity {
   country match {
     case c: Country => // ok
     case _ => throw new IllegalArgumentException("parentAdministrativeEntityProvider should have a country in its hierarchy")
@@ -30,4 +29,13 @@ final case class AdministrativeDivision(
 
   // ParentAdministrativeEntityProvider
   def parentAdministrativeEntity: Option[AdministrativeEntity] = parentAdministrativeEntityProvider.parentAdministrativeEntity
+
+  override def hashCode(): Int = Objects.hashCode(parentAdministrativeEntity, code)
+
+  override def equals(that: Any): Boolean =   that match {
+    case a: AdministrativeDivision => Objects.equal(parentAdministrativeEntity, a.parentAdministrativeEntity) &&  Objects.equal(code, a.code)
+    case _ => false
+  }
+
+
 }

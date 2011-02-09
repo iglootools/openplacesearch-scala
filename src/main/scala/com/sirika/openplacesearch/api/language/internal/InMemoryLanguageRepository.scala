@@ -17,8 +17,11 @@ class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)
 
   def findAll() : Seq[Language] = languages
-  def getByAlpha2Code(code: String): Language = alpha2LookupTable.get(code.toLowerCase).get
-  def getByAlpha3Code(code: String): Language = alpha3LookupTable.get(code.toLowerCase).get
+  def getByAlpha2Code(code: String): Language = maybeGetByAlpha2Code(code).get
+  def getByAlpha3Code(code: String): Language = maybeGetByAlpha3Code(code).get
+
+  def maybeGetByAlpha2Code(code: String): Option[Language] = alpha2LookupTable.get(code.toLowerCase)
+  def maybeGetByAlpha3Code(code: String): Option[Language] = alpha3LookupTable.get(code.toLowerCase)
 
   private def parseLanguages[R <: Reader](readerSupplier: InputSupplier[R]) : List[Language] = {
     // 4 fields separated by tabs

@@ -7,12 +7,15 @@ import com.sirika.commons.scala.Urls
  */
 
 object ReferenceData {
-  val LanguagesPath = "com/sirika/openplacesearch/api/referencedata/iso639languages"
-  val CountriesPath = "com/sirika/openplacesearch/api/referencedata/countries"
-  val FirstOrderAdministrativeDivisionsPath = "com/sirika/openplacesearch/api/referencedata/admin1CodesASCII"
-  val SecondOrderAdministrativeDivisionsPath = "com/sirika/openplacesearch/api/referencedata/admin2Codes"
+  private val pkgPath = "com/sirika/openplacesearch/api/referencedata"
+  val LanguagesPath = pkgPath + "/iso639languages"
+  val CountriesPath = pkgPath +  "/countries"
+  val FirstOrderAdministrativeDivisionsPath = pkgPath + "/admin1CodesASCII"
+  val SecondOrderAdministrativeDivisionsPath = pkgPath + "/admin2Codes"
+  val ExtractedAlternateNamesPath = pkgPath + "/extractedAlternateNames"
   def Languages = Urls.toInputReaderSupplier(ReferenceData.LanguagesPath)
   def Countries = Urls.toInputReaderSupplier(ReferenceData.CountriesPath)
   def FirstOrderAdministrativeDivisions = Urls.toInputReaderSupplier(ReferenceData.FirstOrderAdministrativeDivisionsPath)
   def SecondOrderAdministrativeDivisions = Urls.toInputReaderSupplier(ReferenceData.SecondOrderAdministrativeDivisionsPath)
+  def ExtractedAlternateNames = Urls.toInputReaderSupplier(ReferenceData.ExtractedAlternateNamesPath)
 }

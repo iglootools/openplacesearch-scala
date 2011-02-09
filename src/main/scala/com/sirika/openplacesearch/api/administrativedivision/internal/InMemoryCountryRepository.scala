@@ -14,7 +14,8 @@ import com.google.inject.Inject
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 @com.google.inject.Singleton()
-class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository)
+class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository,
+                                           private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends CountryRepository with Logging {
 
   private lazy val countries = parseCountries(ReferenceData.Countries)
@@ -43,7 +44,7 @@ class InMemoryCountryRepository @Inject() (private[this] val continentRepository
                 alpha2Code=isoAlpha2CountryCode,
                 numeric=isoNumericCountryCode.toInt),
             continent=continentRepository.getByGeonamesCode(continentCode),
-            featureNameProvider= SimpleFeatureNameProvider(defaultName = countryName, parentAdministrativeEntity=None),
+            featureNameProvider= SimpleFeatureNameProvider(defaultName = countryName, parentAdministrativeEntity=None, names=alternateNamesLookup.getAlternateNamesFor(geonamesId.toLong)),
             currency=someIfNonEmpty(currencyCode, {c => Currency.getInstance(c)}),
             fipsCountryCode=
               FipsCountryCode(
