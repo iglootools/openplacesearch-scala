@@ -13,9 +13,6 @@ import api.Implicits._
 
 @RunWith(classOf[JUnitRunner])
 class GeolocalizationResultSpec extends Spec with ShouldMatchers {
-  val administrativeDivisionRepository = api.ApplicationContext.getInstance(classOf[AdministrativeDivisionRepository])
-  val countryRepository = api.ApplicationContext.getInstance(classOf[CountryRepository])
-  val languageRepository = api.ApplicationContext.getInstance(classOf[LanguageRepository])
 
   describe("toPlaces") {
     val GeolocalizationResultNearParis = Urls.toInputStreamSupplier("com/sirika/openplacesearch/api/gisgraphy/geolocalizationNearParis.xml")
@@ -24,11 +21,10 @@ class GeolocalizationResultSpec extends Spec with ShouldMatchers {
       placesNearParis.size should be === 10
     }
 
-    def referenceParis = Places.France.IleDeFrance.Paris.paris
-
+    it("should correctly initialize all fields") {
+      PlaceAssertions.shouldBeParis(placesNearParis(0), checkAlternateNames=false)
+    }
     def placesNearParis= new GeolocalizationResult(GeolocalizationResultNearParis).toPlaces
   }
-
-
 
 }
