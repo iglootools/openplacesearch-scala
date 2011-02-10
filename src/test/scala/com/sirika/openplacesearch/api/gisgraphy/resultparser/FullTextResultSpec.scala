@@ -16,15 +16,20 @@ class FullTextResultSpec extends Spec with ShouldMatchers {
   val countryRepository = api.ApplicationContext.getInstance(classOf[CountryRepository])
   val languageRepository = api.ApplicationContext.getInstance(classOf[LanguageRepository])
 
-  describe("toPlaces on FullTextSearchForParisWithFullStyle sample") {
+  describe("toPlaces") {
     val FullTextSearchForParisWithFullStyle = Urls.toInputStreamSupplier("com/sirika/openplacesearch/api/gisgraphy/fullTextSearchForParisWithFullStyle.xml")
 
-    it("should return 10 places") {
+    it("should return 10 places (fullTextSearchForParisWithFullStyle)") {
       placesCalledParis.size should be === 10
     }
 
-    it("should construct Place correctly") {
+    it("should correctly initialize all fields") {
       parisShouldHaveBeenCreatedCorrectly(placesCalledParis(0))
+    }
+
+    it("should correctly initialize places that only have ADM1") {
+      val parisOntario = placesCalledParis(3)
+      parisOntario.administrativeDivisionLevel == 2
     }
 
     def parisShouldHaveBeenCreatedCorrectly(place: Place) {
