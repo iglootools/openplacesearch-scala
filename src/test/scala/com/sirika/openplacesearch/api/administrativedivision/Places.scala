@@ -18,7 +18,7 @@ object Places {
         def paris: Place = placeBasedOn(
           GisFeature(
             featureGeography=FeatureGeography(
-              location=JtsPoint(2.333056,48.866667),
+              location=JtsPoint(2.34879994392395,48.85340881347656),
               population=Some(2138551L),
               gTopo30ElevationInMeters=Some(30L),
               elevationInMeters=None,

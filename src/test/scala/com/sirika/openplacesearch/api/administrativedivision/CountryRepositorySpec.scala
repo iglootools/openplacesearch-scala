@@ -1,6 +1,5 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
-import internal.InMemoryCountryRepository
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
