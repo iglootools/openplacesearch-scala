@@ -7,20 +7,19 @@ import xml.{Node, XML}
 import com.sirika.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository, Place}
 import com.sirika.openplacesearch.api.language.LanguageRepository
 import org.joda.time.DateTimeZone
-import com.sirika.openplacesearch.api.geonames.{GeonamesFeatureCategory, GeonamesFeature, GisFeature}
+import com.sirika.openplacesearch.api.geonames.{GeonamesFeatureCategory, GeonamesFeature, GisFeature, GeonamesPlace}
 import com.sirika.openplacesearch.api.feature._
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-final class FullTextResult[I <: InputStream]( private[this] val countryRepository: CountryRepository,
-                                              private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                              private[this] val languageRepository: LanguageRepository,
-                                              private[this] val inputSupplier: InputSupplier[I]) {
+final class FullTextResult[I <: InputStream](private[this] val inputSupplier: InputSupplier[I])
+                                            (implicit private[this] val countryRepository: CountryRepository,
+                                             implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
+                                             implicit private[this] val languageRepository: LanguageRepository) {
 
   def toPlaces: List[Place] = {
     val xml = InputSupliers.doWithInputStream(inputSupplier) { is =>
-      println("Loading XML")
       XML.load(is)
     }
     (xml \ "result" \ "doc").map { result => toPlace(result)}.toList
@@ -48,7 +47,7 @@ final class FullTextResult[I <: InputStream]( private[this] val countryRepositor
     val adm2 = adm2Code.map { c => administrativeDivisionRepository.getSecondOrderAdministrativeDivision(country, adm1, c)}
     // FIXME: adm3+4 ?
 
-    placeBasedOn(
+    GeonamesPlace(
       GisFeature(
         featureGeography=FeatureGeography(
           location=JtsPoint(longitude,latitude),
@@ -60,12 +59,6 @@ final class FullTextResult[I <: InputStream]( private[this] val countryRepositor
         featureNames=FeatureNames(defaultName=name, localizedNamesSupplier = new InMemoryLocalizedNamesSupplier(alternateNames(root))),
         parentAdministrativeEntity=adm2.orElse(Some(adm1))))
   }
-
-  private def placeBasedOn(gisFeature: GisFeature): Place = Place(
-    parentAdministrativeEntityProvider=gisFeature,
-    featureGeographyProvider=gisFeature,
-    featureNameProvider=gisFeature,
-    stableIdProvider=gisFeature)
 
   private def value(root: Node, element: String, name: String):String = {
     option(root, element, name).get

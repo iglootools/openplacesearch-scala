@@ -9,6 +9,7 @@ import api.administrativedivision._
 import api.feature.JtsPoint
 import api.language.LanguageRepository
 import com.sirika.commons.scala.io.Urls
+import api.Implicits._
 
 @RunWith(classOf[JUnitRunner])
 class FullTextResultSpec extends Spec with ShouldMatchers {
@@ -53,11 +54,7 @@ class FullTextResultSpec extends Spec with ShouldMatchers {
     }
     def referenceParis = Places.France.IleDeFrance.Paris.paris
 
-    def placesCalledParis= new FullTextResult(
-      countryRepository=countryRepository,
-      administrativeDivisionRepository=administrativeDivisionRepository,
-      languageRepository=languageRepository,
-      FullTextSearchForParisWithFullStyle).toPlaces
+    def placesCalledParis= new FullTextResult(FullTextSearchForParisWithFullStyle).toPlaces
   }
 
 
