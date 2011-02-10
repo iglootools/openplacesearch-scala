@@ -42,15 +42,8 @@ class FullTextResultSpec extends Spec with ShouldMatchers {
       place.timeZone should be === referenceParis.timeZone
       place.stableId should be === referenceParis.stableId
       place.name should be === referenceParis.name
-      //place.localizedNames.size should be >= 10
-
       place.distanceTo(referenceParis) should be <= 100.0
-
-
-
-
-
-
+      place.localizedNames.size should be >= 10
 
     }
     def referenceParis = Places.France.IleDeFrance.Paris.paris

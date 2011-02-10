@@ -8,7 +8,7 @@ import com.sirika.openplacesearch.api.administrativedivision.{AdministrativeDivi
 import com.sirika.openplacesearch.api.language.LanguageRepository
 import org.joda.time.DateTimeZone
 import com.sirika.openplacesearch.api.geonames.{GeonamesFeatureCategory, GeonamesFeature, GisFeature}
-import com.sirika.openplacesearch.api.feature.{FeatureNames, FeatureGeography, JtsPoint}
+import com.sirika.openplacesearch.api.feature._
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
@@ -38,7 +38,6 @@ final class FullTextResult[I <: InputStream]( private[this] val countryRepositor
     val latitude = value(root, "double", "lat").toDouble
     val longitude = value(root, "double", "lng").toDouble
     val name = value(root, "str", "name")
-    // FIXME: name_alternate_*
     val gtopo30 = option(root,"int", "gtopo30").map(_.toLong)
     val elevation = option(root,"int", "elevation").map(_.toLong)
     val population = option(root, "int", "population").map(_.toLong)
@@ -58,7 +57,7 @@ final class FullTextResult[I <: InputStream]( private[this] val countryRepositor
           elevationInMeters=elevation,
           timeZone=timezone),
         geonamesFeature=GeonamesFeature(geonamesId=featureId, geonamesFeatureCategory = GeonamesFeatureCategory(featureClass=featureClass, featureCode=featureCode)),
-        featureNames=FeatureNames(defaultName=name),
+        featureNames=FeatureNames(defaultName=name, localizedNamesSupplier = new InMemoryLocalizedNamesSupplier(alternateNames(root))),
         parentAdministrativeEntity=adm2.orElse(Some(adm1))))
   }
 
@@ -74,5 +73,17 @@ final class FullTextResult[I <: InputStream]( private[this] val countryRepositor
 
   private def option(root: Node, element: String, name: String):Option[String] = {
     (root \ element).find{n => (n \ "@name").text == name }.map(_.text)
+  }
+
+  private def alternateNames(root: Node):Iterable[LocalizedName] = {
+    (root \ "arr").filter{n => (n \ "@name").text.startsWith("name_alternate_")}.flatMap{n =>
+      val language = (n \ "@name").text.stripPrefix("name_alternate_").toLowerCase match {
+        case alpha2 if alpha2.size == 2 => Some(languageRepository.getByAlpha2Code(alpha2))
+        case alpha3 if alpha3.size == 3 => Some(languageRepository.getByAlpha3Code(alpha3))
+        case _ => // we ignore all alternate names that are not ISO languages (airport codes, etc)
+          None
+      }
+      language.map {l => new LocalizedName(name=((n \ "str").text), language=l)}
+    }
   }
 }
