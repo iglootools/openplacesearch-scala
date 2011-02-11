@@ -8,7 +8,7 @@ import com.sirika.openplacesearch.api
 import api.administrativedivision.{AdministrativeDivisions, Places}
 import api.feature.JtsPoint
 import api.Implicits._
-import com.sirika.commons.scala.io.Urls
+import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
 @RunWith(classOf[JUnitRunner])
 class FullTextResultSpec extends Spec with ShouldMatchers {
@@ -29,7 +29,11 @@ class FullTextResultSpec extends Spec with ShouldMatchers {
       parisOntario.administrativeDivisionLevel == 2
     }
 
-    def placesCalledParis= new FullTextResult(FullTextSearchForParisWithFullStyle).toPlaces
+    def placesCalledParis= {
+      InputSupliers.doWithInputStream(FullTextSearchForParisWithFullStyle) { is =>
+        new FullTextResult(is).toPlaces
+      }
+    }
   }
 
 }

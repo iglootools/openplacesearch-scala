@@ -8,8 +8,8 @@ import com.sirika.openplacesearch.api
 import api.administrativedivision._
 import api.feature.JtsPoint
 import api.language.LanguageRepository
-import com.sirika.commons.scala.io.Urls
 import api.Implicits._
+import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
 @RunWith(classOf[JUnitRunner])
 class GeolocalizationResultSpec extends Spec with ShouldMatchers {
@@ -24,7 +24,12 @@ class GeolocalizationResultSpec extends Spec with ShouldMatchers {
     it("should correctly initialize all fields") {
       PlaceAssertions.shouldBeParis(placesNearParis(0), checkAlternateNames=false)
     }
-    def placesNearParis= new GeolocalizationResult(GeolocalizationResultNearParis).toPlaces
+
+    def placesNearParis= {
+      InputSupliers.doWithInputStream(GeolocalizationResultNearParis) { is =>
+        new GeolocalizationResult(is).toPlaces
+      }
+    }
   }
 
 }

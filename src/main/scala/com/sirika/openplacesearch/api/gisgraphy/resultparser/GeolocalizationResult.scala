@@ -11,18 +11,18 @@ import com.sirika.openplacesearch.api.geonames.{GeonamesFeatureCategory, Geoname
 import com.sirika.openplacesearch.api.feature._
 
 /**
+ * <p>
+ * Does not close the inputStream !!
+ * </p>
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-final class GeolocalizationResult[I <: InputStream](private[this] val inputSupplier: InputSupplier[I])
-                                                   (implicit  private[this] val countryRepository: CountryRepository,
-                                                    implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                                    implicit private[this] val languageRepository: LanguageRepository) {
+final class GeolocalizationResult(private[this] val inputStream: InputStream)
+                                 (implicit  private[this] val countryRepository: CountryRepository,
+                                  implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
+                                  implicit private[this] val languageRepository: LanguageRepository) {
 
   def toPlaces: List[Place] = {
-    val xml = InputSupliers.doWithInputStream(inputSupplier) { is =>
-      XML.load(is)
-    }
-    (xml \ "result").map { result => toPlace(result)}.toList
+    (XML.load(inputStream) \ "result").map { result => toPlace(result)}.toList
   }
 
   private def toPlace(root: Node) = {
