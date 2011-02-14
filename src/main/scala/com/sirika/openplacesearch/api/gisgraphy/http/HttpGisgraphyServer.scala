@@ -21,9 +21,9 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
   extends GisgraphyServer with Logging {
   require(Option(baseUrl) exists (_.nonEmpty), "baseUrl is required")
   require(httpClient != null, "httpClient is required")
-  info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
-
   implicit val gisgraphyServer: GisgraphyServer = this
+
+  info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
 
   def execute[T](urlGenerator: UrlGenerator, resultParser: ResultParser): List[Place] = {
     try {
