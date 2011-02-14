@@ -18,7 +18,7 @@ class InMemoryCountryRepository @Inject() (private[this] val continentRepository
                                            private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends CountryRepository with Logging {
 
-  private lazy val countries = parseCountries(ReferenceData.Countries)
+  private val countries = parseCountries(ReferenceData.Countries)
   private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)
   private val alpha2LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha2Code, c)} : _*)
   private val alpha3LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha3Code, c)} : _*)

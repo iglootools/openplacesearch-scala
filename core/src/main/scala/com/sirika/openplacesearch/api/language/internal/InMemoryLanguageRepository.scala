@@ -11,7 +11,7 @@ import java.io.{Reader, InputStreamReader}
 
 @com.google.inject.Singleton()
 class InMemoryLanguageRepository extends LanguageRepository with Logging {
-  private lazy val languages = parseLanguages(ReferenceData.Languages)
+  private val languages = parseLanguages(ReferenceData.Languages)
 
   private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*)
   private val alpha2LookupTable : Map[String, Language] = Map(languages filter {_.alpha2Code.isDefined} map{language => (language.alpha2Code.get, language)} : _*)

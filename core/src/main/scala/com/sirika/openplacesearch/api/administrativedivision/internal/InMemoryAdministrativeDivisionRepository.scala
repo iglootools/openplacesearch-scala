@@ -16,6 +16,11 @@ class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val coun
                                                           private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends AdministrativeDivisionRepository with Logging {
 
+  // make sure the objects are not lazy-loaded
+  def doNothing(a: Any) = {}
+  doNothing(FirstOrderAdministrativeDivisions.allFirstOrderAdministrativeDivisions)
+  doNothing(SecondOrderAdministrativeDivisions.allSecondOrderAdministrativeDivisions)
+
   private[this] object FirstOrderAdministrativeDivisions {
     val allFirstOrderAdministrativeDivisions = parseAdm1(ReferenceData.FirstOrderAdministrativeDivisions)
     val allFirstOrderAdministrativeDivisionsPerCountry: Map[Country,List[AdministrativeDivision]] = allFirstOrderAdministrativeDivisions.groupBy (_.country)
