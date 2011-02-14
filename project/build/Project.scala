@@ -2,7 +2,7 @@ import sbt._
 import de.element34.sbteclipsify._
  
 class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify with IdeaProject {
-    //val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
+    val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
     val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
     val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
     
@@ -17,7 +17,7 @@ class Project(info: ProjectInfo) extends DefaultProject(info) with Eclipsify wit
     
     // HTTP and REST
     val HttpComponentsVersion = "4.1"
-    val hcHelpers = "com.sirika.hchelpers" % "hchelpers-core" % "0.8" withSources()
+    val hcHelpers = "com.sirika.hchelpers" % "hchelpers-scala" % "0.9-SNAPSHOT" //withSources()
     val httpComponentsClient = "org.apache.httpcomponents" % "httpclient" % HttpComponentsVersion withSources()
     val httpComponentsMime = "org.apache.httpcomponents" % "httpmime" % HttpComponentsVersion withSources()
     

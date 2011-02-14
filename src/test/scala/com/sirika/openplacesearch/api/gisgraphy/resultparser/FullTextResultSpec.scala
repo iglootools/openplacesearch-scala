@@ -5,8 +5,6 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import com.sirika.openplacesearch.api
-import api.administrativedivision.{AdministrativeDivisions, Places}
-import api.feature.JtsPoint
 import api.Implicits._
 import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
@@ -31,7 +29,7 @@ class FullTextResultSpec extends Spec with ShouldMatchers {
 
     def placesCalledParis= {
       InputSupliers.doWithInputStream(FullTextSearchForParisWithFullStyle) { is =>
-        new FullTextResult(is).toPlaces
+        new FullTextResultParser().toPlaces(is)
       }
     }
   }

@@ -1,8 +1,6 @@
 package com.sirika.openplacesearch.api.gisgraphy.resultparser
 
-import com.google.common.io.InputSupplier
 import java.io.{InputStream}
-import com.sirika.commons.scala.io.InputSupliers
 import xml.{Node, XML}
 import com.sirika.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository, Place}
 import com.sirika.openplacesearch.api.language.LanguageRepository
@@ -17,12 +15,11 @@ import com.sirika.openplacesearch.api.feature._
  * </p>
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-final class FullTextResult(private[this] val inputStream: InputStream)
-                          (implicit private[this] val countryRepository: CountryRepository,
-                           implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                           implicit private[this] val languageRepository: LanguageRepository) {
+final class FullTextResultParser(implicit private[this] val countryRepository: CountryRepository,
+                                 implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
+                                 implicit private[this] val languageRepository: LanguageRepository) extends ResultParser {
 
-  def toPlaces: List[Place] = {
+  def toPlaces(inputStream: InputStream): List[Place] = {
     (XML.load(inputStream) \ "result" \ "doc").map { result => toPlace(result)}.toList
   }
 

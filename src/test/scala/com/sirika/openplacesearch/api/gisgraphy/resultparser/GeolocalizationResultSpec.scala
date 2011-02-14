@@ -5,9 +5,6 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import com.sirika.openplacesearch.api
-import api.administrativedivision._
-import api.feature.JtsPoint
-import api.language.LanguageRepository
 import api.Implicits._
 import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
@@ -27,7 +24,7 @@ class GeolocalizationResultSpec extends Spec with ShouldMatchers {
 
     def placesNearParis= {
       InputSupliers.doWithInputStream(GeolocalizationResultNearParis) { is =>
-        new GeolocalizationResult(is).toPlaces
+        new GeolocalizationResultParser().toPlaces(is)
       }
     }
   }

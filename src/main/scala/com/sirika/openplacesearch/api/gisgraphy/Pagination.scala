@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.gisgraphy.http;
+package com.sirika.openplacesearch.api.gisgraphy
 
 final case class Pagination(val firstResult: Int, val numberOfResults: Int) {
   require(firstResult >=1, "the first result is 1")
