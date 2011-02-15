@@ -1,11 +1,10 @@
-package com.sirika.openplacesearch.api.administrativedivision.internal
-
+package com.sirika.openplacesearch.api.administrativedivision
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-protected[administrativedivision] object FieldExtractors {
+protected[api] object AdministrativeDivisionFieldExtractors {
 
   def extractFieldsFromAdministrativeDivisionLine(line: String, lineNumber: Long): Array[String] = {
     val split = line.split('\t')

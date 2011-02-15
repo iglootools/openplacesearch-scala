@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.administrativedivision.internal
+package com.sirika.openplacesearch.api.administrativedivision
 
 import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
@@ -28,7 +28,7 @@ protected[administrativedivision] final class InMemoryAdministrativeDivisionRepo
 
     private def parseAdm1[R <: Reader](readerSupplier: InputSupplier[R]) : List[AdministrativeDivision] = {
 
-      new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
+      new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
         fields match {
           case Array(compositeCode, name, asciiName, geonamesId)
           =>
@@ -59,7 +59,7 @@ protected[administrativedivision] final class InMemoryAdministrativeDivisionRepo
     private def parseAdm2[R <: Reader](readerSupplier: InputSupplier[R]) : List[AdministrativeDivision] = {
       var adm1hacks: Map[(Country, String), AdministrativeDivision] = Map()
 
-      val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
+      val result = new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
         fields match {
           case Array(compositeCode, name, asciiName, geonamesId)
           =>

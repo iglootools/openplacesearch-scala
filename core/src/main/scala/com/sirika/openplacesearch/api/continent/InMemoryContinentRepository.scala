@@ -1,8 +1,6 @@
-package com.sirika.openplacesearch.api.continent.internal
+package com.sirika.openplacesearch.api.continent
 
-import com.sirika.openplacesearch.api.continent.Continent
 import scala.collection.immutable.List
-import com.sirika.openplacesearch.api.continent.ContinentRepository
 
 @com.google.inject.Singleton()
 protected[continent] final class InMemoryContinentRepository extends ContinentRepository {

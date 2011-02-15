@@ -1,7 +1,6 @@
 package com.sirika.openplacesearch.api.continent
 
 import com.google.inject.AbstractModule
-import internal.InMemoryContinentRepository
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

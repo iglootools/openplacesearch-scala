@@ -1,6 +1,5 @@
-package com.sirika.openplacesearch.api.administrativedivision.internal
+package com.sirika.openplacesearch.api.administrativedivision
 
-import com.sirika.openplacesearch.api.administrativedivision.{Country, IsoCountryCode, FipsCountryCode, CountryAdministrativeInformation,CountryGeographicInformation, CountryRepository, SimpleFeatureNameProvider}
 import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
 import com.ibm.icu.util.{ULocale, Currency}
@@ -31,7 +30,7 @@ protected[administrativedivision] final class InMemoryCountryRepository @Inject(
   private def parseCountries[R <: Reader](readerSupplier: InputSupplier[R]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
 
-    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
       fields match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,

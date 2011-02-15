@@ -2,12 +2,11 @@ package com.sirika.openplacesearch.api.administrativedivision
 
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.feature._
-
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class SimpleFeatureNameProvider(val defaultName: String,
+protected[api] final case class SimpleFeatureNameProvider(val defaultName: String,
                                            val parentAdministrativeEntity:Option[AdministrativeEntity],
                                            val names: Iterable[LocalizedName] = List())
   extends FeatureNameProvider with ParentAdministrativeEntityProvider {

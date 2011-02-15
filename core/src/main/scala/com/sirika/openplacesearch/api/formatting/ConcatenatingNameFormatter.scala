@@ -1,7 +1,6 @@
-package com.sirika.openplacesearch.api.formatting.internal
+package com.sirika.openplacesearch.api.formatting
 
 import com.sirika.openplacesearch.api.feature.FeatureNameProvider
-import com.sirika.openplacesearch.api.formatting.NameFormatter
 
 /**
  * @param Whether to reverse the order of the names (defaults to true)

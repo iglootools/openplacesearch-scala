@@ -17,8 +17,8 @@ final case class Country(
   val featureNameProvider: FeatureNameProvider,
   val currency: Option[Currency] = None,
   val fipsCountryCode: FipsCountryCode = FipsCountryCode(),
-  val countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),
-  val countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation())
+  val countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),  //private[this] : remove when deleting case class
+  val countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation()) //private[this] : remove when deleting case class
     extends CountryAdministrativeInformationProvider
     with AdministrativeEntity
     with CurrencyProvider

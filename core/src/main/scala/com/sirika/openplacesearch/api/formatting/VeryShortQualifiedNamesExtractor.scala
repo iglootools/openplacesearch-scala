@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.formatting.internal
+package com.sirika.openplacesearch.api.formatting
 
 import com.sirika.openplacesearch.api.feature.NamePart
 

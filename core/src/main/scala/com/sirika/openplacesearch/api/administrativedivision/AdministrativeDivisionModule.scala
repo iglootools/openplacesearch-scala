@@ -1,7 +1,6 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
 import com.google.inject.AbstractModule
-import internal.{InMemoryAlternateNamesLookup, AlternateNamesLookup, InMemoryCountryRepository, InMemoryAdministrativeDivisionRepository}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

@@ -1,14 +1,12 @@
-package com.sirika.openplacesearch.api.administrativedivision.internal
+package com.sirika.openplacesearch.api.administrativedivision
 
 import com.sirika.openplacesearch.api.feature.LocalizedName
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
-import com.sirika.openplacesearch.api.administrativedivision.Country
 import com.google.common.io.InputSupplier
 import java.io.Reader
 import com.sirika.commons.scala.lineparser.{Skip,SkipCause, LineByLineInputStreamParser}
 import com.google.inject.Inject
 import com.sirika.openplacesearch.api.language.{LanguageRepository, Language}
-import java.util.NoSuchElementException
 
 //import scala.collection.mutable
 
@@ -21,7 +19,7 @@ protected[administrativedivision] final class InMemoryAlternateNamesLookup @Inje
   def getAlternateNamesFor(geonamesId: Long): List[LocalizedName] = localizedNames.get(geonamesId).getOrElse(List())
 
   private def parseLocalizedNames[R <: Reader](readerSupplier: InputSupplier[R]) : Map[Long,List[LocalizedName]] = {
-    new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = readerSupplier, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
         case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName) =>
           val language: Option[Language] = isolanguage match {

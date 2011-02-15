@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.administrativedivision.internal
+package com.sirika.openplacesearch.api.administrativedivision
 
 import com.sirika.openplacesearch.api.feature.LocalizedName
 

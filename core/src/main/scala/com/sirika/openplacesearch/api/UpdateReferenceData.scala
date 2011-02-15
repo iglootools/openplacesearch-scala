@@ -1,5 +1,5 @@
 package com.sirika.openplacesearch.api
-import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
+import administrativedivision._
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 import com.google.common.io.{Files, InputSupplier}
 import com.google.common.base.Charsets
@@ -68,7 +68,7 @@ object UpdateReferenceData extends Logging{
   }
 
   def extractCountryGisFeatureIds = {
-    new LineByLineInputStreamParser(readerSupplier = ReferenceFiles.readerSupplier(ReferenceFiles.CountriesFilename), fieldExtractor = FieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = ReferenceFiles.readerSupplier(ReferenceFiles.CountriesFilename), fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
       fields match {
         case List(isoAlpha2CountryCode,isoAlpha3CountryCode,isoNumericCountryCode,fipsCountryCode,countryName,
         capitalName,areaInSquareMeters,population,continentCode,topLevelDomain,currencyCode,currencyName,
@@ -79,7 +79,7 @@ object UpdateReferenceData extends Logging{
   }
 
   def extractAdministrativeDivisionGisFeatureIds[R <: Reader](input: InputSupplier[R]) = {
-    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromAdministrativeDivisionLine).map { (fields, line, lineNumber) =>
       fields match {
         case Array(compositeCode, name, asciiName, geonamesId)
         => geonamesIdToResult(geonamesId)
@@ -93,7 +93,7 @@ object UpdateReferenceData extends Logging{
      */
     def isIsoLanguageCode(s: String) = s.size == 2 || s.size == 3
 
-    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = FieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
+    new LineByLineInputStreamParser(readerSupplier = input, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromAlternateNames).map { (fields, line, lineNumber) =>
       fields match {
         case List(alternateNameId, geonamesid, isolanguage, alternateName, isPreferredName, isShortName)
           if geonamesIds.contains(geonamesid.toInt) && isIsoLanguageCode(isolanguage) => Right(line)

@@ -1,13 +1,11 @@
-package com.sirika.openplacesearch.api.language.internal
+package com.sirika.openplacesearch.api.language
 
 import scala.collection.immutable.{List,Map}
 import com.google.common.io.{InputSupplier}
 import grizzled.slf4j.Logging
-import com.sirika.openplacesearch.api.language.Language
-import com.sirika.openplacesearch.api.language.LanguageRepository
 import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
-import java.io.{Reader, InputStreamReader}
+import java.io.{Reader}
 
 @com.google.inject.Singleton()
 protected[language] final class InMemoryLanguageRepository extends LanguageRepository with Logging {

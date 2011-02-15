@@ -6,6 +6,6 @@ import com.sirika.openplacesearch.api.feature.ParentAdministrativeEntityProvider
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class SimpleParentAdministrativeEntityProvider(val parentAdministrativeEntity: Option[AdministrativeEntity]) extends ParentAdministrativeEntityProvider {
+protected[api] final case class SimpleParentAdministrativeEntityProvider(val parentAdministrativeEntity: Option[AdministrativeEntity]) extends ParentAdministrativeEntityProvider {
   require(parentAdministrativeEntity != null, "parentAdministrativeEntity must be a non-null Option")
 }
