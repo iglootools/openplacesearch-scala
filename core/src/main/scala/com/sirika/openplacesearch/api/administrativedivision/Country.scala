@@ -11,18 +11,19 @@ import com.google.common.base.Objects
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class Country(
-  val isoCountryCode: IsoCountryCode,
-  val continent: Continent,
-  val featureNameProvider: FeatureNameProvider,
-  val currency: Option[Currency] = None,
-  val fipsCountryCode: FipsCountryCode = FipsCountryCode(),
-  val countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),  //private[this] : remove when deleting case class
-  val countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation()) //private[this] : remove when deleting case class
-    extends CountryAdministrativeInformationProvider
-    with AdministrativeEntity
-    with CurrencyProvider
-    with CountryGeographicInformationProvider{
+final case class Country(val isoCountryCode: IsoCountryCode,
+                         val continent: Continent,
+                         val featureNameProvider: FeatureNameProvider,
+                         val currency: Option[Currency] = None,
+                         val fipsCountryCode: FipsCountryCode = FipsCountryCode(),
+                         val countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),  //private[this] : remove when deleting case class
+                         val countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation()) //private[this] : remove when deleting case class
+                        (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository)
+
+  extends CountryAdministrativeInformationProvider
+  with AdministrativeEntity
+  with CurrencyProvider
+  with CountryGeographicInformationProvider{
 
   //require(Option(name).exists {_.nonEmpty}, "name is required")
   require(continent != null, "continent is required")
@@ -39,6 +40,7 @@ final case class Country(
 
   // AdministrativeEntity
   def parentAdministrativeEntity = None
+  def childAdministrativeDivisions: List[AdministrativeDivision] = administrativeDivisionRepository.findAllFirstOrderAdministrativeDivisions(this)
 
   // FeatureNameProvider
   def name: String = featureNameProvider.name

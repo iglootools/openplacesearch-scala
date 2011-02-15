@@ -11,10 +11,10 @@ import com.ibm.icu.util.Currency
  */
 
 final case class Place(
-  protected[this] val parentAdministrativeEntityProvider:ParentAdministrativeEntityProvider,
-  protected[this] val featureGeographyProvider: FeatureGeographyProvider,
-  protected[this] val featureNameProvider: FeatureNameProvider,
-  protected[this] val stableIdProvider: StableIdProvider)
+                        protected[this] val parentAdministrativeEntityProvider:ParentAdministrativeEntityProvider,
+                        protected[this] val featureGeographyProvider: FeatureGeographyProvider,
+                        protected[this] val featureNameProvider: FeatureNameProvider,
+                        protected[this] val stableIdProvider: StableIdProvider)
   extends FeatureGeographyProvider
   with AdministrativeEntity
   with StableIdProvider
@@ -31,6 +31,8 @@ final case class Place(
 
   // ParentAdministrativeEntity
   def parentAdministrativeEntity: Option[AdministrativeEntity] = parentAdministrativeEntityProvider.parentAdministrativeEntity
+  def childAdministrativeDivisions: List[AdministrativeDivision] = List()
+
 
   // StableIdProvider
   def stableId: String = stableIdProvider.stableId

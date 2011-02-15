@@ -13,8 +13,11 @@ import com.google.inject.Inject
  */
 @com.google.inject.Singleton()
 protected[administrativedivision] final class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository,
-                                                          private[this] val alternateNamesLookup: AlternateNamesLookup)
+                                                                                                  private[this] val alternateNamesLookup: AlternateNamesLookup,
+                                                                                                  private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository)
   extends AdministrativeDivisionRepository with Logging {
+
+  implicit val administrativeDivisionRepo = administrativeDivisionRepository
 
   // make sure the objects are not lazy-loaded
   def doNothing(a: Any) = {}

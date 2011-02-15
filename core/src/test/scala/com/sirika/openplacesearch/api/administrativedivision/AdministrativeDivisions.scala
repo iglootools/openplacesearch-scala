@@ -1,5 +1,7 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
+import com.sirika.openplacesearch.api.DummyImplicitDependencyInjection._
+
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */

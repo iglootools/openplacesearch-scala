@@ -16,6 +16,8 @@ class DummyAdministrativeEntity(val name: String, val parentAdministrativeEntity
   def preferredName(language: Language): String = featureNames.preferredName(language)
   def localizedNames: List[LocalizedName] = featureNames.localizedNames
 
+  def childAdministrativeDivisions: List[AdministrativeDivision] = List()
+
   override def equals(that: Any): Boolean = that match {
     case a: DummyAdministrativeEntity => name.equals(a.name)
     case _ => false

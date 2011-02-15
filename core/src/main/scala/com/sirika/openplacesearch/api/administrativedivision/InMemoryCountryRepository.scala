@@ -14,13 +14,17 @@ import com.google.inject.Inject
  */
 @com.google.inject.Singleton()
 protected[administrativedivision] final class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository,
-                                           private[this] val alternateNamesLookup: AlternateNamesLookup)
+                                                                                   private[this] val alternateNamesLookup: AlternateNamesLookup,
+                                                                                   private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository)
   extends CountryRepository with Logging {
+
+  implicit val administrativeDivisionRepo = administrativeDivisionRepository
 
   private val countries = parseCountries(ReferenceData.Countries)
   private val fipsLookupTable : Map[String, Country] = Map(countries.filter{_.fipsCountryCode.fipsCode.isDefined}.map{c : Country => (c.fipsCountryCode.fipsCode.get, c)} : _*)
   private val alpha2LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha2Code, c)} : _*)
   private val alpha3LookupTable : Map[String, Country] = Map(countries.map{c : Country => (c.isoCountryCode.alpha3Code, c)} : _*)
+
 
   def findAll: List[Country] = countries
   def getByFipsCode(code: String): Country = fipsLookupTable.get(code).get
@@ -29,6 +33,7 @@ protected[administrativedivision] final class InMemoryCountryRepository @Inject(
 
   private def parseCountries[R <: Reader](readerSupplier: InputSupplier[R]) : List[Country] = {
     // ISO,ISO3,ISO-Numeric,fips,Country,Capital,Area(in sq km),Population,Continent,tld,CurrencyCode,CurrencyName,Phone,Postal Code Format,Postal Code Regex,Languages,geonameid,neighbours,EquivalentFipsCode
+
 
     new LineByLineInputStreamParser(readerSupplier = ReferenceData.Countries, fieldExtractor = AdministrativeDivisionFieldExtractors.extractFieldsFromCountryLine).map { (fields, line, lineNumber) =>
       fields match {

@@ -12,7 +12,8 @@ import com.google.common.base.{Objects}
  */
 final case class AdministrativeDivision(val code: String,
                                         val featureNameProvider: FeatureNameProvider,
-                                        val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider) extends AdministrativeEntity {
+                                        val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider)
+                                       (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository) extends AdministrativeEntity {
   country match {
     case c: Country => // ok
     case _ => throw new IllegalArgumentException("parentAdministrativeEntityProvider should have a country in its hierarchy")
@@ -29,6 +30,18 @@ final case class AdministrativeDivision(val code: String,
 
   // ParentAdministrativeEntityProvider
   def parentAdministrativeEntity: Option[AdministrativeEntity] = parentAdministrativeEntityProvider.parentAdministrativeEntity
+
+  // AdministrativeEntity
+  def childAdministrativeDivisions: List[AdministrativeDivision] = {
+    val childDivisionsFinder = administrativeDivisionLevel match {
+      case 1 => {self: AdministrativeDivision => administrativeDivisionRepository.findAllSecondOrderAdministrativeDivisions(self.country, self)}
+      case 2 => {self: AdministrativeDivision => List()}
+      case _ => throw new RuntimeException("not implemented")
+    }
+
+    childDivisionsFinder(this)
+  }
+
 
   override def hashCode(): Int = Objects.hashCode(parentAdministrativeEntity, code)
 

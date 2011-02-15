@@ -31,4 +31,6 @@ trait AdministrativeEntity extends ParentAdministrativeEntityProvider with Featu
       case _ => throw new RuntimeException("By design, ADM0 should be a country")
     }
   }
+
+  def childAdministrativeDivisions: List[AdministrativeDivision]
 }
