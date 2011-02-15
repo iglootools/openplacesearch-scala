@@ -19,7 +19,10 @@ General README
 
 = Limitations =
 * We do not import ADM3 and ADM4
-
+* no work around the 10-result limitation of stock gisgraphy (needs a patched gisgraphy to get more results)
+* childAdministrativeDivisions() returns all children. No way to add additional filters. 
+* no lazy alternate names fetcher for geolocresults (so, we have no alternate names for geoloc results)
+* uses FULL => slower than required. LONG does not return alternate names (contrary to gisgraphy documentation)
 
 Developer README
 ================
