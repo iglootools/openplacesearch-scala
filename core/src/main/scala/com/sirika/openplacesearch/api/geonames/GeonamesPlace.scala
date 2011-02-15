@@ -4,7 +4,7 @@ import com.sirika.openplacesearch.api.administrativedivision.Place
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-object GeonamesPlace {
+protected[api] object GeonamesPlace {
   def apply(gisFeature: GisFeature) = Place(
     parentAdministrativeEntityProvider=gisFeature,
     featureGeographyProvider=gisFeature,

@@ -5,7 +5,7 @@ import com.sirika.openplacesearch.api.feature.StableIdProvider
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-final case class GeonamesFeature(val geonamesId: Long,val geonamesFeatureCategory: GeonamesFeatureCategory)
+protected[api] final case class GeonamesFeature(val geonamesId: Long,val geonamesFeatureCategory: GeonamesFeatureCategory)
   extends GeonamesFeatureProvider with StableIdProvider {
   require(geonamesFeatureCategory != null, "geonamesFeatureCategory is required")
 

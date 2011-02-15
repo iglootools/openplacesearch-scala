@@ -15,30 +15,56 @@ package object api {
     implicit val languageRepository = api.DefaultApplicationContext.getInstance(classOf[LanguageRepository])
   }
 
-  // package: administrativedivision
+  // administrativedivision
   type AdministrativeDivision = api.administrativedivision.AdministrativeDivision
-  type AdministrativeEntity = api.administrativedivision.AdministrativeEntity
   type Country = api.administrativedivision.Country
+  type Place = api.administrativedivision.Place
+
+  type FipsCountryCode = api.administrativedivision.FipsCountryCode
+  type IsoCountryCode = api.administrativedivision.IsoCountryCode
+
+  type AdministrativeEntity = api.administrativedivision.AdministrativeEntity
   type CountryAdministrativeInformationProvider = api.administrativedivision.CountryAdministrativeInformationProvider
   type CountryGeographicInformationProvider = api.administrativedivision.CountryGeographicInformationProvider
   type CountryProvider = api.administrativedivision.CountryProvider
   type CurrencyProvider = api.administrativedivision.CurrencyProvider
-  type FipsCountryCode = api.administrativedivision.FipsCountryCode
-  type IsoCountryCode = api.administrativedivision.IsoCountryCode
   type PhonePrefixProvider = api.administrativedivision.PhonePrefixProvider
-  type Place = api.administrativedivision.Place
   type PostalCodeFormatProvider = api.administrativedivision.PostalCodeFormatProvider
   type PreferredLocalesProvider = api.administrativedivision.PreferredLocalesProvider
-   type TopLevelDomainProvider = api.administrativedivision.TopLevelDomainProvider
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
-//  type CountryRepository = api.administrativedivision.CountryRepository
+  type TopLevelDomainProvider = api.administrativedivision.TopLevelDomainProvider
 
+  // continent
+  type Continent = api.continent.Continent
+
+  // feature
+  type LocalizedName = api.feature.LocalizedName
+  type NamePart = api.feature.NamePart
+
+  type DistanceCalculator = api.feature.DistanceCalculator
+  type ElevationProvider = api.feature.ElevationProvider
+  type FeatureGeographyProvider = api.feature.FeatureGeographyProvider
+  type FeatureNameProvider = api.feature.FeatureNameProvider
+  type LocationProvider = api.feature.LocationProvider
+  type ParentAdministrativeEntityProvider = api.feature.ParentAdministrativeEntityProvider
+  type PopulationProvider = api.feature.PopulationProvider
+  type StableIdProvider = api.feature.StableIdProvider
+  type TimeZoneProvider = api.feature.TimeZoneProvider
+
+
+  // formatting
+  type NameFormatter = api.formatting.NameFormatter
+  val Formatters = api.formatting.Formatters
+
+  // gisgraphy
+  type GisgraphyServer = api.gisgraphy.GisgraphyServer
+  type GisgraphyQuery = api.gisgraphy.GisgraphyQuery
+  type Pagination = api.gisgraphy.Pagination
+  type GisgraphyException = api.gisgraphy.GisgraphyException
+
+  type HttpGisgraphyServer = api.gisgraphy.http.HttpGisgraphyServer
+
+  // language
+  type Language = api.language.Language
 }
 
 

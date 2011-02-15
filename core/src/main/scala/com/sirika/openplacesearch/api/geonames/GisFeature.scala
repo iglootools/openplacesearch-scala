@@ -11,7 +11,7 @@ import com.sirika.openplacesearch.api.feature.FeatureGeographyProvider
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-case class GisFeature(protected[this] val featureGeography: FeatureGeographyProvider,
+protected[api] case class GisFeature(protected[this] val featureGeography: FeatureGeographyProvider,
                       protected[this] val geonamesFeature: GeonamesFeatureProvider,
                       protected[this] val featureNames: FeatureNames,
                       val parentAdministrativeEntity: Option[AdministrativeEntity] ) extends DistanceCalculator
