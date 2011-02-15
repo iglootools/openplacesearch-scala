@@ -5,7 +5,7 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import com.sirika.openplacesearch.api.Implicits._
+import com.sirika.openplacesearch.api.ImplicitDependencyInjection._
 import com.sirika.openplacesearch.api.administrativedivision.Places
 
 @RunWith(classOf[JUnitRunner])

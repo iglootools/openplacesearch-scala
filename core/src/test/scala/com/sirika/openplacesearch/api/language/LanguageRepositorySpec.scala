@@ -11,7 +11,7 @@ import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class LanguageRepositorySpec extends Spec with ShouldMatchers {
-  val languageRepository = api.ApplicationContext.getInstance(classOf[LanguageRepository])
+  val languageRepository = api.DefaultApplicationContext.getInstance(classOf[LanguageRepository])
 
   describe("getByAlpha2Code") {
     it("should find the french language") {

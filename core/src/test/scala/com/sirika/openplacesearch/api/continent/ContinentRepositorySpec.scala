@@ -10,7 +10,7 @@ import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class ContinentRepositorySpec extends Spec with ShouldMatchers {
-  val continentRepository = api.ApplicationContext.getInstance(classOf[ContinentRepository])
+  val continentRepository = api.DefaultApplicationContext.getInstance(classOf[ContinentRepository])
 
   describe("getByGeonamesCode") {
     it("should find Europe") {
