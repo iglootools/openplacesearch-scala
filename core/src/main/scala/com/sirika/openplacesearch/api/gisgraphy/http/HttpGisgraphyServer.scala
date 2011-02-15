@@ -10,9 +10,17 @@ import com.sirika.openplacesearch.api.gisgraphy.resultparser.ResultParser
 import com.sirika.openplacesearch.api.administrativedivision.{Place, AdministrativeDivisionRepository, CountryRepository}
 import com.sirika.openplacesearch.api.feature.LocationProvider
 import com.sirika.openplacesearch.api.gisgraphy._
+import com.sirika.openplacesearch.api
+
+object HttpGisgraphyServer {
+  def apply(baseUrl: String, httpClient: HttpClient=SimpleHttpClient(maxTotalNumberOfConnections=100, defaultMaxNumberOfConnectionsPerRoute=100)): HttpGisgraphyServer = {
+    import api.ImplicitDependencyInjection._
+    new HttpGisgraphyServer(baseUrl, httpClient)
+  }
+}
 
 final class HttpGisgraphyServer(private[this] val baseUrl: String,
-                                private[this] val httpClient: HttpClient = SimpleHttpClient(maxTotalNumberOfConnections=100, defaultMaxNumberOfConnectionsPerRoute=100))
+                                private[this] val httpClient: HttpClient)
                                (implicit private[this] val countryRepository: CountryRepository,
                                 implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
                                 implicit private[this] val languageRepository: LanguageRepository)

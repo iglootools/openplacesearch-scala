@@ -59,9 +59,10 @@ package object api {
   type GisgraphyServer = api.gisgraphy.GisgraphyServer
   type GisgraphyQuery = api.gisgraphy.GisgraphyQuery
   type Pagination = api.gisgraphy.Pagination
+  val Pagination = api.gisgraphy.Pagination
   type GisgraphyException = api.gisgraphy.GisgraphyException
 
-  type HttpGisgraphyServer = api.gisgraphy.http.HttpGisgraphyServer
+  val HttpGisgraphyServer = api.gisgraphy.http.HttpGisgraphyServer
 
   // language
   type Language = api.language.Language

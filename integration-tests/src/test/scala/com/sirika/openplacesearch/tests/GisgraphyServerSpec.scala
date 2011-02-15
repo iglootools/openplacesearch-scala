@@ -1,17 +1,16 @@
-package com.sirika.openplacesearch.api.gisgraphy
+package com.sirika.openplacesearch.tests
 
-import http.HttpGisgraphyServer
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import com.sirika.openplacesearch.api.ImplicitDependencyInjection._
+import com.sirika.openplacesearch.api._
 import com.sirika.openplacesearch.api.administrativedivision.Places
 
 @RunWith(classOf[JUnitRunner])
 class GisgraphyServerSpec extends Spec with ShouldMatchers {
 
-  val gisgraphyServer: GisgraphyServer = new HttpGisgraphyServer(baseUrl="http://services.gisgraphy.com")
+  val gisgraphyServer: GisgraphyServer = HttpGisgraphyServer(baseUrl="http://services.gisgraphy.com")
   describe("GisgraphyServer") {
     it("should perform fulltext query") {
       val result = gisgraphyServer.newFullTextQuery("paris", Pagination(firstResult=1, numberOfResults=7)).execute

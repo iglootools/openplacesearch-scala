@@ -8,8 +8,8 @@ import com.sirika.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeDivisionRepositorySpec extends Spec with ShouldMatchers {
-  val administrativeDivisionRepository = api.DefaultApplicationContext.getInstance(classOf[AdministrativeDivisionRepository])
-  val countryRepository = api.DefaultApplicationContext.getInstance(classOf[CountryRepository])
+  val administrativeDivisionRepository = api.ImplicitDependencyInjection.administrativeDivisionRepository
+  val countryRepository = api.ImplicitDependencyInjection.countryRepository
 
   describe("findAllFirstOrderAdministrativeDivisions") {
     it("of France should return 22 regions") {

@@ -9,7 +9,7 @@ import api.language.{Languages}
 
 @RunWith(classOf[JUnitRunner])
 class CountryRepositorySpec extends Spec with ShouldMatchers {
-  val countryRepository = api.DefaultApplicationContext.getInstance(classOf[CountryRepository])
+  val countryRepository = api.ImplicitDependencyInjection.countryRepository
 
   describe("findAll") {
 

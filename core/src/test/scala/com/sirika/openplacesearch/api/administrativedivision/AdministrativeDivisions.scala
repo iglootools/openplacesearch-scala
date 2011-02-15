@@ -1,12 +1,5 @@
 package com.sirika.openplacesearch.api.administrativedivision
 
-import com.sirika.openplacesearch.api.continent.Continents
-import com.sirika.openplacesearch.api.geonames._
-import com.sirika.openplacesearch.api.feature._
-import com.sirika.openplacesearch.api.administrativedivision._
-import org.joda.time.DateTimeZone
-import com.ibm.icu.util.{ULocale, Currency}
-
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
