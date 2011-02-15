@@ -12,7 +12,7 @@ import com.sirika.openplacesearch.api.feature.LocationProvider
 import com.sirika.openplacesearch.api.gisgraphy._
 
 final class HttpGisgraphyServer(private[this] val baseUrl: String,
-                                private[this] val httpClient: HttpClient = SimpleHttpClient())
+                                private[this] val httpClient: HttpClient = SimpleHttpClient(maxTotalNumberOfConnections=100, defaultMaxNumberOfConnectionsPerRoute=100))
                                (implicit private[this] val countryRepository: CountryRepository,
                                 implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
                                 implicit private[this] val languageRepository: LanguageRepository)
