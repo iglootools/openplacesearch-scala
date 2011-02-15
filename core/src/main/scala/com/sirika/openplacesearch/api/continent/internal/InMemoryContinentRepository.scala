@@ -5,7 +5,7 @@ import scala.collection.immutable.List
 import com.sirika.openplacesearch.api.continent.ContinentRepository
 
 @com.google.inject.Singleton()
-class InMemoryContinentRepository extends ContinentRepository {
+protected[continent] final class InMemoryContinentRepository extends ContinentRepository {
   private lazy val continents = List(
     Continent("AF", "Africa"),
     Continent("AS", "Asia"),

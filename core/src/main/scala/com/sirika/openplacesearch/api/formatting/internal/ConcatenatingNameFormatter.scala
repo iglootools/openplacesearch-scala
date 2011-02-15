@@ -1,12 +1,13 @@
-package com.sirika.openplacesearch.api.formatting
+package com.sirika.openplacesearch.api.formatting.internal
 
 import com.sirika.openplacesearch.api.feature.FeatureNameProvider
+import com.sirika.openplacesearch.api.formatting.NameFormatter
 
 /**
  * @param Whether to reverse the order of the names (defaults to true)
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-protected final class ConcatenatingNameFormatter(
+protected[formatting] final class ConcatenatingNameFormatter(
   val separator: String = ", ",
   val namesExtractor: NamesExtractor = new FullyQualifiedNamesExtractor(),
   val reverse: Boolean = true) extends NameFormatter {

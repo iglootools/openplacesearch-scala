@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.formatting
+package com.sirika.openplacesearch.api.formatting.internal
 
 import com.sirika.openplacesearch.api.feature.NamePart
 
@@ -6,7 +6,7 @@ import com.sirika.openplacesearch.api.feature.NamePart
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-protected final class VeryShortQualifiedNamesExtractor extends NamesExtractor {
+protected[formatting] final class VeryShortQualifiedNamesExtractor extends NamesExtractor {
   def extractRelevantNames(nameParts: List[NamePart]): List[String] = {
     require(nameParts.size >= 2, "There should be at least 2 NameParts : a Country and a name")
 

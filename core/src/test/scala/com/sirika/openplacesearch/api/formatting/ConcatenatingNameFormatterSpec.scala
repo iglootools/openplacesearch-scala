@@ -1,6 +1,7 @@
 package com.sirika.openplacesearch.api.formatting
 
 import com.sirika.openplacesearch.api.language.internal.InMemoryLanguageRepository
+import internal.{VeryShortQualifiedNamesExtractor, ConcatenatingNameFormatter}
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers

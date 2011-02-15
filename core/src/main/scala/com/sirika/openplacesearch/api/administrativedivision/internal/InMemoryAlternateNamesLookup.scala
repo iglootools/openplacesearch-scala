@@ -16,7 +16,7 @@ import java.util.NoSuchElementException
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 @com.google.inject.Singleton()
-class InMemoryAlternateNamesLookup @Inject() (private[this] val languageRepository: LanguageRepository) extends AlternateNamesLookup {
+protected[administrativedivision] final class InMemoryAlternateNamesLookup @Inject() (private[this] val languageRepository: LanguageRepository) extends AlternateNamesLookup {
   private lazy val localizedNames = parseLocalizedNames(ReferenceData.ExtractedAlternateNames)
   def getAlternateNamesFor(geonamesId: Long): List[LocalizedName] = localizedNames.get(geonamesId).getOrElse(List())
 

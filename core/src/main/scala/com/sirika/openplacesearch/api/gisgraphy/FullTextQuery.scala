@@ -4,7 +4,7 @@ import resultparser.{ResultParser, FullTextResultParser}
 import com.sirika.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
 import com.sirika.openplacesearch.api.language.LanguageRepository
 
-final class FullTextQuery(private[this] val query: String,
+protected[gisgraphy] final class FullTextQuery(private[this] val query: String,
                           private[this] val pagination: Pagination)
                          (implicit protected[this] val gisgraphyServer: GisgraphyServer,
                           implicit protected[this] val countryRepository: CountryRepository,

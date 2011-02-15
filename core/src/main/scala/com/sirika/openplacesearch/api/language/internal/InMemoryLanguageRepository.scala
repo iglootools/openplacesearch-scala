@@ -10,7 +10,7 @@ import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamPars
 import java.io.{Reader, InputStreamReader}
 
 @com.google.inject.Singleton()
-class InMemoryLanguageRepository extends LanguageRepository with Logging {
+protected[language] final class InMemoryLanguageRepository extends LanguageRepository with Logging {
   private val languages = parseLanguages(ReferenceData.Languages)
 
   private val alpha3LookupTable : Map[String, Language] = Map(languages.map{l : Language => (l.alpha3Code, l)} : _*)

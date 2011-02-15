@@ -6,7 +6,7 @@ import com.sirika.commons.scala.io.Urls
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-object ReferenceData {
+protected[api] object ReferenceData {
   private val pkgPath = "com/sirika/openplacesearch/api/referencedata"
   val LanguagesPath = pkgPath + "/iso639languages"
   val CountriesPath = pkgPath +  "/countries"

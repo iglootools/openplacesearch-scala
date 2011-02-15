@@ -6,6 +6,6 @@ import com.sirika.openplacesearch.api.feature.LocalizedName
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-trait AlternateNamesLookup {
+protected[administrativedivision] trait AlternateNamesLookup {
   def getAlternateNamesFor(geonamesId: Long): List[LocalizedName]
 }

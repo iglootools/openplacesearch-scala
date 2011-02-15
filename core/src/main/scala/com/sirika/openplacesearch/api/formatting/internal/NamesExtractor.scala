@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.formatting
+package com.sirika.openplacesearch.api.formatting.internal
 
 import com.sirika.openplacesearch.api.feature.NamePart
 
@@ -9,6 +9,6 @@ import com.sirika.openplacesearch.api.feature.NamePart
 /**
  * Extracts the names that are relevant
  */
-protected trait NamesExtractor {
+protected[formatting] trait NamesExtractor {
   def extractRelevantNames(nameParts: List[NamePart]): List[String]
 }

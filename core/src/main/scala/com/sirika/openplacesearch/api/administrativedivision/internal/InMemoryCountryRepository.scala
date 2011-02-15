@@ -14,7 +14,7 @@ import com.google.inject.Inject
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 @com.google.inject.Singleton()
-class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository,
+protected[administrativedivision] final class InMemoryCountryRepository @Inject() (private[this] val continentRepository: ContinentRepository,
                                            private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends CountryRepository with Logging {
 

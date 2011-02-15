@@ -15,7 +15,7 @@ import com.sirika.commons.scala.jts.JtsPoint
  * </p>
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
-final class GeolocalizationResultParser(implicit  private[this] val countryRepository: CountryRepository,
+protected[gisgraphy] final class GeolocalizationResultParser(implicit  private[this] val countryRepository: CountryRepository,
                                         implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
                                         implicit private[this] val languageRepository: LanguageRepository) extends ResultParser {
 

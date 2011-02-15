@@ -12,7 +12,7 @@ import com.google.inject.Inject
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 @com.google.inject.Singleton()
-class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository,
+protected[administrativedivision] final class InMemoryAdministrativeDivisionRepository @Inject() (private[this] val countryRepository: CountryRepository,
                                                           private[this] val alternateNamesLookup: AlternateNamesLookup)
   extends AdministrativeDivisionRepository with Logging {
 

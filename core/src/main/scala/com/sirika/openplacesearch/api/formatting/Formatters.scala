@@ -1,5 +1,7 @@
 package com.sirika.openplacesearch.api.formatting
 
+import internal._
+
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */

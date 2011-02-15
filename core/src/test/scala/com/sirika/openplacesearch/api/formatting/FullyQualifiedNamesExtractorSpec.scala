@@ -1,5 +1,6 @@
 package com.sirika.openplacesearch.api.formatting
 
+import internal.{NamesExtractor, FullyQualifiedNamesExtractor}
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers

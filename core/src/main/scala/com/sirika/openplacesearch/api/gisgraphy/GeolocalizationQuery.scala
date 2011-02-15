@@ -5,7 +5,7 @@ import resultparser.{ResultParser, GeolocalizationResultParser}
 import com.sirika.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
 import com.sirika.openplacesearch.api.language.LanguageRepository
 
-final class GeolocalizationQuery(private[this] val location: LocationProvider,
+protected[gisgraphy] final class GeolocalizationQuery(private[this] val location: LocationProvider,
                                  private[this] val radiusInMeters: Int,
                                  private[this] val pagination: Pagination)
                                 (implicit protected[this] val gisgraphyServer: GisgraphyServer,

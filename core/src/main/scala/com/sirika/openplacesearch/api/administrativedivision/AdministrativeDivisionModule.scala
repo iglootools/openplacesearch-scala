@@ -7,7 +7,7 @@ import internal.{InMemoryAlternateNamesLookup, AlternateNamesLookup, InMemoryCou
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-class AdministrativeDivisionModule extends AbstractModule {
+final class AdministrativeDivisionModule extends AbstractModule {
   def configure: Unit = {
     bind(classOf[AdministrativeDivisionRepository]).to(classOf[InMemoryAdministrativeDivisionRepository])
     bind(classOf[CountryRepository]).to(classOf[InMemoryCountryRepository])
