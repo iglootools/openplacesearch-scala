@@ -1,12 +1,10 @@
 package com.sirika.openplacesearch.api.gisgraphy.http
 
-import java.io.InputStream
 import org.apache.http.client.HttpClient
-import com.sirika.hchelpers.scala.Implicits._
+import com.sirika.hchelpers.scala._
 import grizzled.slf4j.Logging
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.HttpResponse
-import com.sirika.hchelpers.scala.{HttpErrorHandler, SimpleHttpClient}
 import com.sirika.openplacesearch.api.language.LanguageRepository
 import com.sirika.openplacesearch.api.gisgraphy.resultparser.ResultParser
 import com.sirika.openplacesearch.api.administrativedivision.{Place, AdministrativeDivisionRepository, CountryRepository}
@@ -28,7 +26,7 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
   def execute[T](urlGenerator: UrlGenerator, resultParser: ResultParser): List[Place] = {
     try {
       val result = httpClient.doWithResponse(new HttpGet(urlGenerator.toUrl(baseUrl)),
-        doOnSuccess = {r: HttpResponse =>
+        onSuccess = {r: HttpResponse =>
           assume(r.getEntity != null, "the entity cannot be null")
           resultParser.toPlaces(r.getEntity.getContent)
         })
