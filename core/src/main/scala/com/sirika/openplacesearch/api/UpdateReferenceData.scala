@@ -1,5 +1,4 @@
 package com.sirika.openplacesearch.api
-import com.sirika.openplacesearch.api.referencedata.ReferenceData
 import com.sirika.openplacesearch.api.administrativedivision.internal.FieldExtractors
 import com.sirika.commons.scala.lineparser.{SkipCause, LineByLineInputStreamParser, Skip}
 import com.google.common.io.{Files, InputSupplier}

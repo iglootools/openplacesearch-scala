@@ -7,6 +7,7 @@ import com.sirika.openplacesearch.api.language.LanguageRepository
 import org.joda.time.DateTimeZone
 import com.sirika.openplacesearch.api.geonames.{GeonamesFeatureCategory, GeonamesFeature, GisFeature, GeonamesPlace}
 import com.sirika.openplacesearch.api.feature._
+import com.sirika.commons.scala.jts.JtsPoint
 
 /**
  *
