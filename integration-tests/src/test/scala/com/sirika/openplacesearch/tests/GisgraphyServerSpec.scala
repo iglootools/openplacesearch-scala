@@ -9,17 +9,12 @@ import com.sirika.openplacesearch.api.administrativedivision.Places
 
 @RunWith(classOf[JUnitRunner])
 class GisgraphyServerSpec extends Spec with ShouldMatchers {
-
-  val gisgraphyServer: GisgraphyServer = HttpGisgraphyServer(baseUrl="http://services.gisgraphy.com")
   describe("GisgraphyServer") {
+    val gisgraphyServer: GisgraphyServer = HttpGisgraphyServer(baseUrl="http://services.gisgraphy.com")
+
     it("should perform fulltext query") {
       val result = gisgraphyServer.newFullTextQuery("paris", Pagination(firstResult=1, numberOfResults=7)).execute
       result.size should be === 7
-    }
-
-    it("should not crash when query contains special characters") {
-      val result = gisgraphyServer.newFullTextQuery("los & angeles", Pagination(firstResult=1, numberOfResults=7)).execute
-      result.size should be > 0
     }
 
     it("should perform geoloc query") {
@@ -29,6 +24,10 @@ class GisgraphyServerSpec extends Spec with ShouldMatchers {
         pagination=Pagination(firstResult=1, numberOfResults=7)).execute
       result.size should be === 7
     }
-  }
 
+    it("should not crash when query contains special characters") {
+      val result = gisgraphyServer.newFullTextQuery("los & angeles", Pagination(firstResult=1, numberOfResults=7)).execute
+      result.size should be > 0
+    }
+  }
 }
