@@ -22,6 +22,12 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
   lazy val integrationTests = project("integration-tests", "openplacesearch-integration-tests", new IntegrationTests(_), core)
 
 
+  lazy val skipIntegrationTests = systemOptional[Boolean]("skipIntegrationTests", false).value
+  lazy val printit = task {
+    println("SKIP INTEGRATION TESTS: " + skipIntegrationTests)
+    None
+  }
+
   class Core(info: ProjectInfo) extends DefaultProject(info) with Repositories with IdeaProject with Eclipsify {
     // commons
     lazy val jodaTime = "joda-time" % "joda-time" % "1.6.2" withSources()
@@ -63,7 +69,9 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     override def publishAction = doNothing
     override def deliverAction = doNothing
 
-     // test dependencies
+    override def testOptions = TestFilter(s => false) :: super.testOptions.toList
+
+    // test dependencies
     lazy val junit = Dependencies.junit
     lazy val scalaTest = Dependencies.scalaTest
     lazy val logback = Dependencies.logback
