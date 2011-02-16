@@ -31,9 +31,9 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
 
   info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
 
-  def execute[T](urlGenerator: UrlGenerator, resultParser: ResultParser): List[Place] = {
+  def execute[T](query: GisgraphyQuery, resultParser: ResultParser): List[Place] = {
     try {
-      val result = httpClient.doWithResponse(new HttpGet(urlGenerator.toUrl(baseUrl)),
+      val result = httpClient.doWithResponse(new HttpGet(query.toUrl(baseUrl)),
         onSuccess = {r: HttpResponse =>
           assume(r.getEntity != null, "the entity cannot be null")
           resultParser.toPlaces(r.getEntity.getContent)
