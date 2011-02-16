@@ -17,6 +17,11 @@ class GisgraphyServerSpec extends Spec with ShouldMatchers {
       result.size should be === 7
     }
 
+    it("should not crash when query contains special characters") {
+      val result = gisgraphyServer.newFullTextQuery("los & angeles", Pagination(firstResult=1, numberOfResults=7)).execute
+      result.size should be > 0
+    }
+
     it("should perform geoloc query") {
       val result = gisgraphyServer.newGeolocalizationQuery(
         location=Places.France.IleDeFrance.Paris.paris,
