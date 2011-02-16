@@ -24,6 +24,12 @@ General README
 * no lazy alternate names fetcher for geolocresults (so, we have no alternate names for geoloc results)
 * uses FULL => slower than required. LONG does not return alternate names (contrary to gisgraphy documentation)
 
+= Low-priority Ideas for the future =
+* Entities: add hasSameIdentityAs, hasSameContentAs ?
+* add getDisplayName (ULocale) calls for Language, Country
+* googleMapUrl, yahooMapUrl ?
+
+
 Developer README
 ================
 = Dependencies =
