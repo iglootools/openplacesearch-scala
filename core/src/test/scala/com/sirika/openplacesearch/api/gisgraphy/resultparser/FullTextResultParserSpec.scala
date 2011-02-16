@@ -9,7 +9,7 @@ import api.ImplicitDependencyInjection._
 import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
 @RunWith(classOf[JUnitRunner])
-class FullTextResultSpec extends Spec with ShouldMatchers {
+class FullTextResultParserSpec extends Spec with ShouldMatchers {
 
   describe("toPlaces") {
     val FullTextSearchForParisWithFullStyle = Urls.toInputStreamSupplier("com/sirika/openplacesearch/api/gisgraphy/fullTextSearchForParisWithFullStyle.xml")

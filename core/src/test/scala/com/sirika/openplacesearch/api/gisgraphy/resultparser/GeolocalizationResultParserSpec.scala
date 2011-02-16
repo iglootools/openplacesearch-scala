@@ -9,7 +9,7 @@ import api.ImplicitDependencyInjection._
 import com.sirika.commons.scala.io.{InputSupliers, Urls}
 
 @RunWith(classOf[JUnitRunner])
-class GeolocalizationResultSpec extends Spec with ShouldMatchers {
+class GeolocalizationResultParserSpec extends Spec with ShouldMatchers {
 
   describe("toPlaces") {
     val GeolocalizationResultNearParis = Urls.toInputStreamSupplier("com/sirika/openplacesearch/api/gisgraphy/geolocalizationNearParis.xml")
