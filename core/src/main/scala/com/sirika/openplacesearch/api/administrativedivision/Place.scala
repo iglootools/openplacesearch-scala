@@ -5,16 +5,29 @@ import com.vividsolutions.jts.geom.Point
 import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.feature._
 import com.ibm.icu.util.Currency
+import com.google.common.base.Objects
+
+object Place {
+  def apply(parentAdministrativeEntityProvider:ParentAdministrativeEntityProvider,
+            featureGeographyProvider: FeatureGeographyProvider,
+            featureNameProvider: FeatureNameProvider,
+            stableIdProvider: StableIdProvider): Place = {
+    new Place(
+      parentAdministrativeEntityProvider = parentAdministrativeEntityProvider,
+      featureGeographyProvider = featureGeographyProvider,
+      featureNameProvider = featureNameProvider,
+      stableIdProvider = stableIdProvider)
+  }
+}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class Place(
-                        protected[this] val parentAdministrativeEntityProvider:ParentAdministrativeEntityProvider,
-                        protected[this] val featureGeographyProvider: FeatureGeographyProvider,
-                        protected[this] val featureNameProvider: FeatureNameProvider,
-                        protected[this] val stableIdProvider: StableIdProvider)
+final class Place(protected[this] val parentAdministrativeEntityProvider:ParentAdministrativeEntityProvider,
+                  protected[this] val featureGeographyProvider: FeatureGeographyProvider,
+                  protected[this] val featureNameProvider: FeatureNameProvider,
+                  protected[this] val stableIdProvider: StableIdProvider)
   extends FeatureGeographyProvider
   with AdministrativeEntity
   with StableIdProvider
@@ -49,4 +62,16 @@ final case class Place(
 
   // CurrencyProvider
   def currency: Option[Currency] = country.currency
+
+  override def hashCode(): Int = Objects.hashCode(stableId)
+
+  override def equals(other: Any): Boolean = other match {
+    case p: Place if Objects.equal(this.stableId, p.stableId) => true
+    case _ => false
+  }
+
+  override def toString(): String = Objects.toStringHelper(this)
+    .add("name", name)
+    .add("stableId", stableId)
+    .toString
 }

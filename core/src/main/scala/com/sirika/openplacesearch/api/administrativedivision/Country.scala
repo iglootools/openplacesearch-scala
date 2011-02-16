@@ -3,22 +3,42 @@ package com.sirika.openplacesearch.api.administrativedivision
 import com.sirika.openplacesearch.api.continent.Continent
 import com.ibm.icu.util.{Currency, ULocale}
 import com.sirika.openplacesearch.api.language.Language
-import org.joda.time.DateTimeZone
-import com.sirika.openplacesearch.api.feature.{FeatureNameProvider,LocalizedName, PopulationProvider, TimeZoneProvider}
+import com.sirika.openplacesearch.api.feature.{FeatureNameProvider,LocalizedName}
 import com.google.common.base.Objects
+
+object Country {
+  def apply(isoCountryCode: IsoCountryCode,
+            continent: Continent,
+            featureNameProvider: FeatureNameProvider,
+            currency: Option[Currency] = None,
+            fipsCountryCode: FipsCountryCode = FipsCountryCode(),
+            countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),
+            countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation())
+           (implicit administrativeDivisionRepository: AdministrativeDivisionRepository): Country = {
+    new Country(
+      isoCountryCode=isoCountryCode,
+      continent=continent,
+      featureNameProvider=featureNameProvider,
+      currency=currency,
+      fipsCountryCode=fipsCountryCode,
+      countryAdministrativeInformation=countryAdministrativeInformation,
+      countryGeographicInformation=countryGeographicInformation)
+  }
+
+}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-final case class Country(val isoCountryCode: IsoCountryCode,
-                         val continent: Continent,
-                         val featureNameProvider: FeatureNameProvider,
-                         val currency: Option[Currency] = None,
-                         val fipsCountryCode: FipsCountryCode = FipsCountryCode(),
-                         val countryAdministrativeInformation: CountryAdministrativeInformationProvider = CountryAdministrativeInformation(),  //private[this] : remove when deleting case class
-                         val countryGeographicInformation: CountryGeographicInformationProvider = CountryGeographicInformation()) //private[this] : remove when deleting case class
-                        (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository)
+final class Country(val isoCountryCode: IsoCountryCode,
+                    val continent: Continent,
+                    val featureNameProvider: FeatureNameProvider,
+                    val currency: Option[Currency] = None,
+                    val fipsCountryCode: FipsCountryCode = FipsCountryCode(),
+                    private[this] val countryAdministrativeInformation: CountryAdministrativeInformationProvider,
+                    private[this] val countryGeographicInformation: CountryGeographicInformationProvider)
+                   (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository)
 
   extends CountryAdministrativeInformationProvider
   with AdministrativeEntity
@@ -56,7 +76,13 @@ final case class Country(val isoCountryCode: IsoCountryCode,
   override def hashCode(): Int = Objects.hashCode(isoCountryCode)
 
   override def equals(other: Any): Boolean = other match {
-    case Country(`isoCountryCode`, _, _, _, _, _, _) => true
+    case c: Country if Objects.equal(this.isoCountryCode, c.isoCountryCode) => true
     case _ => false
   }
+
+  override def toString(): String = Objects.toStringHelper(this)
+    .add("name", name)
+    .add("alpha2Code", isoCountryCode.alpha2Code)
+    .add("alpha3Code", isoCountryCode.alpha3Code)
+    .toString
 }

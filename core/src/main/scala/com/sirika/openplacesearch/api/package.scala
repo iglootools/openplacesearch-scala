@@ -17,8 +17,11 @@ package object api {
 
   // administrativedivision
   type AdministrativeDivision = api.administrativedivision.AdministrativeDivision
+  val AdministrativeDivision = api.administrativedivision.AdministrativeDivision
   type Country = api.administrativedivision.Country
+  val Country = api.administrativedivision.Country
   type Place = api.administrativedivision.Place
+  val Place = api.administrativedivision.Place
 
   type FipsCountryCode = api.administrativedivision.FipsCountryCode
   type IsoCountryCode = api.administrativedivision.IsoCountryCode

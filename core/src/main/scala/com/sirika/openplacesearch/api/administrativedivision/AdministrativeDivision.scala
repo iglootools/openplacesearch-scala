@@ -4,16 +4,28 @@ import com.sirika.openplacesearch.api.language.Language
 import com.sirika.openplacesearch.api.feature.{FeatureNameProvider, LocalizedName, ParentAdministrativeEntityProvider}
 import com.google.common.base.{Objects}
 
+object AdministrativeDivision {
+  def apply(code: String,
+            featureNameProvider: FeatureNameProvider,
+            parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider)
+           (implicit administrativeDivisionRepository: AdministrativeDivisionRepository): AdministrativeDivision = {
+    new AdministrativeDivision(
+      code = code,
+      featureNameProvider = featureNameProvider,
+      parentAdministrativeEntityProvider = parentAdministrativeEntityProvider)
+  }
+}
+
 /**
  * An Administrative Division
  * <p>The code is unique only among a given country </p>
  * @param code represents the <a href="http://en.wikipedia.org/wiki/List_of_FIPS_region_codes">FIPS code</a> for US states.
  * @author Sami Dalouche (sami.dalouche@gmail
  */
-final case class AdministrativeDivision(val code: String,
-                                        val featureNameProvider: FeatureNameProvider,
-                                        val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider)
-                                       (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository) extends AdministrativeEntity {
+final class AdministrativeDivision(val code: String,
+                                   val featureNameProvider: FeatureNameProvider,
+                                   val parentAdministrativeEntityProvider: ParentAdministrativeEntityProvider)
+                                  (implicit val administrativeDivisionRepository: AdministrativeDivisionRepository) extends AdministrativeEntity {
   country match {
     case c: Country => // ok
     case _ => throw new IllegalArgumentException("parentAdministrativeEntityProvider should have a country in its hierarchy")
@@ -50,5 +62,8 @@ final case class AdministrativeDivision(val code: String,
     case _ => false
   }
 
-
+  override def toString(): String = Objects.toStringHelper(this)
+    .add("parent", parentAdministrativeEntity)
+    .add("code", code)
+    .toString
 }
