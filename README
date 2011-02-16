@@ -62,11 +62,10 @@ OpenPlaceSearch depends on a number of libraries :
 * git commit -m "updated the reference data"
 
 
-= Import as an eclipse project =
+= Import as an idea project =
 
-* setup SbtEclipsify : http://blog.xebia.fr/2010/05/11/configurer-vos-projets-sbt-pour-eclipse-ou-intellij-idea/
-* sbt eclipse
-* import as an existing eclipse project
+* sbt idea 
+* import the project under intellij
 
 
 Other interesting datasources that could be helpful
