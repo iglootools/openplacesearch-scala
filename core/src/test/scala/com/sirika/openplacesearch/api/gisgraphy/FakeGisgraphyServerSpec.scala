@@ -39,6 +39,13 @@ class FakeGisgraphyServerSpec extends Spec with ShouldMatchers {
       val results = gisgraphyServer.newGeolocalizationQuery(Places.UnitedStates.California.LosAngelesCounty.losAngeles, 50000).execute
       results.size should be === 0
     }
+
+    it("should return only the requested results") {
+      val thirdResultFromParis = gisgraphyServer.newFullTextQuery("Paris").execute(2)
+      val results = gisgraphyServer.newFullTextQuery("Paris", Pagination(firstResult = 3, numberOfResults = 5)).execute
+      results.size should be === 5
+      results(0) should be === thirdResultFromParis
+    }
   }
 
 }
