@@ -28,7 +28,21 @@ General README
 * Entities: add hasSameIdentityAs, hasSameContentAs ?
 * add getDisplayName (ULocale) calls for Language, Country
 * googleMapUrl, yahooMapUrl ?
+* Fetch lookup data from the internet (rather than classpath)
+* replace static language names and country names with calls to ICU4J ULocale + give option to translate to other languages
+* replace currency with information from ICU4J locale (or CLDR)
+* Find a source of phone prefixes for cities
 
+* Create an OSM-based (+ geonames ?) Place search service
+** Extract Administrative Divisions hierarchy
+** Extract Administrative Divisions boundaries
+** Extract City names
+** Extract City boundaries
+** Find a way to map the cities to their timezone
+** Extract interesting amenities (metro, bus, grocery stores, ...)
+** Map Geonames ADMs to OSM Nodes, ways and relations
+** Map Geonames IDs to OSM place nodes
+** Find a way to refer to stable OSM node identifiers...
 
 Developer README
 ================
