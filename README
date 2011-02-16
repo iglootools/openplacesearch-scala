@@ -23,6 +23,8 @@ General README
 * childAdministrativeDivisions() returns all children. No way to add additional filters. 
 * no lazy alternate names fetcher for geolocresults (so, we have no alternate names for geoloc results)
 * uses FULL => slower than required. LONG does not return alternate names (contrary to gisgraphy documentation)
+* we do not support the weird family language codes, so we are ignoring the alternate names that rely on these language codes
+
 
 = Low-priority Ideas for the future =
 * Entities: add hasSameIdentityAs, hasSameContentAs ?

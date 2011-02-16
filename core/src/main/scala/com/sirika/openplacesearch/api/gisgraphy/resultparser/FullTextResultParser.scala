@@ -71,7 +71,9 @@ protected[gisgraphy] final class FullTextResultParser(implicit private[this] val
     (root \ "arr").filter{n => (n \ "@name").text.startsWith("name_alternate_")}.flatMap{n =>
       val language = (n \ "@name").text.stripPrefix("name_alternate_").toLowerCase match {
         case alpha2 if alpha2.size == 2 => Some(languageRepository.getByAlpha2Code(alpha2))
-        case alpha3 if alpha3.size == 3 => Some(languageRepository.getByAlpha3Code(alpha3))
+        case alpha3 if alpha3.size == 3 =>
+          // we do not support the weird family language codes, so we are just going to ignore these languages for now
+          languageRepository.maybeGetByAlpha3Code(alpha3)
         case _ => // we ignore all alternate names that are not ISO languages (airport codes, etc)
           None
       }
