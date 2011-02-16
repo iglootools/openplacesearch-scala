@@ -1,4 +1,4 @@
-package com.sirika.openplacesearch.api.gisgraphy.http
+package com.sirika.openplacesearch.api.gisgraphy
 
 import org.apache.http.client.HttpClient
 import com.sirika.hchelpers.scala._

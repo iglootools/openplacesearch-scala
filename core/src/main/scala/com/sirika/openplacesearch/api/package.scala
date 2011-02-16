@@ -65,7 +65,7 @@ package object api {
   val Pagination = api.gisgraphy.Pagination
   type GisgraphyException = api.gisgraphy.GisgraphyException
 
-  val HttpGisgraphyServer = api.gisgraphy.http.HttpGisgraphyServer
+  val HttpGisgraphyServer = api.gisgraphy.HttpGisgraphyServer
 
   // language
   type Language = api.language.Language
