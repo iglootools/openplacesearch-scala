@@ -15,7 +15,7 @@ $(dirname $0)/download
 # process the data
 mkdir -p $TARGET_DIRECTORY
 cd $PROJECT_DIRECTORY
-sbt run
+sbt "project openplacesearch-updater" run
 
 # copy the files to the classpath
 cp -fv $DOWNLOAD_DIRECTORY/admin1CodesASCII.txt $PROJECT_DATA/admin1CodesASCII

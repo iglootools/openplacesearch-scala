@@ -19,6 +19,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
   override def parallelExecution = true
 
   lazy val core = project("core", "openplacesearch-core", new Core(_))
+  lazy val updater = project("updater", "openplacesearch-updater", new Updater(_), core)
   lazy val integrationTests = project("integration-tests", "openplacesearch-integration-tests", new IntegrationTests(_), core)
 
 
@@ -75,6 +76,14 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     lazy val junit = Dependencies.junit
     lazy val scalaTest = Dependencies.scalaTest
     lazy val logback = Dependencies.logback
+  }
+
+  class Updater(info: ProjectInfo) extends DefaultProject(info) with Repositories with IdeaProject with Eclipsify{
+    def doNothing = task { None }
+    override def publishLocalAction = doNothing
+    override def deliverLocalAction = doNothing
+    override def publishAction = doNothing
+    override def deliverAction = doNothing
   }
 
 
