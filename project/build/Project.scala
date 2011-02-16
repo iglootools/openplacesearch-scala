@@ -70,7 +70,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     override def publishAction = doNothing
     override def deliverAction = doNothing
 
-    override def testOptions = TestFilter(s => false) :: super.testOptions.toList
+    override def testOptions = TestFilter(s => true) :: super.testOptions.toList
 
     // test dependencies
     lazy val junit = Dependencies.junit
