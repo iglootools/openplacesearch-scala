@@ -10,19 +10,6 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
   override def managedStyle = ManagedStyle.Maven
 
-  //override def packageDocsJar = defaultJarPath("-javadoc.jar")
-  //override def packageSrcJar= defaultJarPath("-sources.jar")
-//  val sourceArtifact = Artifact.sources(artifactID)                    s
-//  val docsArtifact = Artifact.javadoc(artifactID)
-  //
-
-//  override def packageDocsJar = defaultJarPath("-javadoc.jar")
-//  override def packageSrcJar= defaultJarPath("-sources.jar")
-
-
-  //val testArtifact = Artifact(artifactID, "jar", "jar", test)
-  //val testSrcArtifact = Artifact(artifactID, "src", "jar", test)
-
   override def pomExtra =
     <licenses>
       <license>
@@ -42,6 +29,8 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
   lazy val updater = project("updater", "openplacesearch-updater", new Updater(_), api)
   lazy val integrationTests = project("integration-tests", "openplacesearch-integration-tests", new IntegrationTests(_), api)
 
+
+
   object Dependencies {
     // test dependencies
     lazy val junit = "junit" % "junit" % "4.8.2" % "test" withSources()
@@ -53,8 +42,8 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
   class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
     //val docsArtifact = Artifact.javadoc("core")
-  //val sourceArtifact = Artifact.sources(artifactID)
-  //override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc)
+//    override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageDocs) //packageDocs,, packageSrc, packageTest, packageTestSrc,
+//    val sourceArtifact = Artifact.sources(artifactID)
 
     // commons
     lazy val jodaTime = "joda-time" % "joda-time" % "1.6.2" withSources()
