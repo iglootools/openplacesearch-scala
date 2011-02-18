@@ -41,7 +41,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
 
     // HTTP and REST
     lazy val HttpComponentsVersion = "4.1"
-    lazy val hcHelpers = "com.sirika.hchelpers" % "hchelpers-scala" % "0.9-SNAPSHOT" //withSources()
+    lazy val hcHelpers = "com.sirika.hchelpers" % "hchelpers-scala" % "0.9" withSources()
     lazy val httpComponentsClient = "org.apache.httpcomponents" % "httpclient" % HttpComponentsVersion withSources()
     lazy val httpComponentsMime = "org.apache.httpcomponents" % "httpmime" % HttpComponentsVersion withSources()
 
