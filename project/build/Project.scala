@@ -1,12 +1,47 @@
+import java.io.File
 import sbt._
 import de.element34.sbteclipsify._
 
-class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with IdeaProject {
-  trait Repositories {
-    //lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
-    lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
-    lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
-  }
+class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject with Eclipsify {
+  //lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
+  lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
+  lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
+  lazy val sirikaRepository = "Sirika Releases Repository" at "http://developers.sirika.com/maven2/releases/"
+
+  override def managedStyle = ManagedStyle.Maven
+
+  //override def packageDocsJar = defaultJarPath("-javadoc.jar")
+  //override def packageSrcJar= defaultJarPath("-sources.jar")
+//  val sourceArtifact = Artifact.sources(artifactID)                    s
+//  val docsArtifact = Artifact.javadoc(artifactID)
+  //
+
+//  override def packageDocsJar = defaultJarPath("-javadoc.jar")
+//  override def packageSrcJar= defaultJarPath("-sources.jar")
+
+
+  //val testArtifact = Artifact(artifactID, "jar", "jar", test)
+  //val testSrcArtifact = Artifact(artifactID, "src", "jar", test)
+
+  override def pomExtra =
+    <licenses>
+      <license>
+        <name>Apache 2</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+
+  // Publishing
+  lazy val keyFile: File = (Path.userHome / ".ssh" / "id_rsa").asFile
+  lazy val publishTo = Resolver.ssh("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/releases") as ("samokk", keyFile)
+
+  // Project Definitions
+  override def parallelExecution = true
+  lazy val api = project("api", "openplacesearch-scala-api", new Api(_))
+  lazy val updater = project("updater", "openplacesearch-updater", new Updater(_), api)
+  lazy val integrationTests = project("integration-tests", "openplacesearch-integration-tests", new IntegrationTests(_), api)
+
   object Dependencies {
     // test dependencies
     lazy val junit = "junit" % "junit" % "4.8.2" % "test" withSources()
@@ -16,20 +51,11 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     lazy val logback = "ch.qos.logback" % "logback-classic" % "0.9.27" % "test" // withSources()
   }
 
-  override def parallelExecution = true
+  class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
+    //val docsArtifact = Artifact.javadoc("core")
+  //val sourceArtifact = Artifact.sources(artifactID)
+  //override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc)
 
-  lazy val core = project("core", "openplacesearch-core", new Core(_))
-  lazy val updater = project("updater", "openplacesearch-updater", new Updater(_), core)
-  lazy val integrationTests = project("integration-tests", "openplacesearch-integration-tests", new IntegrationTests(_), core)
-
-
-  lazy val skipIntegrationTests = systemOptional[Boolean]("skipIntegrationTests", false).value
-  lazy val printit = task {
-    println("SKIP INTEGRATION TESTS: " + skipIntegrationTests)
-    None
-  }
-
-  class Core(info: ProjectInfo) extends DefaultProject(info) with Repositories with IdeaProject with Eclipsify {
     // commons
     lazy val jodaTime = "joda-time" % "joda-time" % "1.6.2" withSources()
     lazy val icu4j = "com.ibm.icu" % "icu4j" % "4.6" withSources()
@@ -63,13 +89,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     lazy val logback = Dependencies.logback
   }
 
-  class IntegrationTests(info: ProjectInfo) extends DefaultProject(info) with Repositories with IdeaProject with Eclipsify{
-    def doNothing = task { None }
-    override def publishLocalAction = doNothing
-    override def deliverLocalAction = doNothing
-    override def publishAction = doNothing
-    override def deliverAction = doNothing
-
+  class IntegrationTests(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
     override def testOptions = TestFilter(s => true) :: super.testOptions.toList
 
     // test dependencies
@@ -78,14 +98,14 @@ class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with
     lazy val logback = Dependencies.logback
   }
 
-  class Updater(info: ProjectInfo) extends DefaultProject(info) with Repositories with IdeaProject with Eclipsify{
-    def doNothing = task { None }
-    override def publishLocalAction = doNothing
-    override def deliverLocalAction = doNothing
-    override def publishAction = doNothing
-    override def deliverAction = doNothing
+  class Updater(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
   }
 
-
+  // Additional Tasks
+  lazy val skipIntegrationTests = systemOptional[Boolean]("skipIntegrationTests", false).value
+  lazy val printit = task {
+    println("SKIP INTEGRATION TESTS: " + skipIntegrationTests)
+    None
+  }
 
 }
