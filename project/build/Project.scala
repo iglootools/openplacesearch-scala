@@ -3,7 +3,7 @@ import de.element34.sbteclipsify._
 
 class Project(info: ProjectInfo) extends ParentProject(info) with Eclipsify with IdeaProject {
   trait Repositories {
-    lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
+    //lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
     lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
     lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
   }
