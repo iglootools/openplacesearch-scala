@@ -21,7 +21,8 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
   // Publishing
   lazy val keyFile: File = (Path.userHome / ".ssh" / "id_rsa").asFile
-  lazy val publishTo = Resolver.ssh("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/releases") as ("samokk", keyFile)
+  //lazy val publishTo = Resolver.ssh("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/releases") as ("samokk", keyFile)
+  lazy val publishTo = Resolver.sftp("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/internal") as ("samokk", keyFile)
 
   // Project Definitions
   override def parallelExecution = true
@@ -42,8 +43,18 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
   class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
     //val docsArtifact = Artifact.javadoc("core")
-//    override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageDocs) //packageDocs,, packageSrc, packageTest, packageTestSrc,
-//    val sourceArtifact = Artifact.sources(artifactID)
+    //override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc) //packageDocs,, packageSrc, packageTest, packageTestSrc,
+    //lazy val sourceArtifact = Artifact.sources(artifactID)
+
+    //override def packageDocsJar = defaultJarPath("-javadoc.jar")
+    override def packageSrcJar = defaultJarPath("-sources.jar")
+    override def packageTestJar = defaultJarPath("-tests.jar")
+    //override def packageTestSrcJar = defaultJarPath("-tests.jar")
+    lazy val sourceArtifact = Artifact.sources(artifactID)
+    lazy val testsArtifact = Artifact(artifactID, "tests")
+    //lazy val docsArtifact = Artifact.javadoc(artifactID)
+    override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc, packageTest) //packageDocs, packageTestSrc
+
 
     // commons
     lazy val jodaTime = "joda-time" % "joda-time" % "1.6.2" withSources()
