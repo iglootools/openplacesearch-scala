@@ -1,12 +1,11 @@
 import java.io.File
 import sbt._
-import de.element34.sbteclipsify._
 
-class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject with Eclipsify {
+class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
   lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
   lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
   lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
-  lazy val sirikaRepository = "Sirika Releases Repository" at "http://developers.sirika.com/maven2/releases/"
+  lazy val iglootoolsRepository = "Iglootools Releases Repository" at "http://developers.sirika.com/maven2/releases/"
 
   override def managedStyle = ManagedStyle.Maven
 
@@ -21,8 +20,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
   // Publishing
   lazy val keyFile: File = (Path.userHome / ".ssh" / "id_rsa").asFile
-  //lazy val publishTo = Resolver.ssh("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/releases") as ("samokk", keyFile)
-  lazy val publishTo = Resolver.sftp("Sirika maven2", "developers.sirika.com", "/srv/http/developers.sirika.com/maven2/internal") as ("samokk", keyFile)
+  lazy val publishTo = Resolver.sftp("Iglootools maven2", "iglootools.org", "/srv/http/iglootools.org/maven2/internal") as ("samokk", keyFile)
 
   // Project Definitions
   override def parallelExecution = true
@@ -41,7 +39,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
     lazy val logback = "ch.qos.logback" % "logback-classic" % "0.9.27" % "test" // withSources()
   }
 
-  class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
+  class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject  {
     //val docsArtifact = Artifact.javadoc("core")
     //override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc) //packageDocs,, packageSrc, packageTest, packageTestSrc,
     //lazy val sourceArtifact = Artifact.sources(artifactID)
@@ -89,7 +87,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
     lazy val logback = Dependencies.logback
   }
 
-  class IntegrationTests(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
+  class IntegrationTests(info: ProjectInfo) extends DefaultProject(info) with IdeaProject {
     override def testOptions = TestFilter(s => true) :: super.testOptions.toList
 
     // test dependencies
@@ -98,7 +96,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
     lazy val logback = Dependencies.logback
   }
 
-  class Updater(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with Eclipsify {
+  class Updater(info: ProjectInfo) extends DefaultProject(info) with IdeaProject{
   }
 
   // Additional Tasks
