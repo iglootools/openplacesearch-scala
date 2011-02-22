@@ -3,7 +3,7 @@ import sbt._
 import de.element34.sbteclipsify._
 
 class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject with Eclipsify {
-  //lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
+  lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
   lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
   lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
   lazy val sirikaRepository = "Sirika Releases Repository" at "http://developers.sirika.com/maven2/releases/"
@@ -67,7 +67,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject wi
 
     // HTTP and REST
     lazy val HttpComponentsVersion = "4.1"
-    lazy val hcHelpers = "com.sirika.hchelpers" % "hchelpers-scala" % "0.9" withSources()
+    lazy val hcHelpers = "org.iglootools.hchelpers" % "hchelpers-scala" % "0.10-SNAPSHOT" //withSources()
     lazy val httpComponentsClient = "org.apache.httpcomponents" % "httpclient" % HttpComponentsVersion withSources()
     lazy val httpComponentsMime = "org.apache.httpcomponents" % "httpmime" % HttpComponentsVersion withSources()
 

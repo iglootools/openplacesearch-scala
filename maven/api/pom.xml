@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>openplacesearch-scala-parent</artifactId>
-		<groupId>com.sirika.openplacesearch</groupId>
+		<groupId>org.iglootools.openplacesearch</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sirika.openplacesearch</groupId>
+	<groupId>org.iglootools.openplacesearch</groupId>
 	<artifactId>openplacesearch-scala-api</artifactId>
 	<name>OpenPlaceSearch Scala API</name>
 	<version>0.1-SNAPSHOT</version>
@@ -20,7 +20,7 @@
 			<version>${guava.version}</version> </dependency> -->
 
 		<dependency>
-			<groupId>com.sirika.hchelpers</groupId>
+			<groupId>org.iglootools.hchelpers</groupId>
 			<artifactId>hchelpers-core</artifactId>
 			<version>${hchelpers.version}</version>
 		</dependency>

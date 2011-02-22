@@ -4,7 +4,7 @@
 set -e
 
 PROJECT_DIRECTORY=$(dirname $0)/..
-PROJECT_DATA=$PROJECT_DIRECTORY/core/src/main/resources/com/sirika/openplacesearch/api/referencedata
+PROJECT_DATA=$PROJECT_DIRECTORY/core/src/main/resources/org/iglootools/openplacesearch/api/referencedata
 
 DOWNLOAD_DIRECTORY=$(dirname $0)/downloads
 TARGET_DIRECTORY=$(dirname $0)/target

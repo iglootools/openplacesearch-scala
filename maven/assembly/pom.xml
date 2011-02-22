@@ -3,18 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>openplacesearch-scala-parent</artifactId>
-		<groupId>com.sirika.openplacesearch</groupId>
+		<groupId>org.iglootools.openplacesearch</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sirika.openplacesearch</groupId>
+	<groupId>org.iglootools.openplacesearch</groupId>
 	<artifactId>openplacesearch-scala-assembly</artifactId>
 	<packaging>pom</packaging>
 	<name>OpenPlaceSearch Scala Assembly</name>
 	<version>0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
-			<groupId>com.sirika.openplacesearch</groupId>
+			<groupId>org.iglootools.openplacesearch</groupId>
 			<artifactId>openplacesearch-scala-api</artifactId>
 			<version>0.1-SNAPSHOT</version>
 			<scope>compile</scope>

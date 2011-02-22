@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-rm -rf ~/.ivy2/cache/com.sirika.hchelpers/
+rm -rf ~/.ivy2/cache/org.iglootools.hchelpers/
 sbt clean-lib
 sbt update
 sbt idea
