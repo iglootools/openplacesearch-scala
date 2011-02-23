@@ -6,7 +6,7 @@ import org.iglootools.openplacesearch.api.feature._
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-protected[api] final case class SimpleFeatureNameProvider(val defaultName: String,
+protected[openplacesearch] final case class SimpleFeatureNameProvider(val defaultName: String,
                                            val parentAdministrativeEntity:Option[AdministrativeEntity],
                                            val names: Iterable[LocalizedName] = List())
   extends FeatureNameProvider with ParentAdministrativeEntityProvider {

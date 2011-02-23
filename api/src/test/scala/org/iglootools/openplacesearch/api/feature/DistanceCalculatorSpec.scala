@@ -5,8 +5,8 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import com.vividsolutions.jts.geom.Point
-import org.iglootools.openplacesearch.api.administrativedivision.Places
 import javax.measure.unit.SI
+import org.iglootools.openplacesearch.samples.Places
 
 @RunWith(classOf[JUnitRunner])
 class DistanceCalculatorSpec extends Spec with ShouldMatchers {

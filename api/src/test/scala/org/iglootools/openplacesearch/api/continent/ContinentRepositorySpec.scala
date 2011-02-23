@@ -4,7 +4,7 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import org.iglootools.openplacesearch.api.continent.Continents._
+import org.iglootools.openplacesearch.samples.Continents._
 import org.iglootools.openplacesearch.api
 
 @RunWith(classOf[JUnitRunner])

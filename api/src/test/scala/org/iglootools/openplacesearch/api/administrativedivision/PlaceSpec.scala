@@ -4,6 +4,7 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
+import org.iglootools.openplacesearch.samples.{Countries, Places}
 
 @RunWith(classOf[JUnitRunner])
 class PlaceSpec extends Spec with ShouldMatchers {

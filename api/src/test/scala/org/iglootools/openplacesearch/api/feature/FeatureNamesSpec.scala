@@ -4,7 +4,8 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import org.iglootools.openplacesearch.api.language.Languages
+import org.iglootools.openplacesearch.samples.Languages
+
 
 @RunWith(classOf[JUnitRunner])
 class FeatureNamesSpec extends Spec with ShouldMatchers {

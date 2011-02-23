@@ -1,8 +1,8 @@
-package org.iglootools.openplacesearch.api
+package org.iglootools.openplacesearch.samples
 
+import org.iglootools.openplacesearch.api._
 import administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
-import language._
-;
+import language.LanguageRepository
 
 object DummyImplicitDependencyInjection {
   implicit val countryRepository: CountryRepository = new CountryRepository {

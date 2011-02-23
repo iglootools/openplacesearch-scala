@@ -11,7 +11,7 @@ import org.iglootools.openplacesearch.api.feature.FeatureGeographyProvider
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
-protected[api] case class GisFeature(protected[this] val featureGeography: FeatureGeographyProvider,
+protected[openplacesearch] case class GisFeature(protected[this] val featureGeography: FeatureGeographyProvider,
                       protected[this] val geonamesFeature: GeonamesFeatureProvider,
                       protected[this] val featureNames: FeatureNames,
                       val parentAdministrativeEntity: Option[AdministrativeEntity] ) extends DistanceCalculator

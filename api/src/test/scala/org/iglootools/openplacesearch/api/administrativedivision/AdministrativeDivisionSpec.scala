@@ -4,6 +4,7 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
+import org.iglootools.openplacesearch.samples.AdministrativeDivisions
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeDivisionSpec extends Spec with ShouldMatchers {

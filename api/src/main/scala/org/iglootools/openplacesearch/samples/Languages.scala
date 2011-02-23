@@ -1,4 +1,6 @@
-package org.iglootools.openplacesearch.api.language
+package org.iglootools.openplacesearch.samples
+
+import org.iglootools.openplacesearch.api.language.Language
 
 object Languages {
   def french(): Language = Language(name = "French", alpha3Code = "fra", alpha2Code = Some("fr"))

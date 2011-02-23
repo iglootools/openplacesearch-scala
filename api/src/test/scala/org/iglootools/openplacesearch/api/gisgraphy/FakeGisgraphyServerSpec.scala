@@ -5,7 +5,8 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import org.iglootools.commons.scala.io.{InputSupliers, Urls}
-import org.iglootools.openplacesearch.api.administrativedivision.Places
+import org.iglootools.openplacesearch.samples.Places
+
 
 @RunWith(classOf[JUnitRunner])
 class FakeGisgraphyServerSpec extends Spec with ShouldMatchers {

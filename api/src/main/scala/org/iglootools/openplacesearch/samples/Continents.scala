@@ -1,4 +1,6 @@
-package org.iglootools.openplacesearch.api.continent
+package org.iglootools.openplacesearch.samples
+
+import org.iglootools.openplacesearch.api.continent.Continent
 
 object Continents {
   def europe = Continent(geonamesCode="EU", name="Europe")

@@ -1,6 +1,7 @@
-package org.iglootools.openplacesearch.api.administrativedivision
+package org.iglootools.openplacesearch.samples
 
-import org.iglootools.openplacesearch.api.DummyImplicitDependencyInjection._
+import org.iglootools.openplacesearch.samples.DummyImplicitDependencyInjection._
+import org.iglootools.openplacesearch.api.administrativedivision.{SimpleParentAdministrativeEntityProvider, SimpleFeatureNameProvider, AdministrativeDivision}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

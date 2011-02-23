@@ -1,13 +1,13 @@
 package org.iglootools.openplacesearch.api.language
 
-import org.iglootools.commons.scala.SanityChecks
 import org.scalatest.junit.JUnitRunner
 
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
-import org.iglootools.openplacesearch.api.language.Languages._
+import org.iglootools.openplacesearch.samples.Languages._
 import org.iglootools.openplacesearch.api.language._
+import org.iglootools.commons.scala.{SanityChecks}
 
 @RunWith(classOf[JUnitRunner])
 class LanguageSpec extends Spec with ShouldMatchers {

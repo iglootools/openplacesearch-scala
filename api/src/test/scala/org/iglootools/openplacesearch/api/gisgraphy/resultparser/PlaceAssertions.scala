@@ -1,6 +1,7 @@
 package org.iglootools.openplacesearch.api.gisgraphy.resultparser
 import org.scalatest.matchers.ShouldMatchers
-import org.iglootools.openplacesearch.api.administrativedivision.{AdministrativeDivisions, Places, Place}
+import org.iglootools.openplacesearch.api.administrativedivision.{Place}
+import org.iglootools.openplacesearch.samples.{Places, AdministrativeDivisions}
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

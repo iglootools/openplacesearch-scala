@@ -6,7 +6,6 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import org.iglootools.openplacesearch.api._
 import org.iglootools.openplacesearch.api.ImplicitDependencyInjection._
-import org.iglootools.openplacesearch.api.administrativedivision.Places
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeDivisionsSpec extends Spec with ShouldMatchers {

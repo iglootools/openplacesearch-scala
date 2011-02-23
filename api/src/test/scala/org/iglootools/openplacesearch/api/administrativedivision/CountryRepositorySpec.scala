@@ -5,7 +5,7 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import org.iglootools.openplacesearch.api
-import api.language.{Languages}
+import org.iglootools.openplacesearch.samples.{Languages, Countries}
 
 @RunWith(classOf[JUnitRunner])
 class CountryRepositorySpec extends Spec with ShouldMatchers {

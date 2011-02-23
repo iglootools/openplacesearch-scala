@@ -1,8 +1,9 @@
-package org.iglootools.openplacesearch.api.administrativedivision
+package org.iglootools.openplacesearch.samples
 
-import org.iglootools.openplacesearch.api.continent.Continents
 import com.ibm.icu.util.{ULocale, Currency}
-import org.iglootools.openplacesearch.api.DummyImplicitDependencyInjection._
+import org.iglootools.openplacesearch.samples.DummyImplicitDependencyInjection._
+import org.iglootools.openplacesearch.api.continent._
+import org.iglootools.openplacesearch.api.administrativedivision._
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)

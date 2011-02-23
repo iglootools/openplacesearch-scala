@@ -5,7 +5,7 @@ import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import org.iglootools.openplacesearch.api.administrativedivision.DummyAdministrativeEntities._
-
+import org.iglootools.openplacesearch.samples.{Countries, AdministrativeDivisions}
 
 @RunWith(classOf[JUnitRunner])
 class AdministrativeEntitySpec extends Spec with ShouldMatchers {

@@ -1,9 +1,10 @@
-package org.iglootools.openplacesearch.api.administrativedivision
+package org.iglootools.openplacesearch.samples
 
 import org.iglootools.openplacesearch.api.geonames._
 import org.iglootools.openplacesearch.api.feature._
 import org.joda.time.DateTimeZone
 import org.iglootools.commons.scala.jts.JtsPoint
+import org.iglootools.openplacesearch.api.administrativedivision.Place
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
