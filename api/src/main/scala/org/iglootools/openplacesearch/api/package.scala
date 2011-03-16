@@ -1,8 +1,8 @@
 package org.iglootools.openplacesearch
 
-import api.administrativedivision.{AdministrativeDivisionModule, AdministrativeDivisionRepository, CountryRepository}
+import api.administrativedivision.{AdministrativeDivisionModule}
 import api.continent.ContinentModule
-import api.language.{LanguageModule, LanguageRepository}
+import api.language.{LanguageModule}
 
 import com.google.inject.Guice
 
@@ -18,8 +18,11 @@ package object api {
   // administrativedivision
   type AdministrativeDivision = api.administrativedivision.AdministrativeDivision
   val AdministrativeDivision = api.administrativedivision.AdministrativeDivision
+  type AdministrativeDivisionRepository = api.administrativedivision.AdministrativeDivisionRepository
+
   type Country = api.administrativedivision.Country
   val Country = api.administrativedivision.Country
+  type CountryRepository = api.administrativedivision.CountryRepository
   type Place = api.administrativedivision.Place
   val Place = api.administrativedivision.Place
 
@@ -69,6 +72,7 @@ package object api {
 
   // language
   type Language = api.language.Language
+  type LanguageRepository = api.language.LanguageRepository
 }
 
 
