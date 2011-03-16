@@ -74,6 +74,8 @@ package object api {
   type GisgraphyException = api.gisgraphy.GisgraphyException
 
   val HttpGisgraphyServer = api.gisgraphy.HttpGisgraphyServer
+  type FakeGisgraphyServer = api.gisgraphy.FakeGisgraphyServer
+  val FakeGisgraphyServer = api.gisgraphy.FakeGisgraphyServer
 
   // language
   type Language = api.language.Language
