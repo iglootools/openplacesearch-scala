@@ -64,6 +64,11 @@ package object api {
   // gisgraphy
   type GisgraphyServer = api.gisgraphy.GisgraphyServer
   type GisgraphyQuery = api.gisgraphy.GisgraphyQuery
+  //type FullTextQuery = api.gisgraphy.FullTextQuery
+  val FullTextQuery = api.gisgraphy.FullTextQuery
+  //type GeolocalizationQuery = api.gisgraphy.GeolocalizationQuery
+  val GeolocalizationQuery = api.gisgraphy.GeolocalizationQuery
+
   type Pagination = api.gisgraphy.Pagination
   val Pagination = api.gisgraphy.Pagination
   type GisgraphyException = api.gisgraphy.GisgraphyException

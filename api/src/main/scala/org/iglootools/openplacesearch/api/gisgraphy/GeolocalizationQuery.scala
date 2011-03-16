@@ -5,7 +5,7 @@ import resultparser.{ResultParser, GeolocalizationResultParser}
 import org.iglootools.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
 import org.iglootools.openplacesearch.api.language.LanguageRepository
 
-protected[gisgraphy] final case class GeolocalizationQuery(val location: LocationProvider,
+final case class GeolocalizationQuery(val location: LocationProvider,
                                                       val radiusInMeters: Int,
                                                       val pagination: Pagination)
                                                      (implicit protected[this] val gisgraphyServer: GisgraphyServer,

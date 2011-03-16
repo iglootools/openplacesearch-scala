@@ -6,7 +6,7 @@ import org.iglootools.openplacesearch.api.language.LanguageRepository
 import java.net.URLEncoder
 import com.google.common.base.Charsets
 
-protected[gisgraphy] final case class FullTextQuery(val query: String,
+final case class FullTextQuery(val query: String,
                                                val pagination: Pagination)
                                               (implicit protected[this] val gisgraphyServer: GisgraphyServer,
                                                implicit protected[this] val countryRepository: CountryRepository,
