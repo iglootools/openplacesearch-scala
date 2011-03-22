@@ -28,6 +28,7 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
   require(Option(baseUrl) exists (_.nonEmpty), "baseUrl is required")
   require(httpClient != null, "httpClient is required")
   implicit val gisgraphyServer: GisgraphyServer = this
+  val stableIDMapper = new GisgraphyStableIDMapper
 
   info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
 

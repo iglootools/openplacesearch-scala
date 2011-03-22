@@ -28,6 +28,7 @@ final class FakeGisgraphyServer(private[this] val resultForQuery: (GisgraphyQuer
                                 implicit private[this] val languageRepository: LanguageRepository)
   extends GisgraphyServer with Logging {
   implicit val gisgraphyServer: GisgraphyServer = this
+  val stableIDMapper = new GisgraphyStableIDMapper
 
   def execute[T](query: GisgraphyQuery, resultParser: ResultParser): List[Place] = {
     val inputSupplierOption = mapQueryToInputSupplier(query)

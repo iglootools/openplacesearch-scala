@@ -26,6 +26,14 @@ class GisgraphyServerSpec extends Spec with ShouldMatchers {
       result.size should be === 7
     }
 
+    it("should find by ID") {
+      gisgraphyServer.getById("2988507") should be === Places.France.IleDeFrance.Paris.paris
+    }
+
+    it("should find by stable ID") {
+      gisgraphyServer.getById("paris") should be === Places.France.IleDeFrance.Paris.paris
+    }
+
     it("should not crash when query contains special characters") {
       val result = gisgraphyServer.newFullTextQuery("los & angeles", Pagination(firstResult=1, numberOfResults=7)).execute
       result.size should be > 0
