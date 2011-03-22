@@ -13,6 +13,7 @@ protected[api] object ReferenceData {
   val FirstOrderAdministrativeDivisionsPath = pkgPath + "/admin1CodesASCII"
   val SecondOrderAdministrativeDivisionsPath = pkgPath + "/admin2Codes"
   val ExtractedAlternateNamesPath = pkgPath + "/extractedAlternateNames"
+  val GeonamesIDAliases = pkgPath + "/geonames-aliases.xml"
   def Languages = Urls.toInputReaderSupplier(ReferenceData.LanguagesPath)
   def Countries = Urls.toInputReaderSupplier(ReferenceData.CountriesPath)
   def FirstOrderAdministrativeDivisions = Urls.toInputReaderSupplier(ReferenceData.FirstOrderAdministrativeDivisionsPath)

@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<id-aliases>
+    <country code="AD">
+        <alias from="3041563" to="andorra-la-vella"/>
+    </country>
+    <country code="AE">
+        <alias from="292968" to="abu-dhabi"/>
+    </country>
+    <country code="AF">
+        <alias from="1138958" to="kabul"/>
+    </country>
+    <country code="AG">
+        <alias from="3576022" to="saint-johns"/>
+    </country>
+    <country code="AI">
+        <alias from="3573374" to="the-valley"/>
+    </country>
+    <country code="AL">
+        <alias from="3183875" to="tirana"/>
+    </country>
+    <country code="AM">
+        <alias from="616052" to="yerevan"/>
+    </country>
+    <country code="AO">
+        <alias from="2240449" to="luanda"/>
+    </country>
+    <country code="AR">
+        <alias from="3435910" to="buenos-aires"/>
+    </country>
+    <country code="AS">
+        <alias from="5881576" to="pago-pago"/>
+    </country>
+    <country code="AT">
+        <alias from="2761369" to="vienna"/>
+    </country>
+    <country code="AU">
+        <alias from="2172517" to="canberra"/>
+    </country>
+    <country code="AW">
+        <alias from="3577154" to="oranjestad"/>
+    </country>
+    <country code="AX">
+        <alias from="3041732" to="mariehamn"/>
+    </country>
+    <country code="AZ">
+        <alias from="587084" to="baku"/>
+    </country>
+    <country code="BA">
+        <alias from="3191281" to="sarajevo"/>
+    </country>
+    <country code="BB">
+        <alias from="3374036" to="bridgetown"/>
+    </country>
+    <country code="BD">
+        <alias from="1185241" to="dhaka"/>
+    </country>
+    <country code="BE">
+        <alias from="2800866" to="brussels"/>
+    </country>
+    <country code="BF">
+        <alias from="2357048" to="ouagadougou"/>
+    </country>
+    <country code="BG">
+        <alias from="727011" to="sofia"/>
+    </country>
+    <country code="BH">
+        <alias from="290340" to="manama"/>
+    </country>
+    <country code="BI">
+        <alias from="425378" to="bujumbura"/>
+    </country>
+    <country code="BJ">
+        <alias from="2392087" to="porto-novo"/>
+    </country>
+    <country code="BL">
+        <alias from="3579132" to="gustavia"/>
+    </country>
+    <country code="BM">
+        <alias from="2190324" to="hamilton-BM"/>
+    </country>
+    <country code="BN">
+        <alias from="1820906" to="bandar-seri-begawan"/>
+    </country>
+    <country code="BO">
+        <alias from="3911925" to="la-paz"/>
+    </country>
+    <country code="BR">
+        <alias from="3469058" to="brasilia"/>
+    </country>
+    <country code="BS">
+        <alias from="3571824" to="nassau"/>
+    </country>
+    <country code="BT">
+        <alias from="1252416" to="thimphu"/>
+    </country>
+    <country code="BW">
+        <alias from="933773" to="gaborone"/>
+    </country>
+    <country code="BY">
+        <alias from="625144" to="minsk"/>
+    </country>
+    <country code="BZ">
+        <alias from="3582672" to="belmopan"/>
+    </country>
+    <country code="CA">
+        <administrative-division code="AB">
+            <alias from="5892532" to="banff-AB-CA"/>
+            <alias from="5914894" to="canmore"/>
+            <alias from="5913490" to="calgary"/>
+            <alias from="5946768" to="edmonton"/>
+            <alias from="6155033" to="st-albert-AB-CA"/>
+            <alias from="6157989" to="strathcona"/>
+            <alias from="5955895" to="fort-mcmurray"/>
+            <alias from="5964347" to="grande-prairie"/>
+            <alias from="6053154" to="lethbridge-AB-CA"/>
+            <alias from="6058024" to="lloydminster"/>
+            <alias from="6071618" to="medicine-hat"/>
+            <alias from="6118158" to="red-deer"/>
+        </administrative-division>
+        <administrative-division code="BC">
+            <alias from="5931800" to="cranbrook-BC-CA"/>
+            <alias from="5881791" to="abbotsford"/>
+            <alias from="5921357" to="chilliwack"/>
+            <alias from="6049429" to="langley"/>
+            <alias from="5989045" to="kamloops"/>
+            <alias from="5990579" to="kelowna"/>
+            <alias from="6101141" to="penticton"/>
+            <alias from="6085772" to="nanaimo"/>
+            <alias from="6086871" to="nelson-BC-CA"/>
+            <alias from="6113365" to="prince-george"/>
+            <alias from="6173331" to="vancouver"/>
+            <alias from="6173864" to="vernon-BC-CA"/>
+            <alias from="6174041" to="victoria-BC-CA"/>
+            <alias from="6180144" to="whistler"/>
+        </administrative-division>
+
+        <administrative-division code="PE">
+            <alias from="5920288" to="charlottetown"/>
+            <alias from="6159244" to="summerside-PE-CA"/>
+        </administrative-division>
+
+        <administrative-division code="MB">
+            <alias from="5907896" to="brandon-MB-CA"/>
+            <alias from="6111529" to="portage-la-prairie"/>
+            <alias from="5954718" to="flin-flon"/>
+            <alias from="6165406" to="thompson-MB-CA"/>
+            <alias from="6183235" to="winnipeg"/>
+        </administrative-division>
+
+        <administrative-division code="NB">
+            <alias from="6696259" to="bathurst-NB-CA"/>
+            <alias from="6545023" to="edmundston"/>
+            <alias from="5957776" to="fredericton-NB-CA"/>
+            <alias from="6075080" to="miramichi-NB-CA"/>
+            <alias from="6076211" to="moncton"/>
+            <alias from="6138517" to="saint-john-NB-CA"/>
+        </administrative-division>
+
+        <administrative-division code="NS">
+            <alias from="5908723" to="bridgewater-NS-CA"/>
+            <alias from="6324729" to="halifax"/>
+            <alias from="6087579" to="new-glasgow-NS-CA"/>
+            <alias from="6169587" to="truro-NS-CA"/>
+            <alias from="6185217" to="yarmouth-NS-CA"/>
+        </administrative-division>
+
+        <administrative-division code="ON">
+            <alias from="5894171" to="barrie"/>
+            <alias from="5897885" to="belleville-ON-CA"/>
+            <alias from="6168768" to="trenton-ON-CA"/>
+            <alias from="5907990" to="brantford"/>
+            <alias from="5909294" to="brockville"/>
+            <alias from="5920450" to="chatham-kent-ON-CA"/>
+            <alias from="5928065" to="cornwall"/>
+            <alias from="5967629" to="guelph"/>
+            <alias from="5969785" to="hamilton"/>
+            <alias from="5989403" to="kapuskasing"/>
+            <alias from="5991056" to="kenora"/>
+            <alias from="5992500" to="kingston-ON-CA"/>
+            <alias from="5965812" to="greater-napanee"/>
+            <alias from="5992996" to="kitchener"/>
+            <alias from="5913695" to="cambridge-ON-CA"/>
+            <alias from="6176823" to="waterloo-ON-CA"/>
+            <alias from="6157977" to="stratford-ON-CA"/>
+            <alias from="6051123" to="leamington-ON-CA"/>
+            <alias from="6058560" to="london-ON-CA"/>
+            <alias from="6089125" to="norfolk-county"/>
+            <alias from="6089426" to="north-bay"/>
+            <alias from="6094817" to="ottawa"/>
+            <alias from="6095645" to="owen-sound"/>
+            <alias from="6101645" to="peterborough-ON-CA"/>
+            <alias from="6100832" to="pembroke"/>
+            <alias from="6101607" to="petawawa"/>
+            <alias from="6119448" to="renfrew-ON-CA"/>
+            <alias from="6141190" to="sarnia"/>
+            <alias from="6141439" to="sault-ste-marie-ON-CA"/>
+            <alias from="6155721" to="st-catharines"/>
+            <alias from="5964700" to="greater-sudbury"/>
+            <alias from="6166142" to="thunder-bay"/>
+            <alias from="6166739" to="timmins"/>
+            <alias from="6167865" to="toronto"/>
+            <alias from="6066513" to="markham-ON-CA"/>
+            <alias from="6075357" to="mississauga"/>
+            <alias from="6092122" to="oakville-ON-CA"/>
+            <alias from="5969721" to="halton-hills"/>
+            <alias from="6094578" to="oshawa"/>
+            <alias from="6182962" to="windsor"/>
+            <alias from="6184365" to="woodstock-ON-CA"/>
+        </administrative-division>
+
+        <administrative-division code="QC">
+            <alias from="5959974" to="gatineau"/>
+            <alias from="6128577" to="rouyn-noranda"/>
+            <alias from="6173017" to="val-d-or-QC-CA"/>
+            <alias from="5889745" to="baie-comeau"/>
+            <alias from="6325521" to="levis"/>
+            <alias from="6943827" to="thetford-mines"/>
+            <alias from="6620953" to="st-georges-de-beauce"/>
+            <alias from="5942845" to="drummondville"/>
+            <alias from="6174151" to="victoriaville"/>
+            <alias from="5964215" to="granby-QC-CA"/>
+            <alias from="6077243" to="montreal"/>
+            <alias from="6325494" to="quebec"/>
+            <alias from="6354895" to="rimouski"/>
+            <alias from="6137270" to="saguenay"/>
+            <alias from="6544161" to="lac-saint-jean"/>
+            <alias from="6138374" to="saint-hyacinthe"/>
+            <alias from="6138495" to="saint-jean-sur-richelieu"/>
+            <alias from="6144312" to="sept-iles"/>
+            <alias from="6146143" to="sherbrooke"/>
+            <alias from="6169141" to="trois-rivieres"/>
+            <alias from="6145489" to="shawinigan"/>
+        </administrative-division>
+
+        <administrative-division code="SK">
+            <alias from="6050066" to="la-ronge"/>
+            <alias from="6071421" to="meadow-lake-SK-CA"/>
+            <alias from="6088469" to="nipawin"/>
+            <alias from="6113335" to="prince-albert"/>
+            <alias from="6078112" to="moose-jaw"/>
+            <alias from="6119109" to="regina"/>
+            <alias from="6141256" to="saskatoon"/>
+            <alias from="6160603" to="swift-current"/>
+        </administrative-division>
+
+        <administrative-division code="NL">
+            <alias from="5927969" to="corner-brook"/>
+            <alias from="5959335" to="ganger-NL-CA"/>
+            <alias from="5994839" to="labrador-city"/>
+            <alias from="5970458" to="goose-bay"/>
+            <alias from="6324733" to="st-johns-NL-CA"/>
+        </administrative-division>
+
+        <administrative-division code="NT">
+            <alias from="6185377" to="yellowknife"/>
+        </administrative-division>
+
+        <administrative-division code="NU">
+            <alias from="5983720" to="iqaluit"/>
+        </administrative-division>
+
+        <administrative-division code="YT">
+            <alias from="6180550" to="whitehorse"/>
+        </administrative-division>
+    </country>
+    <country code="CC">
+        <alias from="7304591" to="west-island"/>
+    </country>
+    <country code="CD">
+        <alias from="2314302" to="kinshasa"/>
+    </country>
+    <country code="CG">
+        <alias from="2260535" to="brazzaville"/>
+    </country>
+    <country code="CF">
+        <alias from="2389853" to="bangui"/>
+    </country>
+    <country code="CH">
+        <alias from="2661552" to="berne"/>
+    </country>
+    <country code="CI">
+        <alias from="2279755" to="yamoussoukro"/>
+    </country>
+    <country code="CK">
+        <alias from="4035715" to="avarua"/>
+    </country>
+    <country code="CL">
+        <alias from="3871336" to="santiago"/>
+    </country>
+    <country code="CM">
+        <alias from="2220957" to="yaounde"/>
+    </country>
+    <country code="CN">
+        <alias from="1816670" to="beijing"/>
+    </country>
+    <country code="CO">
+        <alias from="3688689" to="bogota"/>
+    </country>
+    <country code="CR">
+        <alias from="3621849" to="san-jose"/>
+    </country>
+    <country code="CU">
+        <alias from="3553478" to="havana"/>
+    </country>
+    <country code="CV">
+        <alias from="3374333" to="praia"/>
+    </country>
+    <country code="CW">
+        <alias from="3513090" to="willemstad-CW"/>
+    </country>
+    <country code="CX">
+        <alias from="2078127" to="flying-fish-cove"/>
+    </country>
+    <country code="CY">
+        <alias from="146268" to="nicosia"/>
+    </country>
+    <country code="CZ">
+        <alias from="3067696" to="prague"/>
+    </country>
+    <country code="DE">
+        <alias from="2950159" to="berlin"/>
+    </country>
+    <country code="DJ">
+        <alias from="223817" to="djibouti"/>
+    </country>
+    <country code="DK">
+        <alias from="2618425" to="copenhagen"/>
+    </country>
+    <country code="DM">
+        <alias from="3575635" to="roseau"/>
+    </country>
+    <country code="DO">
+        <alias from="3492908" to="santo-domingo"/>
+    </country>
+    <country code="DZ">
+        <alias from="2507480" to="algiers"/>
+    </country>
+    <country code="EC">
+        <alias from="3652462" to="quito"/>
+    </country>
+    <country code="EE">
+        <alias from="588409" to="tallinn"/>
+    </country>
+    <country code="EG">
+        <alias from="360630" to="cairo"/>
+    </country>
+    <country code="EH">
+        <alias from="2462881" to="el-aaiun"/>
+    </country>
+    <country code="ER">
+        <alias from="343300" to="asmara"/>
+    </country>
+    <country code="ES">
+        <alias from="3117735" to="madrid"/>
+    </country>
+    <country code="ET">
+        <alias from="344979" to="addis-ababa"/>
+    </country>
+    <country code="FI">
+        <alias from="658225" to="helsinki"/>
+    </country>
+    <country code="FJ">
+        <alias from="2198148" to="suva"/>
+    </country>
+    <country code="FK">
+        <alias from="3426691" to="stanley"/>
+    </country>
+    <country code="FM">
+        <alias from="2081986" to="palikir"/>
+    </country>
+    <country code="FO">
+        <alias from="2611396" to="torshavn"/>
+    </country>
+    <country code="FR">
+        <alias from="2988507" to="paris"/>
+    </country>
+    <country code="GA">
+        <alias from="2399697" to="libreville"/>
+    </country>
+    <country code="GB">
+        <alias from="2643743" to="london"/>
+    </country>
+    <country code="GD">
+        <alias from="3579925" to="saint-georges"/>
+    </country>
+    <country code="GE">
+        <alias from="611717" to="tbilisi"/>
+    </country>
+    <country code="GF">
+        <alias from="3382160" to="cayenne"/>
+    </country>
+    <country code="GG">
+        <alias from="3042287" to="saint-peter-port"/>
+    </country>
+    <country code="GH">
+        <alias from="2306104" to="accra"/>
+    </country>
+    <country code="GI">
+        <alias from="2411585" to="gibraltar"/>
+    </country>
+    <country code="GL">
+        <alias from="3421319" to="nuuk"/>
+    </country>
+    <country code="GM">
+        <alias from="2413876" to="banjul"/>
+    </country>
+    <country code="GN">
+        <alias from="2422465" to="conakry"/>
+    </country>
+    <country code="GP">
+        <alias from="3579732" to="basse-terre"/>
+    </country>
+    <country code="GQ">
+        <alias from="2309527" to="malabo"/>
+    </country>
+    <country code="GR">
+        <alias from="264371" to="athens"/>
+    </country>
+    <country code="GS">
+        <alias from="3426466" to="grytviken"/>
+    </country>
+    <country code="GT">
+        <alias from="3598132" to="guatemala-city"/>
+    </country>
+    <country code="GU">
+        <alias from="4044012" to="hagatna"/>
+    </country>
+    <country code="GW">
+        <alias from="2374775" to="bissau"/>
+    </country>
+    <country code="GY">
+        <alias from="3378644" to="georgetown"/>
+    </country>
+    <country code="HK">
+        <alias from="1819729" to="hong-kong"/>
+    </country>
+    <country code="HN">
+        <alias from="3600949" to="tegucigalpa"/>
+    </country>
+    <country code="HR">
+        <alias from="3186886" to="zagreb"/>
+    </country>
+    <country code="HT">
+        <alias from="3718426" to="port-au-prince"/>
+    </country>
+    <country code="HU">
+        <alias from="3054643" to="budapest"/>
+    </country>
+    <country code="ID">
+        <alias from="1642911" to="jakarta"/>
+    </country>
+    <country code="IE">
+        <alias from="2964574" to="dublin"/>
+    </country>
+    <country code="IL">
+        <alias from="281184" to="jerusalem"/>
+    </country>
+    <country code="IM">
+        <alias from="3042237" to="douglas"/>
+    </country>
+    <country code="IN">
+        <alias from="1261481" to="new-delhi"/>
+    </country>
+    <country code="IQ">
+        <alias from="98182" to="baghdad"/>
+    </country>
+    <country code="IR">
+        <alias from="112931" to="tehran"/>
+    </country>
+    <country code="IS">
+        <alias from="3413829" to="reykjavik"/>
+    </country>
+    <country code="IT">
+        <alias from="3169070" to="rome"/>
+    </country>
+    <country code="JE">
+        <alias from="3237864" to="saint-helier"/>
+    </country>
+    <country code="JM">
+        <alias from="3489854" to="kingston-JM"/>
+    </country>
+    <country code="JO">
+        <alias from="250441" to="amman"/>
+    </country>
+    <country code="JP">
+        <alias from="1850147" to="tokyo"/>
+    </country>
+    <country code="KE">
+        <alias from="184745" to="nairobi"/>
+    </country>
+    <country code="KG">
+        <alias from="1528675" to="bishkek"/>
+    </country>
+    <country code="KH">
+        <alias from="1821306" to="phnom-penh"/>
+    </country>
+    <country code="KI">
+        <alias from="2110257" to="tarawa"/>
+    </country>
+    <country code="KM">
+        <alias from="921772" to="moroni"/>
+    </country>
+    <country code="KN">
+        <alias from="3575551" to="basseterre"/>
+    </country>
+    <country code="KP">
+        <alias from="1871859" to="pyongyang"/>
+    </country>
+    <country code="KR">
+        <alias from="1835848" to="seoul"/>
+    </country>
+    <country code="XK">
+        <alias from="786714" to="pristina"/>
+    </country>
+    <country code="KW">
+        <alias from="285787" to="kuwait-city"/>
+    </country>
+    <country code="KY">
+        <alias from="1735106" to="george-town"/>
+    </country>
+    <country code="KZ">
+        <alias from="1526273" to="astana"/>
+    </country>
+    <country code="LA">
+        <alias from="1651944" to="vientiane"/>
+    </country>
+    <country code="LB">
+        <alias from="276781" to="beirut"/>
+    </country>
+    <country code="LC">
+        <alias from="3576812" to="castries"/>
+    </country>
+    <country code="LI">
+        <alias from="3042030" to="vaduz"/>
+    </country>
+    <country code="LK">
+        <alias from="1248991" to="colombo"/>
+    </country>
+    <country code="LR">
+        <alias from="2274895" to="monrovia"/>
+    </country>
+    <country code="LS">
+        <alias from="932505" to="maseru"/>
+    </country>
+    <country code="LT">
+        <alias from="593116" to="vilnius"/>
+    </country>
+    <country code="LU">
+        <alias from="2960316" to="luxembourg"/>
+    </country>
+    <country code="LV">
+        <alias from="456172" to="riga"/>
+    </country>
+    <country code="LY">
+        <alias from="2210247" to="tripolis"/>
+    </country>
+    <country code="MA">
+        <alias from="2538475" to="rabat"/>
+    </country>
+    <country code="MC">
+        <alias from="2993458" to="monaco"/>
+    </country>
+    <country code="MD">
+        <alias from="618426" to="chisinau"/>
+    </country>
+    <country code="ME">
+        <alias from="3193044" to="podgorica"/>
+    </country>
+    <country code="MF">
+        <alias from="3578851" to="marigot"/>
+    </country>
+    <country code="MG">
+        <alias from="1070940" to="antananarivo"/>
+    </country>
+    <country code="MH">
+        <alias from="2113779" to="majuro"/>
+    </country>
+    <country code="MK">
+        <alias from="785842" to="skopje"/>
+    </country>
+    <country code="ML">
+        <alias from="2460596" to="bamako"/>
+    </country>
+    <country code="MM">
+        <alias from="6611854" to="nay-pyi-taw"/>
+    </country>
+    <country code="MN">
+        <alias from="2028462" to="ulan-bator"/>
+    </country>
+    <country code="MO">
+        <alias from="1821274" to="macao"/>
+    </country>
+    <country code="MQ">
+        <alias from="3570675" to="fort-de-france"/>
+    </country>
+    <country code="MR">
+        <alias from="2377450" to="nouakchott"/>
+    </country>
+    <country code="MS">
+        <alias from="3578069" to="plymouth"/>
+    </country>
+    <country code="MT">
+        <alias from="2562305" to="valletta"/>
+    </country>
+    <country code="MU">
+        <alias from="934154" to="port-louis"/>
+    </country>
+    <country code="MV">
+        <alias from="1282027" to="male"/>
+    </country>
+    <country code="MW">
+        <alias from="927967" to="lilongwe"/>
+    </country>
+    <country code="MX">
+        <alias from="3530597" to="mexico-city"/>
+    </country>
+    <country code="MY">
+        <alias from="1735161" to="kuala-lumpur"/>
+    </country>
+    <country code="MZ">
+        <alias from="1040652" to="maputo"/>
+    </country>
+    <country code="NA">
+        <alias from="3352136" to="windhoek"/>
+    </country>
+    <country code="NC">
+        <alias from="2139521" to="noumea"/>
+    </country>
+    <country code="NE">
+        <alias from="2440485" to="niamey"/>
+    </country>
+    <country code="NF">
+        <alias from="2161314" to="kingston-NF"/>
+    </country>
+    <country code="NG">
+        <alias from="2352778" to="abuja"/>
+    </country>
+    <country code="NI">
+        <alias from="3617763" to="managua"/>
+    </country>
+    <country code="NL">
+        <alias from="2759794" to="amsterdam"/>
+    </country>
+    <country code="NO">
+        <alias from="3143244" to="oslo"/>
+    </country>
+    <country code="NP">
+        <alias from="1283240" to="kathmandu"/>
+    </country>
+    <country code="NU">
+        <alias from="4036284" to="alofi"/>
+    </country>
+    <country code="NZ">
+        <alias from="2179537" to="wellington"/>
+        <alias from="2193733" to="auckland"/>
+    </country>
+    <country code="OM">
+        <alias from="287286" to="muscat"/>
+    </country>
+    <country code="PA">
+        <alias from="3703443" to="panama-city"/>
+    </country>
+    <country code="PE">
+        <alias from="3936456" to="lima"/>
+    </country>
+    <country code="PF">
+        <alias from="4033936" to="papeete"/>
+    </country>
+    <country code="PG">
+        <alias from="2088122" to="port-moresby"/>
+    </country>
+    <country code="PH">
+        <alias from="1701668" to="manila"/>
+    </country>
+    <country code="PK">
+        <alias from="1176615" to="islamabad"/>
+    </country>
+    <country code="PL">
+        <alias from="756135" to="warsaw"/>
+    </country>
+    <country code="PM">
+        <alias from="3424934" to="saint-pierre"/>
+    </country>
+    <country code="PN">
+        <alias from="4030723" to="adamstown"/>
+    </country>
+    <country code="PR">
+        <alias from="4568127" to="san-juan"/>
+    </country>
+    <country code="PS">
+        <alias from="7303419" to="east-jerusalem"/>
+    </country>
+    <country code="PT">
+        <alias from="2267057" to="lisbon"/>
+    </country>
+    <country code="PW">
+        <alias from="7303944" to="ngerulmud"/>
+    </country>
+    <country code="PY">
+        <alias from="3439389" to="asuncion"/>
+    </country>
+    <country code="QA">
+        <alias from="doha" to="doha"/>
+    </country>
+    <country code="RE">
+        <alias from="935264" to="saint-denis"/>
+    </country>
+    <country code="RO">
+        <alias from="683506" to="bucharest"/>
+    </country>
+    <country code="RS">
+        <alias from="792680" to="belgrade"/>
+    </country>
+    <country code="RU">
+        <alias from="524901" to="moscow"/>
+    </country>
+    <country code="RW">
+        <alias from="202061" to="kigali"/>
+    </country>
+    <country code="SA">
+        <alias from="108410" to="riyadh"/>
+    </country>
+    <country code="SB">
+        <alias from="2108502" to="honiara"/>
+    </country>
+    <country code="SC">
+        <alias from="241131" to="victoria"/>
+    </country>
+    <country code="SD">
+        <alias from="379252" to="khartoum"/>
+    </country>
+    <country code="SE">
+        <alias from="2673730" to="stockholm"/>
+    </country>
+    <country code="SG">
+        <alias from="1880252" to="singapore"/>
+    </country>
+    <country code="SH">
+        <alias from="3370903" to="jamestown"/>
+    </country>
+    <country code="SI">
+        <alias from="3196359" to="ljubljana"/>
+    </country>
+    <country code="SJ">
+        <alias from="2729907" to="longyearbyen"/>
+    </country>
+    <country code="SK">
+        <alias from="3060972" to="bratislava"/>
+    </country>
+    <country code="SL">
+        <alias from="2409306" to="freetown"/>
+    </country>
+    <country code="SM">
+        <alias from="3168070" to="san-marino"/>
+    </country>
+    <country code="SN">
+        <alias from="2253354" to="dakar"/>
+    </country>
+    <country code="SO">
+        <alias from="53654" to="mogadishu"/>
+    </country>
+    <country code="SR">
+        <alias from="3383330" to="paramaribo"/>
+    </country>
+    <country code="ST">
+        <alias from="2410763" to="sao-tome"/>
+    </country>
+    <country code="SV">
+        <alias from="3583361" to="san-salvador"/>
+    </country>
+    <country code="SX">
+        <alias from="3513392" to="philipsburg"/>
+    </country>
+    <country code="SY">
+        <alias from="170654" to="damascus"/>
+    </country>
+    <country code="SZ">
+        <alias from="934985" to="mbabane"/>
+    </country>
+    <country code="TC">
+        <alias from="3576994" to="cockburn-town"/>
+    </country>
+    <country code="TD">
+        <alias from="2427123" to="n-djamena"/>
+    </country>
+    <country code="TF">
+        <alias from="1546102" to="port-aux-francais"/>
+    </country>
+    <country code="TG">
+        <alias from="2365267" to="lome"/>
+    </country>
+    <country code="TH">
+        <alias from="1609350" to="bangkok"/>
+    </country>
+    <country code="TJ">
+        <alias from="1221874" to="dushanbe"/>
+    </country>
+    <country code="TL">
+        <alias from="1645457" to="dili"/>
+    </country>
+    <country code="TM">
+        <alias from="162183" to="ashgabat"/>
+    </country>
+    <country code="TN">
+        <alias from="2464470" to="tunis"/>
+    </country>
+    <country code="TO">
+        <alias from="4032402" to="nuku-alofa"/>
+    </country>
+    <country code="TR">
+        <alias from="323786" to="ankara"/>
+    </country>
+    <country code="TT">
+        <alias from="3573890" to="port-of-spain"/>
+    </country>
+    <country code="TV">
+        <alias from="2110394" to="funafuti"/>
+    </country>
+    <country code="TW">
+        <alias from="1668341" to="taipei"/>
+    </country>
+    <country code="TZ">
+        <alias from="160196" to="dodoma"/>
+    </country>
+    <country code="UA">
+        <alias from="703448" to="kiev"/>
+    </country>
+    <country code="UG">
+        <alias from="232422" to="kampala"/>
+    </country>
+    <country code="US">
+        <alias from="4140963" to="washington-dc"/>
+        <alias from="5368361" to="los-angeles"/>
+        <alias from="5128581" to="new-york"/>
+    </country>
+    <country code="UY">
+        <alias from="3441575" to="montevideo"/>
+    </country>
+    <country code="UZ">
+        <alias from="1512569" to="tashkent"/>
+    </country>
+    <country code="VA">
+        <alias from="6691831" to="vatican-city"/>
+    </country>
+    <country code="VC">
+        <alias from="3577887" to="kingstown"/>
+    </country>
+    <country code="VE">
+        <alias from="3646738" to="caracas"/>
+    </country>
+    <country code="VG">
+        <alias from="3577430" to="road-town"/>
+    </country>
+    <country code="VI">
+        <alias from="4795467" to="charlotte-amalie"/>
+    </country>
+    <country code="VN">
+        <alias from="1581130" to="hanoi"/>
+    </country>
+    <country code="VU">
+        <alias from="2135171" to="port-vila"/>
+    </country>
+    <country code="WF">
+        <alias from="4034821" to="mata-utu"/>
+    </country>
+    <country code="WS">
+        <alias from="4035413" to="apia"/>
+    </country>
+    <country code="YE">
+        <alias from="71137" to="sanaa"/>
+    </country>
+    <country code="YT">
+        <alias from="921815" to="mamoudzou"/>
+    </country>
+    <country code="ZA">
+        <alias from="964137" to="pretoria"/>
+    </country>
+    <country code="ZM">
+        <alias from="909137" to="lusaka"/>
+    </country>
+    <country code="ZW">
+        <alias from="890299" to="harare"/>
+    </country>
+    <country code="CS">
+        <alias from="792680" to="belgrade"/>
+    </country>
+    <country code="AN">
+        <alias from="3513090" to="willemstad-AN"/>
+    </country>
+
+</id-aliases>

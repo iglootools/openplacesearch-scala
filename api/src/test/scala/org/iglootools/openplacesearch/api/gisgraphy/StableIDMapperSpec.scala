@@ -23,15 +23,5 @@ class StableIDMapperSpec extends Spec with ShouldMatchers {
       stableIDMapper.originalID("paris") should be === Some("2988507")
     }
   }
-   /*
-  describe("temp") {
-    val out = new FileOutputStream("/tmp/out")
-    val writer = new OutputStreamWriter(out, Charsets.UTF_8)
-    GisgraphyStableIDMapper.Mapping.foreach {
-      (k: String, v: String) =>
-
-
-    }
-  }  */
 
 }
