@@ -54,7 +54,7 @@ class GisgraphyStableIDMapper extends StableIDMapper {
       // Saint Barthélemy
       "3579132" -> "gustavia",
       // Bermuda
-      "2190324" -> "hamilton",
+      "2190324" -> "hamilton-BM",
       // Brunei
       "1820906" -> "bandar-seri-begawan",
       // Bolivia
@@ -88,7 +88,8 @@ class GisgraphyStableIDMapper extends StableIDMapper {
       "6058024" -> "lloydminster",
       "6071618" -> "medicine-hat",
       "6118158" -> "red-deer",
-      // Canada-BC
+
+       // Canada-BC
       "5931800" -> "cranbrook-BC-CA",
       "5881791" -> "abbotsford",
       "5921357" -> "chilliwack",
