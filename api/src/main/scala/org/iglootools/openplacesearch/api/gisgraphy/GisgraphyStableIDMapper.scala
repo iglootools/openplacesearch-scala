@@ -1,7 +1,7 @@
 package org.iglootools.openplacesearch.api.gisgraphy;
 
-class GisgraphyStableIDMapper extends StableIDMapper {
-  private val Mapping: Map[String,String] =
+object GisgraphyStableIDMapper {
+  val Mapping: Map[String,String] =
     Map(
       // Andorra
       "3041563" -> "andorra-la-vella",
@@ -89,7 +89,7 @@ class GisgraphyStableIDMapper extends StableIDMapper {
       "6071618" -> "medicine-hat",
       "6118158" -> "red-deer",
 
-       // Canada-BC
+      // Canada-BC
       "5931800" -> "cranbrook-BC-CA",
       "5881791" -> "abbotsford",
       "5921357" -> "chilliwack",
@@ -635,11 +635,13 @@ class GisgraphyStableIDMapper extends StableIDMapper {
       // Netherlands Antilles
       "3513090" -> "willemstad"
     )
-  private val Reverse: Map[String,String] = Mapping.map { case (k,v) => (v,k) }
 
-  assume(Mapping.size == Reverse.size, "Duplicate entries are not allowed: " + Mapping.size + " vs " + Reverse.size)
+  val Reverse: Map[String,String] = Mapping.map { case (k,v) => (v,k) }
+}
+class GisgraphyStableIDMapper extends StableIDMapper {
+  assume(GisgraphyStableIDMapper.Mapping.size == GisgraphyStableIDMapper.Reverse.size,
+    "Duplicate entries are not allowed: " + GisgraphyStableIDMapper.Mapping.size + " vs " + GisgraphyStableIDMapper.Reverse.size)
 
-  def originalID(stableID: String): Option[String] = Reverse.get(stableID)
-
-  def stableID(originalID: String): Option[String] = Mapping.get(originalID)
+  def originalID(stableID: String): Option[String] = GisgraphyStableIDMapper.Reverse.get(stableID)
+  def stableID(originalID: String): Option[String] = GisgraphyStableIDMapper.Mapping.get(originalID)
 }

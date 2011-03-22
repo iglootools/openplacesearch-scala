@@ -6,7 +6,8 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.Spec
 import org.iglootools.commons.scala.io.Urls
 import org.iglootools.openplacesearch.samples.Places
-
+import java.io.{OutputStreamWriter, FileOutputStream}
+import com.google.common.base.Charsets
 
 @RunWith(classOf[JUnitRunner])
 class StableIDMapperSpec extends Spec with ShouldMatchers {
@@ -22,5 +23,15 @@ class StableIDMapperSpec extends Spec with ShouldMatchers {
       stableIDMapper.originalID("paris") should be === Some("2988507")
     }
   }
+   /*
+  describe("temp") {
+    val out = new FileOutputStream("/tmp/out")
+    val writer = new OutputStreamWriter(out, Charsets.UTF_8)
+    GisgraphyStableIDMapper.Mapping.foreach {
+      (k: String, v: String) =>
+
+
+    }
+  }  */
 
 }
