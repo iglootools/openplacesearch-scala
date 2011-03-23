@@ -5,9 +5,10 @@ import xml.{Node, XML}
 import org.iglootools.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository, Place}
 import org.iglootools.openplacesearch.api.language.LanguageRepository
 import org.joda.time.DateTimeZone
-import org.iglootools.openplacesearch.api.geonames.{GeonamesFeatureCategory, GeonamesFeature, GisFeature, GeonamesPlace}
 import org.iglootools.openplacesearch.api.feature._
 import org.iglootools.commons.scala.jts.JtsPoint
+import org.iglootools.openplacesearch.api.StableIDMapper
+import org.iglootools.openplacesearch.api.geonames._
 
 /**
  * <p>
@@ -17,7 +18,8 @@ import org.iglootools.commons.scala.jts.JtsPoint
  */
 protected[gisgraphy] final class GeolocalizationResultParser(implicit  private[this] val countryRepository: CountryRepository,
                                         implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                        implicit private[this] val languageRepository: LanguageRepository) extends ResultParser {
+                                        implicit private[this] val languageRepository: LanguageRepository,
+                                        implicit private[this] val stableIDMapper: StableIDMapper) extends ResultParser {
 
   def toPlaces(inputStream: InputStream): List[Place] = {
     (XML.load(inputStream) \ "result").map { result => toPlace(result)}.toList

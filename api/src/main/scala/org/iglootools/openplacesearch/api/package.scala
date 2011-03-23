@@ -2,17 +2,19 @@ package org.iglootools.openplacesearch
 
 import api.administrativedivision.{AdministrativeDivisionModule}
 import api.continent.ContinentModule
+import api.geonames.{StableIDMapper, GeonamesModule}
 import api.language.{LanguageModule}
 
 import com.google.inject.Guice
 
 package object api {
-  lazy val DefaultApplicationContext = Guice.createInjector(new AdministrativeDivisionModule(), new ContinentModule(), new LanguageModule())
+  lazy val DefaultApplicationContext = Guice.createInjector(new AdministrativeDivisionModule, new ContinentModule, new LanguageModule, new GeonamesModule)
 
   object ImplicitDependencyInjection {
     implicit val administrativeDivisionRepository = api.DefaultApplicationContext.getInstance(classOf[AdministrativeDivisionRepository])
     implicit val countryRepository = api.DefaultApplicationContext.getInstance(classOf[CountryRepository])
     implicit val languageRepository = api.DefaultApplicationContext.getInstance(classOf[LanguageRepository])
+    implicit val stableIDMapper = api.DefaultApplicationContext.getInstance(classOf[StableIDMapper])
   }
 
   // administrativedivision
@@ -80,6 +82,9 @@ package object api {
   // language
   type Language = api.language.Language
   type LanguageRepository = api.language.LanguageRepository
+
+  // Geonames
+  type StableIDMapper = api.geonames.StableIDMapper
 }
 
 

@@ -3,10 +3,11 @@ package org.iglootools.openplacesearch.api.gisgraphy
 import org.iglootools.openplacesearch.api.feature.LocationProvider
 import resultparser.ResultParser
 import org.iglootools.openplacesearch.api.administrativedivision.Place
+import org.iglootools.openplacesearch.api.geonames.StableIDMapper
 
 trait GisgraphyServer {
 
-  def stableIDMapper: StableIDMapper
+  protected[this] def stableIDMapper: StableIDMapper
 
   /**
    * @throws Exception on failure

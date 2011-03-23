@@ -11,6 +11,7 @@ import org.iglootools.openplacesearch.api.administrativedivision.{Place, Adminis
 import org.iglootools.openplacesearch.api.feature.LocationProvider
 import org.iglootools.openplacesearch.api.gisgraphy._
 import org.iglootools.openplacesearch.api
+import api.geonames.{StableIDMapper, GeonamesStableIDMapper}
 import org.iglootools.commons.scala.io.InputSupliers
 import com.google.common.io.InputSupplier
 import java.io.InputStream
@@ -25,10 +26,10 @@ object FakeGisgraphyServer {
 final class FakeGisgraphyServer(private[this] val resultForQuery: (GisgraphyQuery) => Option[InputSupplier[InputStream]])
                                (implicit private[this] val countryRepository: CountryRepository,
                                 implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                implicit private[this] val languageRepository: LanguageRepository)
+                                implicit private[this] val languageRepository: LanguageRepository,
+                                implicit protected[this] val stableIDMapper: StableIDMapper)
   extends GisgraphyServer with Logging {
   implicit val gisgraphyServer: GisgraphyServer = this
-  val stableIDMapper = new GisgraphyStableIDMapper
 
   def execute[T](query: GisgraphyQuery, resultParser: ResultParser): List[Place] = {
     val inputSupplierOption = mapQueryToInputSupplier(query)

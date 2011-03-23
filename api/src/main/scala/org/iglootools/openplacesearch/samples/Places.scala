@@ -5,12 +5,15 @@ import org.iglootools.openplacesearch.api.feature._
 import org.joda.time.DateTimeZone
 import org.iglootools.commons.scala.jts.JtsPoint
 import org.iglootools.openplacesearch.api.administrativedivision.Place
+import org.iglootools.openplacesearch.api
 
 /**
  * @author Sami Dalouche (sami.dalouche@gmail.com)
  */
 
 object Places {
+  implicit val stableIDMapper: StableIDMapper = api.ImplicitDependencyInjection.stableIDMapper
+
   object France {
     object IleDeFrance {
 

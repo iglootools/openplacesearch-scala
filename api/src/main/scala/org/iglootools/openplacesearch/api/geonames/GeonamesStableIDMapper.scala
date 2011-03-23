@@ -1,4 +1,5 @@
-package org.iglootools.openplacesearch.api.gisgraphy;
+package org.iglootools.openplacesearch.api.geonames
+
 import scala.collection.immutable.TreeMap
 import xml.XML
 import org.iglootools.openplacesearch.api.referencedata.ReferenceData
@@ -6,7 +7,7 @@ import org.iglootools.commons.scala.io.{InputSupliers, Urls}
 import java.io.InputStream
 import grizzled.slf4j.Logging
 
-class GisgraphyStableIDMapper extends StableIDMapper with Logging {
+class GeonamesStableIDMapper extends StableIDMapper with Logging {
 
   val Mapping: Map[String,String] = parseAliases
   val Reverse: Map[String,String] = Mapping.map { case (k,v) => (v,k) }

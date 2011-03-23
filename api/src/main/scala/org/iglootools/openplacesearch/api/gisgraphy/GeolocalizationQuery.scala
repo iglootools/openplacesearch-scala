@@ -4,14 +4,16 @@ import org.iglootools.openplacesearch.api.feature.LocationProvider
 import resultparser.{ResultParser, GeolocalizationResultParser}
 import org.iglootools.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
 import org.iglootools.openplacesearch.api.language.LanguageRepository
+import org.iglootools.openplacesearch.api.geonames.StableIDMapper
 
 final case class GeolocalizationQuery(val location: LocationProvider,
-                                                      val radiusInMeters: Int,
-                                                      val pagination: Pagination)
-                                                     (implicit protected[this] val gisgraphyServer: GisgraphyServer,
-                                                      implicit protected[this] val countryRepository: CountryRepository,
-                                                      implicit protected[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                                      implicit protected[this] val languageRepository: LanguageRepository) extends GisgraphyQuery with UrlGenerator  {
+                                      val radiusInMeters: Int,
+                                      val pagination: Pagination)
+                                     (implicit protected[this] val gisgraphyServer: GisgraphyServer,
+                                      implicit protected[this] val countryRepository: CountryRepository,
+                                      implicit protected[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
+                                      implicit protected[this] val languageRepository: LanguageRepository,
+                                      implicit private[this] val stableIDMapper: StableIDMapper) extends GisgraphyQuery with UrlGenerator  {
 
   require(location != null, "location is required")
   require(radiusInMeters > 0, "radius must be a positive number")

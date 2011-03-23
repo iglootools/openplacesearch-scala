@@ -11,6 +11,7 @@ import org.iglootools.openplacesearch.api.administrativedivision.{Place, Adminis
 import org.iglootools.openplacesearch.api.feature.LocationProvider
 import org.iglootools.openplacesearch.api.gisgraphy._
 import org.iglootools.openplacesearch.api
+import api.geonames.StableIDMapper
 
 object HttpGisgraphyServer {
   def apply(baseUrl: String, httpClient: HttpClient=SimpleHttpClient(maxTotalNumberOfConnections=100, defaultMaxNumberOfConnectionsPerRoute=100)): HttpGisgraphyServer = {
@@ -23,12 +24,12 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
                                 private[this] val httpClient: HttpClient)
                                (implicit private[this] val countryRepository: CountryRepository,
                                 implicit private[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                implicit private[this] val languageRepository: LanguageRepository)
+                                implicit private[this] val languageRepository: LanguageRepository,
+                                implicit protected[this] val stableIDMapper: StableIDMapper)
   extends GisgraphyServer with Logging {
   require(Option(baseUrl) exists (_.nonEmpty), "baseUrl is required")
   require(httpClient != null, "httpClient is required")
   implicit val gisgraphyServer: GisgraphyServer = this
-  val stableIDMapper = new GisgraphyStableIDMapper
 
   info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
 

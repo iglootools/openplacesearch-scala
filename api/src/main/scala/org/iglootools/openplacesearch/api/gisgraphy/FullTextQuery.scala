@@ -5,13 +5,15 @@ import org.iglootools.openplacesearch.api.administrativedivision.{Administrative
 import org.iglootools.openplacesearch.api.language.LanguageRepository
 import java.net.URLEncoder
 import com.google.common.base.Charsets
+import org.iglootools.openplacesearch.api.geonames.StableIDMapper
 
 final case class FullTextQuery(val query: String,
-                                               val pagination: Pagination)
-                                              (implicit protected[this] val gisgraphyServer: GisgraphyServer,
-                                               implicit protected[this] val countryRepository: CountryRepository,
-                                               implicit protected[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
-                                               implicit protected[this] val languageRepository: LanguageRepository) extends GisgraphyQuery with UrlGenerator {
+                               val pagination: Pagination)
+                              (implicit protected[this] val gisgraphyServer: GisgraphyServer,
+                               implicit protected[this] val countryRepository: CountryRepository,
+                               implicit protected[this] val administrativeDivisionRepository: AdministrativeDivisionRepository,
+                               implicit protected[this] val languageRepository: LanguageRepository,
+                               implicit private[this] val stableIDMapper: StableIDMapper) extends GisgraphyQuery with UrlGenerator {
   require(Option(query) exists(_.nonEmpty), "query is required")
   require(pagination != null, "pagination is required")
 
