@@ -27,4 +27,6 @@ final case class FullTextQuery(val query: String,
   }
 
   protected def resultParser: ResultParser = new FullTextResultParser
+
+  override def toString: String = "FullTextQuery: (" + query + ") "  + pagination
 }

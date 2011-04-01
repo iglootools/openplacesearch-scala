@@ -34,7 +34,7 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
   info("Created HttpGisgraphyServer with baseUrl: %s".format(baseUrl))
 
   def execute[T](query: GisgraphyQuery, resultParser: ResultParser): List[Place] = {
-    debug("Executing query: " + query)
+    debug("Querying url: " + query.toUrl(baseUrl))
     try {
       val result = httpClient.doWithResponse(new HttpGet(query.toUrl(baseUrl)),
         onSuccess = {r: HttpResponse =>

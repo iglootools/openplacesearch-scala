@@ -5,6 +5,7 @@ import resultparser.{ResultParser, GeolocalizationResultParser}
 import org.iglootools.openplacesearch.api.administrativedivision.{AdministrativeDivisionRepository, CountryRepository}
 import org.iglootools.openplacesearch.api.language.LanguageRepository
 import org.iglootools.openplacesearch.api.geonames.StableIDMapper
+import java.lang.String
 
 final case class GeolocalizationQuery(val location: LocationProvider,
                                       val radiusInMeters: Int,
@@ -31,4 +32,6 @@ final case class GeolocalizationQuery(val location: LocationProvider,
   }
 
   protected def resultParser: ResultParser = new GeolocalizationResultParser
+
+  override def toString: String = "GeolocalizationQuery: (" + location.longitude + "," + location.latitude + ") - " + radiusInMeters + "m. " + pagination
 }
