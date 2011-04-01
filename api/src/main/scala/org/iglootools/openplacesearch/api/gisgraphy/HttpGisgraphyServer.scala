@@ -43,10 +43,10 @@ final class HttpGisgraphyServer(private[this] val baseUrl: String,
         })
       result match {
         case Right(r) => r
-        case Left(e) => throw new GisgraphyException(message="Received an unexpected HTTP exception. This  may mean that gisgraphy HTTP server is wrongly configured", cause=e)
+        case Left(e) => throw new GisgraphyException(msg="Received an unexpected HTTP exception. This  may mean that gisgraphy HTTP server is wrongly configured", cause=e)
       }
     } catch {
-      case e => throw new GisgraphyException(message="System failure. The connection either crashed or a timeout happened", cause=e);
+      case e => throw new GisgraphyException(msg="System failure. The connection either crashed or a timeout happened", cause=e);
     }
 
   }
