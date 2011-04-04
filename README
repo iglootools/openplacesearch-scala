@@ -77,3 +77,10 @@ Other interesting datasources that could be helpful
 * ADM1 : http://wwwn.cdc.gov/epiinfo/
 
 * Population: http://sedac.ciesin.columbia.edu/gpw/
+
+
+= Release Procedure =
+* git tag v0.x
+* git push --tags origin
+* git publish
+* bump version number
