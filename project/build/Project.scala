@@ -68,7 +68,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
 
     // HTTP and REST
     lazy val HttpComponentsVersion = "4.1"
-    lazy val hcHelpers = "org.iglootools.hchelpers" % "hchelpers-scala" % "0.10-SNAPSHOT" //withSources()
+    lazy val hcHelpers = "org.iglootools.hchelpers" % "hchelpers-scala" % "0.10" withSources()
     lazy val httpComponentsClient = "org.apache.httpcomponents" % "httpclient" % HttpComponentsVersion withSources()
     lazy val httpComponentsMime = "org.apache.httpcomponents" % "httpmime" % HttpComponentsVersion withSources()
 
