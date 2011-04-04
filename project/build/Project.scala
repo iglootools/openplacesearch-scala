@@ -40,9 +40,15 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
     lazy val mockito = "org.mockito" % "mockito-all" % "1.8.5" % "test" withSources()
     //val avsl = "org.clapper" %% "avsl" % "0.3.1" % "test" // withSources()
     lazy val logback = "ch.qos.logback" % "logback-classic" % "0.9.27" % "test" // withSources()
+
+     def ivyXML =
+      <dependencies>
+          <override org="com.vividsolutions" rev="1.8" />
+      </dependencies>
   }
 
   class Api(info: ProjectInfo) extends DefaultProject(info) with IdeaProject  {
+    override def ivyXML = Dependencies.ivyXML
     //val docsArtifact = Artifact.javadoc("core")
     //override def packageToPublishActions = super.packageToPublishActions ++ Seq(packageSrc) //packageDocs,, packageSrc, packageTest, packageTestSrc,
     //lazy val sourceArtifact = Artifact.sources(artifactID)
@@ -91,6 +97,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
   }
 
   class IntegrationTests(info: ProjectInfo) extends DefaultProject(info) with IdeaProject {
+    override def ivyXML = Dependencies.ivyXML
     override def testOptions = TestFilter(s => true) :: super.testOptions.toList
 
     // test dependencies
@@ -100,6 +107,7 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
   }
 
   class Updater(info: ProjectInfo) extends DefaultProject(info) with IdeaProject{
+    override def ivyXML = Dependencies.ivyXML
   }
 
   // Additional Tasks
