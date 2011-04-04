@@ -2,10 +2,11 @@ import java.io.File
 import sbt._
 
 class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
-  lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
-  lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
-  lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
-  lazy val iglootoolsRepository = "Iglootools Releases Repository" at "http://developers.sirika.com/maven2/releases/"
+//  lazy val mavenLocal = "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
+//  lazy val geotoolsRepository = "Open Source Geospatial Foundation Repository" at "http://download.osgeo.org/webdav/geotools/"
+//  lazy val javanetRepository = "Java.net Repository" at "http://download.java.net/maven/2"
+//  lazy val iglootoolsRepository = "Iglootools Releases Repository" at "http://developers.sirika.com/maven2/releases/"
+    lazy val iglootoolsRepository = "Iglootools Releases Repository" at "http://www.iglootools.org/artifactory/iglootools-release"
 
   override def managedStyle = ManagedStyle.Maven
 
@@ -19,8 +20,10 @@ class Project(info: ProjectInfo) extends ParentProject(info) with IdeaProject  {
     </licenses>
 
   // Publishing
-  lazy val keyFile: File = (Path.userHome / ".ssh" / "id_rsa").asFile
-  lazy val publishTo = Resolver.sftp("Iglootools maven2", "iglootools.org", "/srv/http/iglootools.org/maven2/internal") as ("samokk", keyFile)
+//  lazy val keyFile: File = (Path.userHome / ".ssh" / "id_rsa").asFile
+//  lazy val publishTo = Resolver.sftp("Iglootools maven2", "iglootools.org", "/srv/http/iglootools.org/maven2/internal") as ("samokk", keyFile)
+  val publishTo = "Iglootools" at "http://www.iglootools.org/artifactory/iglootools-release-local"
+  Credentials(Path.userHome / ".ivy2" / ".credentials", log)
 
   // Project Definitions
   override def parallelExecution = true
